@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+ 	xmlns:sec="http://www.springframework.org/schema/security"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/security  
+        http://www.springframework.org/schema/security/spring-security.xsd
+        http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+		">
+    
+    <!-- Uncomment and add your base-package here:
+         <context:component-scan
+            base-package="org.springframework.samples.service"/>  -->
+    
+    <context:property-placeholder location="classpath*:baseDocument/base.properties" ignore-unresolvable="true"/><!-- 加载配置基础的properties文件 -->         
+     <!-- 扫描除了controller之外别的所有注解 -->
+	<context:component-scan base-package="com.jcmz">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	
+	<!-- 配置数据源 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+			<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+			<property name="url"
+				value="${jdbc_url}"></property>
+			<property name="username" value="${jdbc_username}"></property>
+			<property name="password" value="${jdbc_password}"></property>
+	</bean>
+	
+	<!-- 注入sqlSessionFactory，使用了最优的方式，可以不用写mybatis的配置文件 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configuration">
+			<bean class="org.apache.ibatis.session.Configuration">
+				<property name="mapUnderscoreToCamelCase" value="true" />
+			</bean>
+		</property>
+	</bean>
+
+	<!-- 
+		注入一个MapperScannerConfigurer的bean，设置了一个属性basePackage，以此指定mapper包，自动注入该
+		 包中的全部映射器
+	-->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.jcmz.mapper" />
+	</bean>
+	
+	<!-- 就是当spring初始会话，spring容器执行完，servlet容器执行完做的事，需要配置下列类，才会去做这些事 -->
+	<bean class="com.jcmz.controller.StartUp_load"></bean>
+	
+   
+   
+
+    <!-- 定义上下文返回的消息的国际化 -->  
+	 <bean id="messageSource"  
+	    class="org.springframework.context.support.ReloadableResourceBundleMessageSource">  
+	    <property name="basenames"  
+	        >
+	        <list>
+	           <value>classpath:baseDocument/messages</value><!-- 此处出错导致纠结好久，由于路径不对，应该加上classpath就行了 -->
+	        </list>
+	        </property>  
+	</bean>
+	<!-- 启用用户的缓存功能 -->  
+	<bean id="userCache"  
+	    class="org.springframework.security.core.userdetails.cache.EhCacheBasedUserCache">  
+	    <property name="cache" ref="userEhCache" />  
+	</bean>  
+	  
+	<bean id="userEhCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">  
+	    <property name="cacheName" value="userCache" />  
+	    <property name="cacheManager" ref="cacheManager" />  
+	</bean>  
+	  
+	<bean id="cacheManager"  
+	    class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" >
+	     <!-- <property name="configLocation" value="classpath:ehcache.xml"></property> -->
+    </bean> 
+    
+    <!--2、开启基于注解的aop功能  -->  
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	<!--  
+	 0）、被代理对象也得先加入到ioc中  
+	 1）、编写日志切面，并加入到ioc中，@Component @Aspect  
+	 2）、给切面编写通知方法。  
+	 3）、加上何时何地切入的注解。切入点表达式  
+	 4）、开启基于注解的aop功能即可  
+	 -->  
+	
+	
+	
+</beans>

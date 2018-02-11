@@ -1,0 +1,335 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.jcmz</groupId>
+  <artifactId>MyBBS</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+   <properties>
+
+		
+		<!-- Web -->
+		<jsp.version>2.2</jsp.version>
+		<jstl.version>1.2</jstl.version>
+		<servlet.version>2.5</servlet.version>
+		
+		
+		<!-- Spring -->
+		<spring-framework.version>4.3.12.RELEASE</spring-framework.version>
+
+		<!-- Hibernate / JPA/mybatis -->
+		<hibernate.version>4.2.1.Final</hibernate.version>
+        <mybatis.version>3.4.5</mybatis.version>
+        
+        <!-- 通过配置build，结合maven指令generate生成mapper映射文件等 -->
+        <mybatis-generator.version>1.3.5</mybatis-generator.version>
+
+		<!-- mybatis-spring集成的包 -->
+		<mybatis-spring.version>1.3.1</mybatis-spring.version>
+
+		<!-- Logging -->
+		<logback.version>1.1.3</logback.version>
+
+		<!-- Test -->
+		<junit.version>4.12</junit.version>
+		
+		<!-- mysql.jar -->
+		<mySql.version>5.1.44</mySql.version>
+		
+		<!-- commons-dbcp -->
+		<commons-dbcp.version>1.4</commons-dbcp.version>
+		<spring-dao.version>2.0.8</spring-dao.version>
+		
+		<!-- 数据校验jar -->
+		<hibernate-validator.version>4.3.1.Final</hibernate-validator.version>
+		<validation-api.version>1.1.0.Final</validation-api.version>
+		
+		<!-- 阿里的jason包 -->
+		<fastjson.version>1.2.38</fastjson.version>
+		<!-- spring security相关的包 -->
+		<spring-security.version>4.2.3.RELEASE</spring-security.version>
+
+	</properties>
+	
+	<dependencies>
+		<!-- jasonObject阿里巴巴提供的jar -->
+		<dependency>
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>fastjson</artifactId>
+		    <version>${fastjson.version}</version>
+		</dependency>
+	
+		<!-- 用于jsonIgnore注解的jar -->
+		<!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-core-asl -->
+		<dependency>
+		    <groupId>org.codehaus.jackson</groupId>
+		    <artifactId>jackson-core-asl</artifactId>
+		    <version>1.9.13</version>
+		</dependency>
+
+
+		<!-- Spring MVC -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring-framework.version}</version>
+		</dependency>
+		
+		<!-- Other Web dependencies -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>${jstl.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
+		    <version>4.0.0</version>
+		    <scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>${jsp.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	
+		<!-- Spring and Transactions -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring-framework.version}</version>
+		</dependency>
+
+		<!-- Logging with SLF4J & LogBack -->
+		<dependency>
+            <groupId>org.logback-extensions</groupId>
+            <artifactId>logback-ext-spring</artifactId>
+            <version>0.1.2</version>
+        </dependency>
+		<!-- <dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>jcl-over-slf4j</artifactId>
+		    <version>1.7.25</version>
+		</dependency> -->
+
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- logback-classic包含了logback本身所需的slf4j-api.jar、logback-core.jar及logback-classsic.jar。 
+ 		logback-ext-spring是由官方提供的对Spring的支持，它的作用就相当于log4j中的Log4jConfigListener；
+ 		这个listener，网上大多都是用的自己实现的，原因在于这个插件似乎并没有出现在官方文档的显要位置导致大多数
+ 		人并不知道它的存在。 
+ 		jcl-over-slf4j是用来把Spring源代码中大量使用到的commons-logging替换成slf4j，只有在添加了这个依
+ 		赖之后才能看到Spring框架本身打印的日志–即info文件中打印出的spring启动日志信息，否则只能看到开发者自己打印的日志。 -->
+
+		<!-- mybatis核心包 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>${mybatis.version}</version>
+		</dependency>
+
+		<!-- spring相关的包 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring-framework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring-framework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring-framework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring-framework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring-framework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring-framework.version}</version>
+		</dependency>
+		<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+            <version>${spring-framework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring-framework.version}</version>
+        </dependency>    
+        <!-- 用于切面逻辑的表达式 -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-expression</artifactId>
+		    <version>${spring-framework.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+<dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjweaver</artifactId>
+    <version>1.8.13</version>
+</dependency>
+		
+        
+        <!-- 下包中含有spring ehcache数据缓存的包，提高访问效率 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring-framework.version}</version>
+        </dependency>
+        
+		<!-- mybatis-spring 二者集成需要的包-->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>${mybatis-spring.version}</version>
+		</dependency>
+		
+		<!-- mysql-connector驱动包 -->
+		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>${mySql.version}</version>
+		</dependency>
+		
+		<!-- commons-dbcp -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>${commons-dbcp.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-dao</artifactId>
+			<version>${spring-dao.version}</version>
+		</dependency>
+		
+		<!-- mybatis generator -->
+		<dependency>
+			<groupId>org.mybatis.generator</groupId>
+			<artifactId>mybatis-generator-core</artifactId>
+			<version>${mybatis-generator.version}</version>
+		</dependency>
+		
+		<!-- Test Artifacts -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring-framework.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- springd的数据校验的包 -->
+		<dependency>
+		    <groupId>javax.validation</groupId>
+		    <artifactId>validation-api</artifactId>
+		    <version>${validation-api.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-validator</artifactId>
+		    <version>${hibernate-validator.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.jboss.logging</groupId>
+		    <artifactId>jboss-logging</artifactId>
+		    <version>3.1.0.CR2</version>
+		</dependency>
+		
+		<!-- spring security包 -->
+		 <dependency>  
+            <groupId>org.springframework.security</groupId>  
+            <artifactId>spring-security-core</artifactId>  
+            <version>${spring-security.version}</version>  
+        </dependency>  
+        <dependency>  
+            <groupId>org.springframework.security</groupId>  
+            <artifactId>spring-security-web</artifactId>  
+            <version>${spring-security.version}</version>  
+        </dependency>  
+        <dependency>  
+            <groupId>org.springframework.security</groupId>  
+            <artifactId>spring-security-config</artifactId>  
+            <version>${spring-security.version}</version>  
+        </dependency>  
+        <dependency>  
+            <groupId>org.springframework.security</groupId>  
+            <artifactId>spring-security-crypto</artifactId>  
+            <version>${spring-security.version}</version>  
+        </dependency>  
+        <dependency>  
+            <groupId>org.springframework.security</groupId>  
+            <artifactId>spring-security-taglibs</artifactId>  
+            <version>${spring-security.version}</version>  
+        </dependency> 
+        
+        <!-- ehcache 相关依赖  -->
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>2.8.2</version>
+        </dependency>
+
+	</dependencies>	
+	
+	<!-- 通过maven执行generate指令，来自动生成mapper映射文件（或者通过控制台执行generate语句） -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.mybatis.generator</groupId>
+				<artifactId>mybatis-generator-maven-plugin</artifactId>
+				<version>${mybatis-generator.version}</version>
+				<executions>
+					<execution>
+						<id>Generate MyBatis Artifacts</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<phase>generate</phase>
+					</execution>
+				</executions>
+				<dependencies>
+					<!-- mybatis核心包 -->
+					<dependency>
+						<groupId>org.mybatis</groupId>
+						<artifactId>mybatis</artifactId>
+						<version>${mybatis.version}</version>
+					</dependency>
+					<!-- mybatis generator -->
+					<dependency>
+						<groupId>org.mybatis.generator</groupId>
+						<artifactId>mybatis-generator-core</artifactId>
+						<version>${mybatis-generator.version}</version>
+					</dependency>
+					<!-- mysql-connector驱动包 -->
+					<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>${mySql.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+</project>
