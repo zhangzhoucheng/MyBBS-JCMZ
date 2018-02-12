@@ -27,7 +27,7 @@ See here for more details: http://gordondickens.com/wordpress/2013/03/27/sawing-
     <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${rootPath}/${appName}/info/${appName}-ilog.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-        <fileNamePattern>${rootPath}/${appName}/all/${appName}-ilog-%d{yyyy-MM-dd}-i.log</fileNamePattern>
+        <fileNamePattern>${rootPath}/${appName}/info/${appName}-ilog-%d{yyyy-MM-dd}-i.log</fileNamePattern>
             <maxHistory>30</maxHistory>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>10MB</maxFileSize>
@@ -75,7 +75,7 @@ See here for more details: http://gordondickens.com/wordpress/2013/03/27/sawing-
     <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${rootPath}/${appName}/error/${appName}-elog.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${rootPath}/${appName}/all/${appName}-elog-%d{yyyy-MM-dd}-e.log</fileNamePattern>
+            <fileNamePattern>${rootPath}/${appName}/error/${appName}-elog-%d{yyyy-MM-dd}-e.log</fileNamePattern>
             <maxHistory>30</maxHistory>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>10MB</maxFileSize>
