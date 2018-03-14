@@ -19,8 +19,7 @@
          <context:component-scan
             base-package="org.springframework.samples.service"/>  -->
     
-    <context:property-placeholder location="classpath*:baseDocument/base.properties" ignore-unresolvable="true"/><!-- 加载配置基础的properties文件 -->         
-     <!-- 扫描除了controller之外别的所有注解 -->
+  <context:property-placeholder location="classpath*:baseDocument/base.properties" ignore-unresolvable="true"/><!-- 加载配置基础的properties文件 --><!-- 扫描除了controller之外别的所有注解 -->
 	<context:component-scan base-package="com.jcmz">
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />

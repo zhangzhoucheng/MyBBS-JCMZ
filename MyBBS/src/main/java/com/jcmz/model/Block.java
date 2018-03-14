@@ -9,7 +9,30 @@ public class Block {
 
     private Integer blockstatus;
 
-    private Integer pageid;
+    public Block(String blockname, String blockremark, Integer blockstatus, Integer pageid) {
+		super();
+		this.blockname = blockname;
+		this.blockremark = blockremark;
+		this.blockstatus = blockstatus;
+		this.pageid = pageid;
+	}
+
+	
+
+	public Block(Integer id, String blockname, String blockremark, Integer blockstatus, Integer pageid) {
+		super();
+		this.id = id;
+		this.blockname = blockname;
+		this.blockremark = blockremark;
+		this.blockstatus = blockstatus;
+		this.pageid = pageid;
+	}
+
+	public Block() {
+		super();
+	}
+
+	private Integer pageid;
 
     public Integer getId() {
         return id;

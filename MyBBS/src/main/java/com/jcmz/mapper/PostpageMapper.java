@@ -27,4 +27,6 @@ public interface PostpageMapper {
     int updateByPrimaryKeySelective(Postpage record);
 
     int updateByPrimaryKey(Postpage record);
+    List<Postpage> selectPageWhole();
+    List<Postpage> selectPageAndBlock();
 }

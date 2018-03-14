@@ -7,13 +7,35 @@ public class User {
 
     private String userpassword;
 
-    private String nickname;//昵称
+    private String nickname;
 
-    private Integer idtype;//身份类型，0是普通用户，1是板块管理员，2是最高权限者
+    private Integer idtype;
 
-    private Integer status;//账户状态，0是冻结，1是正常，2是删除
+    private Integer status;
 
-    public Integer getId() {
+    public User() {
+		super();
+	}
+
+	public User(Integer id, String username, String userpassword, String nickname, Integer idtype, Integer status) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.userpassword = userpassword;
+		this.nickname = nickname;
+		this.idtype = idtype;
+		this.status = status;
+	}
+
+	public User(String string, String string2, String string3, int zeroOne, int zeroOne2) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public User(String name, Object object, String pas) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -57,17 +79,7 @@ public class User {
         return status;
     }
 
-    public User(String username, String userpassword, String nickname, Integer idtype, Integer status) {
-		super();
-
-		this.username = username;
-		this.userpassword = userpassword;
-		this.nickname = nickname;
-		this.idtype = idtype;
-		this.status = status;
-	}
-
-	public void setStatus(Integer status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 }

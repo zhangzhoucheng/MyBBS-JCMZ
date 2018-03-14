@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jcmz.mapper.UserMapper">
   <resultMap id="BaseResultMap" type="com.jcmz.model.User">
-    <id column="id" jdbcType="INTEGER" property="id" />
+    <id column="user_id" jdbcType="INTEGER" property="id" />
     <result column="userName" jdbcType="VARCHAR" property="username" />
     <result column="userPassword" jdbcType="VARCHAR" property="userpassword" />
     <result column="nickName" jdbcType="VARCHAR" property="nickname" />

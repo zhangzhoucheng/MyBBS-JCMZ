@@ -1,7 +1,15 @@
 package com.jcmz.model;
 
-public class Postpage {
-    private Integer id;
+import java.io.Serializable;
+import java.util.List;
+
+public class Postpage implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
 
     private String pagename;
 
@@ -10,8 +18,31 @@ public class Postpage {
     private Integer pagemanagerid;
 
     private String pageremark;
+    private List<User> users;
+    private List<Block> blocks;
 
-    public Integer getId() {
+  
+
+	
+
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
+	public List<Block> getBlocks() {
+		return blocks;
+	}
+
+	public void setBlocks(List<Block> blocks) {
+		this.blocks = blocks;
+	}
+
+	public Integer getId() {
         return id;
     }
 
