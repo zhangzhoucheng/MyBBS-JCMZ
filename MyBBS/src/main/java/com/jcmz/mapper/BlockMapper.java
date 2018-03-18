@@ -2,6 +2,8 @@ package com.jcmz.mapper;
 
 import com.jcmz.model.Block;
 import com.jcmz.model.BlockExample;
+import com.jcmz.model.Post;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,4 +29,8 @@ public interface BlockMapper {
     int updateByPrimaryKeySelective(Block record);
 
     int updateByPrimaryKey(Block record);
+
+	List<Block> getBlocksByPid(int p_id);
+
+	
 }

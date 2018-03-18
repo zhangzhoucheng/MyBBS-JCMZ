@@ -9,7 +9,13 @@ public class User {
 
     private String nickname;
 
-    private Integer idtype;
+    @Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", userpassword=" + userpassword + ", nickname=" + nickname
+				+ ", idtype=" + idtype + ", status=" + status + "]";
+	}
+
+	private Integer idtype;
 
     private Integer status;
 

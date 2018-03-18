@@ -7,6 +7,8 @@
     <result column="blockRemark" jdbcType="VARCHAR" property="blockremark" />
     <result column="blockStatus" jdbcType="INTEGER" property="blockstatus" />
     <result column="pageId" jdbcType="INTEGER" property="pageid" />
+    <result column="countNum" jdbcType="INTEGER" property="countNum"/>
+    <collection property="posts" ofType="com.jcmz.model.Post" resultMap="com.jcmz.mapper.PostMapper.BaseResultMap"></collection>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,6 +71,10 @@
   <sql id="Base_Column_List">
     id, blockName, blockRemark, blockStatus, pageId
   </sql>
+  <select id="getBlocksByPid" resultMap="BaseResultMap">
+  	select b.id as block_id,b.blockName,b.blockRemark,b.blockStatus,b.pageId,b.countNum,p.*  from (select * from tb_block t where t.pageId=#{0} and t.blockStatus !=0) b left join tb_post p on b.id=p.blockTypeId order by b.countNum desc,b.id,p.postIsFocus desc
+  </select>
+  
   <select id="selectByExample" parameterType="com.jcmz.model.BlockExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

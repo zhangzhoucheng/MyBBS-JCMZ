@@ -41,7 +41,7 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
-		 <table tableName="tb_block" domainObjectName="Block"></table>
+		<!--  <table tableName="tb_block" domainObjectName="Block"></table>
 		<table tableName="tb_pagemanager" domainObjectName="Pagemanager"></table>
 		<table tableName="tb_post" domainObjectName="Post"></table>
 		<table tableName="tb_postbase" domainObjectName="Postbase"></table>
@@ -49,7 +49,8 @@
 		<table tableName="tb_postreply" domainObjectName="Postreply"></table>
 		<table tableName="tb_user" domainObjectName="User"></table>
 		<table tableName="tb_userdetail" domainObjectName="Userdetail"></table>
-		<table tableName="tb_basetype" domainObjectName="Basetype"></table>
+		<table tableName="tb_basetype" domainObjectName="Basetype"></table> -->
+		 <table tableName="tb_blocksofpagehot" domainObjectName="BlocksHotNum"></table>
 		
 	</context>
 

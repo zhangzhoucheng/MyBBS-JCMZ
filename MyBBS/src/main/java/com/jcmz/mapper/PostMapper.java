@@ -27,4 +27,15 @@ public interface PostMapper {
     int updateByPrimaryKeySelective(Post record);
 
     int updateByPrimaryKey(Post record);
+    List<Post> getPostsByBid(int b_id);
+
+	List<Post> getoBlockSetTop(int b_id);
+
+	List<Post> getoBlockByTime(int b_id);
+
+	int getAllCount(int b_id);
+
+	List<Post> getPostsByPaging(@Param("b_id")int b_id,@Param("start")int start, @Param("perPageCount")int perPageCount);
+
+	
 }

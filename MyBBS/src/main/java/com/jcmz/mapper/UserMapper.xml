@@ -70,6 +70,12 @@
   <sql id="Base_Column_List">
     id, userName, userPassword, nickName, idType, status
   </sql>
+  <sql id="Base_Column_List1">
+    userName, userPassword, nickName, idType, status
+  </sql>
+  <select id="getUserSById" resultMap="BaseResultMap">
+  	select t.id as user_id ,<include refid="Base_Column_List1"></include> from tb_user t,tb_pagemanager tp where tp.pageId=#{0} and tp.userId=t.id
+  </select>
   <select id="selectByExample" parameterType="com.jcmz.model.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

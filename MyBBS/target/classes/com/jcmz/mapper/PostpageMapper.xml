@@ -73,9 +73,29 @@
   </sql>
   
   <select id="selectPageWhole" resultMap="BaseResultMap"><!-- 注意当都需要各自id值的时候，只能取不同“id as”，不然映射的集合缺少值 -->
-  	select p.id as page_id,p.pageName,p.pageRemark,u.id as user_id,u.userName,u.nickName,u.idType,u.status,b.id as block_id,b.blockName,b.blockRemark from tb_postpage p,tb_user u,tb_block b,tb_pagemanager pa 
-  	where p.id=pa.pageId and u.id=pa.userId and p.id=b.pageId and p.pageStatus !=0 and b.blockStatus !=0
+  	select p.id as page_id,p.pageName,p.pageRemark,u.id as user_id,u.userName,u.nickName,u.idType,u.status,b.id as block_id,b.blockName,b.blockRemark,b.countNum from tb_postpage p,tb_user u,
+  	 <include refid="queryBlock-aboutPageId-aboveNum"></include> b,tb_pagemanager pa 
+  	where p.id=pa.pageId and u.id=pa.userId and p.id=b.pageId and p.pageStatus !=0 and b.blockStatus !=0  order by p.id,countNum desc
   </select>
+  <!-- <sql id="queryBlock-aboutPageId-aboveNum">*****查询block板块表中按照版面分类的每个类别的前n条数据（用于得到热点板块，一班设置条数为5条）
+  	(select * from tb_block t1 where (select count(*) from tb_block t2 where t1.pageId=t2.pageId and t1.id > t2.id ) &lt; (select n from tb_blocksofpagehot where id=1)) 
+  
+  -->
+  
+   <sql id="queryBlock-aboutPageId-aboveNum"><!-- *****查询block板块表中按照版面分类的每个类别的前n条数据(该数据是该板块帖子数目靠前的）（用于得到热点板块，一班设置条数为5条） -->
+  	(select * from <include refid="getBlockNew"></include> t1 where (select count(*) from <include refid="getBlockNew"></include> t2 where t1.pageId=t2.pageId and t1.countNum &lt; t2.countNum ) &lt; (select num from tb_blocksofpagehot where id=1)) 
+  </sql>
+  
+  
+  <sql id="getBlockJoinPostnum"><!-- 这个是获取到新的block表，只是相对于原来的是多了一列表示他拥有帖子数量，从而运用到queryBlock-aboutPageId-aboveNum，查出排名前五的该版面下的热门板块,仅仅用于当block表没加字段countnum的时候 -->
+ (select *  from tb_block t3 left join (select t1.blockTypeId ,count(*) as countNum from tb_post  t1 group by t1.blockTypeId)t2  on t3.id=t2.blockTypeId)
+  </sql>
+  <sql id="getBlockJoinPostNumAndOrder"><!-- 较于上面多了每个版面的板块会按照帖子数高到底排序 ，仅仅用于当block表没加字段countnum的时候 -->
+  	(select *  from tb_block t3 left join (select t1.blockTypeId ,count(*) as countNum from tb_post  t1 group by t1.blockTypeId)t2  on t3.id=t2.blockTypeId order by t3.pageId, t2.countNum desc)
+  </sql>
+  <sql id="getBlockNew" ><!-- 相较于上面两个block新表，由于本身加了字段countnum所以方便点 -->
+  (select * from tb_block b order by b.pageId,b.countNum desc)
+  </sql>
   <select id="selectPageAndBlock" resultMap="BaseResultMap">
   	select p.id,p.pageName,p.pageRemark,b.id,b.blockName,b.blockRemark from tb_postpage p,tb_block b where b.pageId=p.id
   </select>
