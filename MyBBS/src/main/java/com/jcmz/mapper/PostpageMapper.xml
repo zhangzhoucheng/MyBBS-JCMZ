@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jcmz.mapper.PostpageMapper">
@@ -238,4 +239,246 @@
       pageRemark = #{pageremark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jcmz.mapper.PostpageMapper">
+  <resultMap id="BaseResultMap" type="com.jcmz.model.Postpage">
+    <id column="page_id" jdbcType="INTEGER" property="id" />
+    <result column="pageName" jdbcType="VARCHAR" property="pagename" />
+    <result column="pageStatus" jdbcType="INTEGER" property="pagestatus" />
+    <result column="pageManagerId" jdbcType="INTEGER" property="pagemanagerid" />
+    <result column="pageRemark" jdbcType="VARCHAR" property="pageremark" />
+    <collection property="users" resultMap="com.jcmz.mapper.UserMapper.BaseResultMap" ofType="com.jcmz.model.User"></collection>
+    <collection property="blocks" resultMap="com.jcmz.mapper.BlockMapper.BaseResultMap" ofType="com.jcmz.model.Block"></collection>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, pageName, pageStatus, pageManagerId, pageRemark
+  </sql>
+  
+  <select id="selectPageWhole" resultMap="BaseResultMap"><!-- 注意当都需要各自id值的时候，只能取不同“id as”，不然映射的集合缺少值 -->
+  	select p.id as page_id,p.pageName,p.pageRemark,u.id as user_id,u.userName,u.nickName,u.idType,u.status,b.id as block_id,b.blockName,b.blockRemark,b.countNum from tb_postpage p,tb_user u,
+  	 <include refid="queryBlock-aboutPageId-aboveNum"></include> b,tb_pagemanager pa 
+  	where p.id=pa.pageId and u.id=pa.userId and p.id=b.pageId and p.pageStatus !=0 and b.blockStatus !=0  order by p.id,countNum desc
+  </select>
+  <!-- <sql id="queryBlock-aboutPageId-aboveNum">*****查询block板块表中按照版面分类的每个类别的前n条数据（用于得到热点板块，一班设置条数为5条）
+  	(select * from tb_block t1 where (select count(*) from tb_block t2 where t1.pageId=t2.pageId and t1.id > t2.id ) &lt; (select n from tb_blocksofpagehot where id=1)) 
+  
+  -->
+  
+   <sql id="queryBlock-aboutPageId-aboveNum"><!-- *****查询block板块表中按照版面分类的每个类别的前n条数据(该数据是该板块帖子数目靠前的）（用于得到热点板块，一班设置条数为5条） -->
+  	(select * from <include refid="getBlockNew"></include> t1 where (select count(*) from <include refid="getBlockNew"></include> t2 where t1.pageId=t2.pageId and t1.countNum &lt; t2.countNum ) &lt; (select num from tb_blocksofpagehot where id=1)) 
+  </sql>
+  
+  
+  <sql id="getBlockJoinPostnum"><!-- 这个是获取到新的block表，只是相对于原来的是多了一列表示他拥有帖子数量，从而运用到queryBlock-aboutPageId-aboveNum，查出排名前五的该版面下的热门板块,仅仅用于当block表没加字段countnum的时候 -->
+ (select *  from tb_block t3 left join (select t1.blockTypeId ,count(*) as countNum from tb_post  t1 group by t1.blockTypeId)t2  on t3.id=t2.blockTypeId)
+  </sql>
+  <sql id="getBlockJoinPostNumAndOrder"><!-- 较于上面多了每个版面的板块会按照帖子数高到底排序 ，仅仅用于当block表没加字段countnum的时候 -->
+  	(select *  from tb_block t3 left join (select t1.blockTypeId ,count(*) as countNum from tb_post  t1 group by t1.blockTypeId)t2  on t3.id=t2.blockTypeId order by t3.pageId, t2.countNum desc)
+  </sql>
+  <sql id="getBlockNew" ><!-- 相较于上面两个block新表，由于本身加了字段countnum所以方便点 -->
+  (select * from tb_block b order by b.pageId,b.countNum desc)
+  </sql>
+  <select id="selectPageAndBlock" resultMap="BaseResultMap">
+  	select p.id,p.pageName,p.pageRemark,b.id,b.blockName,b.blockRemark from tb_postpage p,tb_block b where b.pageId=p.id
+  </select>
+  <select id="selectByExample" parameterType="com.jcmz.model.PostpageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_postpage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_postpage
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_postpage
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jcmz.model.PostpageExample">
+    delete from tb_postpage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jcmz.model.Postpage">
+    insert into tb_postpage (id, pageName, pageStatus, 
+      pageManagerId, pageRemark)
+    values (#{id,jdbcType=INTEGER}, #{pagename,jdbcType=VARCHAR}, #{pagestatus,jdbcType=INTEGER}, 
+      #{pagemanagerid,jdbcType=INTEGER}, #{pageremark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jcmz.model.Postpage">
+    insert into tb_postpage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pagename != null">
+        pageName,
+      </if>
+      <if test="pagestatus != null">
+        pageStatus,
+      </if>
+      <if test="pagemanagerid != null">
+        pageManagerId,
+      </if>
+      <if test="pageremark != null">
+        pageRemark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pagename != null">
+        #{pagename,jdbcType=VARCHAR},
+      </if>
+      <if test="pagestatus != null">
+        #{pagestatus,jdbcType=INTEGER},
+      </if>
+      <if test="pagemanagerid != null">
+        #{pagemanagerid,jdbcType=INTEGER},
+      </if>
+      <if test="pageremark != null">
+        #{pageremark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jcmz.model.PostpageExample" resultType="java.lang.Long">
+    select count(*) from tb_postpage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_postpage
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.pagename != null">
+        pageName = #{record.pagename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pagestatus != null">
+        pageStatus = #{record.pagestatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.pagemanagerid != null">
+        pageManagerId = #{record.pagemanagerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pageremark != null">
+        pageRemark = #{record.pageremark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_postpage
+    set id = #{record.id,jdbcType=INTEGER},
+      pageName = #{record.pagename,jdbcType=VARCHAR},
+      pageStatus = #{record.pagestatus,jdbcType=INTEGER},
+      pageManagerId = #{record.pagemanagerid,jdbcType=INTEGER},
+      pageRemark = #{record.pageremark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jcmz.model.Postpage">
+    update tb_postpage
+    <set>
+      <if test="pagename != null">
+        pageName = #{pagename,jdbcType=VARCHAR},
+      </if>
+      <if test="pagestatus != null">
+        pageStatus = #{pagestatus,jdbcType=INTEGER},
+      </if>
+      <if test="pagemanagerid != null">
+        pageManagerId = #{pagemanagerid,jdbcType=INTEGER},
+      </if>
+      <if test="pageremark != null">
+        pageRemark = #{pageremark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jcmz.model.Postpage">
+    update tb_postpage
+    set pageName = #{pagename,jdbcType=VARCHAR},
+      pageStatus = #{pagestatus,jdbcType=INTEGER},
+      pageManagerId = #{pagemanagerid,jdbcType=INTEGER},
+      pageRemark = #{pageremark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+>>>>>>> remotes/origin/master
 </mapper>
