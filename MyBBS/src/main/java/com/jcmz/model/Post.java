@@ -1,5 +1,6 @@
 package com.jcmz.model;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Post {
@@ -13,13 +14,31 @@ public class Post {
 
     private Integer blocktypeid;
 
-    private Date time;
-
+    private Timestamp time;
     private Integer managerstatus;
 
     private Integer postisfocus;
+    private Timestamp setTopTime;
+    
+    public Timestamp getSetTopTime() {
+		return setTopTime;
+	}
 
-    public Integer getId() {
+	public void setSetTopTime(Timestamp setTopTime) {
+		this.setTopTime = setTopTime;
+	}
+
+	private User user;
+
+    public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -43,7 +62,36 @@ public class Post {
         this.title = title == null ? null : title.trim();
     }
 
-    public Integer getUserid() {
+    public Post(Integer id, String content, String title, Integer userid, Integer blocktypeid, Date time,
+			Integer managerstatus, Integer postisfocus) {
+		super();
+		this.id = id;
+		this.content = content;
+		this.title = title;
+		this.userid = userid;
+		this.blocktypeid = blocktypeid;
+		this.time = (Timestamp) time;
+		this.managerstatus = managerstatus;
+		this.postisfocus = postisfocus;
+	}
+
+	public Post() {
+		super();
+	}
+
+	public Post(String content, String title, Integer userid, Integer blocktypeid, Timestamp time, Integer managerstatus,
+			Integer postisfocus) {
+		super();
+		this.content = content;
+		this.title = title;
+		this.userid = userid;
+		this.blocktypeid = blocktypeid;
+		this.time = time;
+		this.managerstatus = managerstatus;
+		this.postisfocus = postisfocus;
+	}
+
+	public Integer getUserid() {
         return userid;
     }
 
@@ -63,7 +111,7 @@ public class Post {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(Timestamp time) {
         this.time = time;
     }
 

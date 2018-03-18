@@ -4,8 +4,6 @@ import com.jcmz.model.User;
 import com.jcmz.model.UserExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
-
 
 public interface UserMapper {
     long countByExample(UserExample example);
@@ -29,4 +27,8 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+	int getIdByUsername(String name);
+
+	List<User> getUserSById(int p_id);
 }

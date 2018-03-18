@@ -234,6 +234,66 @@ public class PostbaseExample {
             return (Criteria) this;
         }
 
+        public Criteria andBasetypeidIsNull() {
+            addCriterion("baseTypeId is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBasetypeidIsNotNull() {
+            addCriterion("baseTypeId is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBasetypeidEqualTo(Integer value) {
+            addCriterion("baseTypeId =", value, "basetypeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBasetypeidNotEqualTo(Integer value) {
+            addCriterion("baseTypeId <>", value, "basetypeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBasetypeidGreaterThan(Integer value) {
+            addCriterion("baseTypeId >", value, "basetypeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBasetypeidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("baseTypeId >=", value, "basetypeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBasetypeidLessThan(Integer value) {
+            addCriterion("baseTypeId <", value, "basetypeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBasetypeidLessThanOrEqualTo(Integer value) {
+            addCriterion("baseTypeId <=", value, "basetypeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBasetypeidIn(List<Integer> values) {
+            addCriterion("baseTypeId in", values, "basetypeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBasetypeidNotIn(List<Integer> values) {
+            addCriterion("baseTypeId not in", values, "basetypeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBasetypeidBetween(Integer value1, Integer value2) {
+            addCriterion("baseTypeId between", value1, value2, "basetypeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBasetypeidNotBetween(Integer value1, Integer value2) {
+            addCriterion("baseTypeId not between", value1, value2, "basetypeid");
+            return (Criteria) this;
+        }
+
         public Criteria andPostidIsNull() {
             addCriterion("postId is null");
             return (Criteria) this;

@@ -10,6 +10,8 @@
     <result column="time" jdbcType="TIMESTAMP" property="time" />
     <result column="managerStatus" jdbcType="INTEGER" property="managerstatus" />
     <result column="postIsFocus" jdbcType="INTEGER" property="postisfocus" />
+    <result column="setTopTime" jdbcType="TIMESTAMP" property="setTopTime"/>
+   <association property="user" resultMap="com.jcmz.mapper.UserMapper.BaseResultMap"/> 
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -72,6 +74,28 @@
   <sql id="Base_Column_List">
     id, content, title, userId, blockTypeId, time, managerStatus, postIsFocus
   </sql>
+  
+ <!--  <select id="getPostsByBid">
+  	select * from tb_post p where p.blockTypeId=#{0}  order by p.postIsFocus desc
+  </select> -->
+  <select id="getPostsByBid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select p.id as id ,p.content,p.title,p.userId,p.blockTypeId,p.time,p.managerStatus,p.postIsFocus ,u.id as user_id,u.userName,u.userPassword,u.nickName,u.idType,u.status from tb_post p,tb_user u  where p.blockTypeId=#{0} and p.userId=u.id and p.managerStatus=0 order by p.postIsFocus desc
+  </select>
+  <select id="getoBlockSetTop" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select p.id as id ,p.content,p.title,p.userId,p.blockTypeId,p.time,p.setTopTime,p.managerStatus,p.postIsFocus ,u.id as user_id,u.userName,u.userPassword,u.nickName,u.idType,u.status from tb_post p,tb_user u  where p.blockTypeId=#{0} and p.userId=u.id and p.managerStatus=1 order by p.setTopTime desc
+  </select>
+   <select id="getoBlockByTime" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select p.id as id ,p.content,p.title,p.userId,p.blockTypeId,p.time,p.managerStatus,p.postIsFocus ,u.id as user_id,u.userName,u.userPassword,u.nickName,u.idType,u.status from tb_post p,tb_user u  where p.blockTypeId=#{0} and p.userId=u.id order by p.time desc
+  </select>
+  <select id="getAllCount"  resultType="java.lang.Integer" >
+  	select count(*) from tb_post p where p.blockTypeId=#{0} and (p.managerStatus=0 or p.managerStatus=1 )
+  </select>
+ <select id="getPostsByPaging" resultMap="BaseResultMap" >
+   	select p.id as id ,p.content,p.title,p.userId,p.blockTypeId,p.time,p.managerStatus,p.postIsFocus ,u.id as user_id,u.userName,u.userPassword,u.nickName,u.idType,u.status from tb_post p,tb_user u  where p.blockTypeId=#{b_id} and p.userId=u.id 
+   	and (p.managerStatus=0 or p.managerStatus=1 ) order by p.time desc limit #{start},#{perPageCount}
+ 
+ 	<!-- select * from tb_post p where p.blockTypeId=#{b_id} and (p.managerStatus=0 or p.managerStatus=1 ) limit #{start},#{perPageCount} -->
+ </select>
   <select id="selectByExample" parameterType="com.jcmz.model.PostExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

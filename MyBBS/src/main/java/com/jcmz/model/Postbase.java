@@ -5,9 +5,15 @@ public class Postbase {
 
     private String name;
 
+    private Integer basetypeid;
+
     private Integer postid;
 
-    private String remark;
+    public Postbase() {
+		super();
+	}
+
+	private String remark;
 
     public Integer getId() {
         return id;
@@ -23,6 +29,14 @@ public class Postbase {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public Integer getBasetypeid() {
+        return basetypeid;
+    }
+
+    public void setBasetypeid(Integer basetypeid) {
+        this.basetypeid = basetypeid;
     }
 
     public Integer getPostid() {

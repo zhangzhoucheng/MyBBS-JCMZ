@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.jcmz.model.Postbase">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="baseTypeId" jdbcType="INTEGER" property="basetypeid" />
     <result column="postId" jdbcType="INTEGER" property="postid" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, postId, remark
+    id, name, baseTypeId, postId, remark
   </sql>
   <select id="selectByExample" parameterType="com.jcmz.model.PostbaseExample" resultMap="BaseResultMap">
     select
@@ -99,10 +100,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.jcmz.model.Postbase">
-    insert into tb_postbase (id, name, postId, 
-      remark)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{postid,jdbcType=INTEGER}, 
-      #{remark,jdbcType=VARCHAR})
+    insert into tb_postbase (id, name, baseTypeId, 
+      postId, remark)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{basetypeid,jdbcType=INTEGER}, 
+      #{postid,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jcmz.model.Postbase">
     insert into tb_postbase
@@ -112,6 +113,9 @@
       </if>
       <if test="name != null">
         name,
+      </if>
+      <if test="basetypeid != null">
+        baseTypeId,
       </if>
       <if test="postid != null">
         postId,
@@ -126,6 +130,9 @@
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="basetypeid != null">
+        #{basetypeid,jdbcType=INTEGER},
       </if>
       <if test="postid != null">
         #{postid,jdbcType=INTEGER},
@@ -150,6 +157,9 @@
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
+      <if test="record.basetypeid != null">
+        baseTypeId = #{record.basetypeid,jdbcType=INTEGER},
+      </if>
       <if test="record.postid != null">
         postId = #{record.postid,jdbcType=INTEGER},
       </if>
@@ -165,6 +175,7 @@
     update tb_postbase
     set id = #{record.id,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
+      baseTypeId = #{record.basetypeid,jdbcType=INTEGER},
       postId = #{record.postid,jdbcType=INTEGER},
       remark = #{record.remark,jdbcType=VARCHAR}
     <if test="_parameter != null">
@@ -176,6 +187,9 @@
     <set>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="basetypeid != null">
+        baseTypeId = #{basetypeid,jdbcType=INTEGER},
       </if>
       <if test="postid != null">
         postId = #{postid,jdbcType=INTEGER},
@@ -189,6 +203,7 @@
   <update id="updateByPrimaryKey" parameterType="com.jcmz.model.Postbase">
     update tb_postbase
     set name = #{name,jdbcType=VARCHAR},
+      baseTypeId = #{basetypeid,jdbcType=INTEGER},
       postId = #{postid,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}

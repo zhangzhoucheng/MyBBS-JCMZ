@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jcmz.mapper.UserMapper">
   <resultMap id="BaseResultMap" type="com.jcmz.model.User">
-    <id column="id" jdbcType="INTEGER" property="id" />
+    <id column="user_id" jdbcType="INTEGER" property="id" />
     <result column="userName" jdbcType="VARCHAR" property="username" />
     <result column="userPassword" jdbcType="VARCHAR" property="userpassword" />
     <result column="nickName" jdbcType="VARCHAR" property="nickname" />
@@ -70,6 +70,12 @@
   <sql id="Base_Column_List">
     id, userName, userPassword, nickName, idType, status
   </sql>
+  <sql id="Base_Column_List1">
+    userName, userPassword, nickName, idType, status
+  </sql>
+  <select id="getUserSById" resultMap="BaseResultMap">
+  	select t.id as user_id ,<include refid="Base_Column_List1"></include> from tb_user t,tb_pagemanager tp where tp.pageId=#{0} and tp.userId=t.id
+  </select>
   <select id="selectByExample" parameterType="com.jcmz.model.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
