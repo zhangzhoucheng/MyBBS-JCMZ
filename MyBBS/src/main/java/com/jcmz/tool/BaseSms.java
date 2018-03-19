@@ -14,6 +14,7 @@ import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 
 public class BaseSms {
+	//test合并属性
 
 	@Test
 	public void sendSms(String tel,String code,String ...name) throws ClientException {
