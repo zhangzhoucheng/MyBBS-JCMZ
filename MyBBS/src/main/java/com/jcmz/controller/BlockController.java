@@ -42,7 +42,7 @@ public class BlockController {
 		List<Post> posts=blockService.getoBlock(b_id);
 		List<Post> postsBySetTop=blockService.getoBlockSetTop(b_id);
 		//List<Post> postsByTime=blockService.getoBlockByTime(b_id);
-		PageBean<Post> pag=pps.findResultsByPageBean(3, b_id);
+		PageBean<Post> pag=pps.findResultsByPageBean(1, b_id);
 		List<Post> postsByTime=pag.getPageLists();//初始显示第一页
 		int allCount=pag.getPageCount();
 		String blocksHotNum=bh.selectByPrimaryKey(1).getNum().toString();

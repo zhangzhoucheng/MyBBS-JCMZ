@@ -44,6 +44,11 @@ article{
 	width:75%;
 	margin-top: 20px;
 }
+.mainReplay{
+	margin:0 auto;
+	width:100%;
+	margin-top:20px;
+}
 .postHostMsg{
 	
 	
@@ -122,7 +127,13 @@ article{
 .paging-content{
 width:100%;
 }
-
+.title1{
+	font-weight: 700p;
+}
+.down1{
+	width:100%;
+	margin:0 auto;
+}
 /*footter的样式*/
 #footer {
 	width: 100%;
@@ -155,42 +166,49 @@ width:100%;
 						class="glyphicon glyphicon-home"></span>首页</a>>></li>
 				<li><a href="gotoBlocks?p_id=${p_id }"><span class="glyphicon glyphicon-list-alt"></span> ${pageName} </a>>></li>
 				<li><a href="gotoBlock?b_id=${b_id}&pageName=${pageName}&p_id=${p_id}"><span class="glyphicon glyphicon-th-large"></span> ${blockName} </a>>></li>
-				<li><a href="#"><span class="glyphicon glyphicon-send"></span> 该贴子 </a>>></li>
+				<li><a href="#"><span class="glyphicon glyphicon-send"></span>  ${userHost.posts[0].title}  </a>>></li>
 
 			</ul>
 		</nav>
 
 		<div class="main">
 			<section class="main1 postHostMsg">
-				<section class="m1-left">
+				<section class="m1-left host-left">
 					<p class="p-center">
 					<span class="glyphicon glyphicon-home headFlag"></span>
-					<span class="headColor">楼主:</span><span>张三四</span>
+					<span class="headColor">楼主:</span><span>${userHost.username }</span>      
 					</p>
 				
 					<img alt="图像" class="photoHead" src="../images/thePostImgs/rb.jpg">
-					<p style="margin-top:8px;"><span class="glyphicon glyphicon-send headFlag"></span><span class="headColor">&nbsp;帖子数:</span><span>1000</span></p>
-					<p><span class="glyphicon glyphicon-heart-empty headFlag"></span><span class="headColor">&nbsp;关注数:</span><span>1000</span></p>
-					<p><span class="glyphicon glyphicon-star-empty headFlag"></span><span class="headColor">&nbsp;收藏数:</span><span>1000</span></p>
-					<p><span class="glyphicon glyphicon-tint headFlag"></span><span class="headColor">&nbsp;我的关注:</span><span>1000</span></p>
+					<p style="margin-top:8px;"><span class="glyphicon glyphicon-send headFlag"></span><span class="headColor">&nbsp;帖子数:</span><span>${userHost.postNum }</span>
+												&nbsp;&nbsp;<span class="glyphicon glyphicon-hand-right headFlag"></span><span class="headColor">&nbsp;点赞数:</span><span>${userHost.posts[0].postisfocus}</span>
+					</p>
+					<p><span class="glyphicon glyphicon-heart-empty headFlag"></span><span class="headColor">&nbsp;关注数:</span><span>${userHost.beFocusedNum }</span>
+						&nbsp;&nbsp;<span class="glyphicon glyphicon-tree-deciduous headFlag"></span><span class="headColor">&nbsp;收藏数:</span><span>${userHost.posts[0].collectedNum}</span>
+					</p>
+					<p><span class="glyphicon glyphicon-star-empty headFlag"></span><span class="headColor">&nbsp;我的收藏:</span><span>${userHost.collectNum }</span></p>
+					<p><span class="glyphicon glyphicon-tint headFlag"></span><span class="headColor">&nbsp;我的关注:</span><span>${userHost.focusOtherNum }</span></p>
 					
 					<span></span>
 				</section>
 				<section class="m1-right">
 					<article class="mr-art">
-						<p class="p-center p-marTop"><span class="glyphicon glyphicon-home"></span><span>主题:</span><span>青春岁月我们一起</span></p>
+						<h3 class="p-center p-marTop"><span class="glyphicon glyphicon-home headFlag"></span><span class="title1">主题:</span><span class="title1">${userHost.posts[0].title }</span></h3>
 						<p style="text-indent: 2em;">
-							送走了凛冽的寒冬，迈着轻盈的脚步，伴着和煦的微风，走进了暖春，迎来了一年一度的樱花盛开的季节。 　　拥有“画中之王”称号的牡丹，有着国色天香，荣华富贵的象征；而荷兰的郁金香也有着“庄严华贵”的雅号，是成功地位的象征，然而，我却独爱那小小的碎碎的樱花，它没有牡丹的青天一色，也没有郁金香的雍容华贵，但当它盛开的时候，总是一树一树的怒放，一簇一簇的展开花瓣，即使花心破碎。正因如此，才决定了它的开放是凄凉的悲壮的美。 　　樱花的生命是如此的短暂，在日本有一句谚语：樱花七日。是说一朵樱花从开放到凋零只有7天的时间，整棵樱桃树从开花到凋谢也只有2周左右。这也形成了樱花边开边落的特点，但它经历短暂的灿烂后随即凋零的壮烈，也更加体现了它的凄美，它死在了生命中最美的一刻，将最美的一面展现给了世人，虽然花期短促，却定格了它永恒的美。 　　这春天派来的使者，最美的时节不在开放，而在凋谢之时，三月里的樱花已悄然绽放，开的如火如荼，貌美无比，极致细腻，深棕的枝干，墨绿的叶子，沾有清晨的露珠，在阳光的照耀下，闪闪发亮，但这并非最美之时。听，那如山下的潺潺流水，又如月下宝石的破碎声，清脆而响亮，在微风的吹拂下，一瓣一瓣的樱花带着股股幽香，像稚嫩的孩子的脸般，从枝桠一泻而下落了一地的樱花雨。 　　“樱花烂漫几多时，柳绿桃红两未知”，李商隐对此给出了最好的解释，。当樱花落尽，余下的只有空荡荡的孤独，那些早日的繁华早已落幕，随着它花瓣的零落而逝去，站在树下，望着一树的寂静，听着最后一朵樱花离落枝头时内心的呐喊以及泪水落地的声音，轻轻的叹息一声，为这凄美而震惊。原来，绚烂之极终归于平静，繁盛之度终归于澹雅，张狂一世的美妙也终会化成一地的缠绵。
-						该文章《樱花伤感散文》来源于出国留学网，网址：https://zw.liuxue86.com/z/3636982.html
+							${userHost.posts[0].content }
 						</p>
+						<p class="p-li">
+						 	  <a>${userHost.posts[0].time} </a>
+						</p>
+						
 					</article>	
 					<footer class="mr-fot">
 						<p class="p-li">
 						
 							<a href="#" class="art-ope1"><span class="glyphicon glyphicon-send art-ope2"></span>转发 </a>&nbsp;&nbsp;
 							<a href="#" class="art-ope1"><span class="glyphicon glyphicon-send art-ope2"></span>关注</a>&nbsp;&nbsp;
-							<a href="#" class="art-ope1"><span class="glyphicon glyphicon-send art-ope2"></span>点赞</a>&nbsp;&nbsp;							
-							<a href="#" class="art-ope1"><span class="glyphicon glyphicon-send art-ope2"></span>收藏 </a>&nbsp;&nbsp;
+							<a href="#" onclick="praiseToHost();return false;" class="art-ope1"><span class="glyphicon glyphicon-send art-ope2"></span><span class="sp_praise">点赞</span></a>&nbsp;&nbsp;							
+							<a href="javascript:collectPost(${po_id},${user.id});return false;" class="art-ope1"><span class="glyphicon glyphicon-send art-ope2"></span><span class="host-col">收藏</span> </a>&nbsp;&nbsp;
 							<a href="#" class="art-ope1"><span class="glyphicon glyphicon-send art-ope2"></span>回复 </a>
 				
 						</p>
@@ -198,62 +216,75 @@ width:100%;
 				</section>
 			</section>
 			
-			<section class="main1 wholeBlocks " id="tran-sec2">
-				
-				
-				<div class="pagingWhole">
-				<div id="paging">
-					<p>
-						<a href="#" onclick="paging(1);return false;"><span class="glyphicon glyphicon-step-backward"></span>上一页</a>&nbsp;&nbsp;
-						<span>当前页:<span id="nowPage">${nowPage}</span></span>/<span id="allPage">${allCount }</span>
-						<span><input class="form-control" id="inPage" value="${inp }" style="width:50px;display:inline;" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"  oninput="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" /></span>
-						<a href="#" onclick="paging(2);return false;"><span class="glyphicon glyphicon-hand-left"></span>跳转</a>
-						&nbsp;&nbsp;<a href="#" onclick="paging(3);return false;"><span class="glyphicon glyphicon-step-forward"></span>下一页</a><span class="pageJump" style="color:red;"></span>
-					</p><span id="b_id" style="display:none"> ${b_id} </span>
-				</div>
-				<div class="paging-content">
-				<table class="" id="my-table">
-					
-				</table>
-				</div>
-				</div>
-			</section>
-			
-			<section class="main1 postHostMsg">
-				<section class="m1-left">
-					<p class="p-center">
-					<span class="glyphicon glyphicon-home headFlag"></span>
-					<span class="headColor">1楼:</span><span>张三四</span>
-					</p>
-				
-					<img alt="图像" class="photoHead" src="../images/thePostImgs/rb.jpg">
-					<p style="margin-top:8px;"><span class="glyphicon glyphicon-send headFlag"></span><span class="headColor">&nbsp;帖子数:</span><span>1000</span></p>
-					<p><span class="glyphicon glyphicon-send headFlag"></span><span class="headColor">&nbsp;关注数:</span><span>1000</span></p>
-					<p><span class="glyphicon glyphicon-star-empty headFlag"></span><span class="headColor">&nbsp;收藏数:</span><span>1000</span></p>
-					<p><span class="glyphicon glyphicon-tint headFlag"></span><span class="headColor">&nbsp;我的关注:</span><span>1000</span></p>
-					
-					<span></span>
-				</section>
-				<section class="m1-right">
-					<article class="mr-art">
-						<p class="p-center p-marTop"><span class="glyphicon glyphicon-home"></span><span>主题:</span><span>青春岁月我们一起</span></p>
-						<p><span style="color:#299727;">张三</span><span>回复</span><span style="color:#FF571C">李四</span><span>说:</span></p>
-						<p style="text-indent: 2em;">
-							写的挺不错嘛
-						</p>
-					</article>	
-					<footer class="mr-fot">
-						<p class="p-li">
+			<div class="mainReplay">
+					<section class=" wholeBlocks main1 " id="tran-sec2">
 						
-							<a href="#" class="art-ope3"><span class="glyphicon glyphicon-send art-ope4"></span>关注 </a>&nbsp;&nbsp;
-							<a href="#" class="art-ope3"><span class="glyphicon glyphicon-send art-ope4"></span>点赞</a>&nbsp;&nbsp;
-							<a href="#" class="art-ope3"><span class="glyphicon glyphicon-send art-ope4"></span>回复 </a>
-				
-						</p>
-					</footer>
-				</section>
-			</section>
-
+						
+						
+						
+							<p>
+								<a href="#" onclick="paging(1);return false;"><span class="glyphicon glyphicon-step-backward"></span>上一页</a>&nbsp;&nbsp;
+								<span>当前页:<span id="nowPage">${nowPage}</span></span>/<span id="allPage">${allPages }</span>
+								<span><input class="form-control" id="inPage" value="${inp }" style="width:50px;display:inline;" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"  oninput="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" /></span>
+								<a href="#" onclick="paging(2);return false;"><span class="glyphicon glyphicon-hand-left"></span>跳转</a>
+								&nbsp;&nbsp;<a href="#" onclick="paging(3);return false;"><span class="glyphicon glyphicon-step-forward"></span>下一页</a><span class="pageJump" style="color:red;"></span>
+							</p><span id="po_id" style="display:none">${po_id}</span>
+					
+						
+					
+					</section>
+					<div class="down1">
+					
+						<c:forEach items="${Postreplys}" var="p" varStatus="vs">
+						
+						<section class="main1 postHostMsg users">
+							
+									<section class="m1-left">
+										<p class="p-center">
+										<span class="glyphicon glyphicon-home headFlag"></span>
+										<span class="headColor"> ${vs.count} 楼:</span><span>${p.user.username }</span>
+										</p>
+									
+										<img alt="图像" class="photoHead" src="../images/thePostImgs/rb.jpg">
+										<p style="margin-top:8px;"><span class="glyphicon glyphicon-send headFlag"></span><span class="headColor">&nbsp;帖子数:</span><span>${p.user.postNum }</span>
+										 <span class="glyphicon glyphicon-thumbs-up headFlag"></span><span class="headColor">&nbsp;点赞数:</span><span>${p.praiseNum }</span>
+										</p>
+										<p>
+										<span class="glyphicon glyphicon-send headFlag"></span><span class="headColor">&nbsp;关注数:</span><span>${p.user.beFocusedNum }</span>
+										
+										</p>
+										<p><span class="glyphicon glyphicon-star-empty headFlag"></span><span class="headColor">&nbsp;我的收藏:</span><span>${p.user.collectNum }</span></p>
+										<p><span class="glyphicon glyphicon-tint headFlag"></span><span class="headColor">&nbsp;我的关注:</span><span>${p.user.focusOtherNum }</span></p>
+										
+										<span></span>
+									</section>
+									<section class="m1-right">
+										<article class="mr-art">
+											<h3 class="p-center p-marTop"><span class="glyphicon glyphicon-home headFlag"></span><span class="title1">主题:</span><span class="title1">${userHost.posts[0].title }</span></h3>
+											<p><span style="color:#299727;">${p.user.username}</span><span>回复</span><span style="color:#FF571C"> ${p.toWhoName} </span><span>说:</span></p>
+											<p style="text-indent: 2em;">
+												${p.replycontet}
+											</p>
+											<p class="p-li">
+							 	  				<a>${p.time} </a>
+											</p>
+										</article>	
+										<footer class="mr-fot">
+											<p class="p-li">
+											
+												<a href="#" class="art-ope3"><span class="glyphicon glyphicon-send art-ope4"></span>关注 </a>&nbsp;&nbsp;
+												<a href="#" onclick="praiseToReply(this,${p.id},${vs.count});return false;"class="art-ope3"><span class="glyphicon glyphicon-send art-ope4"></span><span class="rep-sp-praise">点赞</span></a>&nbsp;&nbsp;
+												<a href="#" class="art-ope3"><span class="glyphicon glyphicon-send art-ope4"></span>回复 </a>
+									
+											</p>
+										</footer>
+									</section>
+							
+						</section>
+					
+						</c:forEach>
+					</div>
+			</div>
 		</div>
 		<footer id="footer" style="" class="">
 			<p>
@@ -357,8 +388,9 @@ width:100%;
 		
 		function paging(flag){//alert(1);
 			var nowPage=$("#nowPage").html();
-			var b_id=$("#b_id").html();
+			var po_id=$("#po_id").html();
 			var inp=$("#inPage").val();
+			//alert(15);
 			if(flag==1){
 				
 				if(nowPage<=1){
@@ -377,21 +409,21 @@ width:100%;
 				nowPage++;
 			}
 			$.ajax({
-				url:"postPaging",
-				data:"nowPage="+nowPage+"&b_id="+b_id+"&inp="+inp,
+				url:"postReplyPaging",
+				data:"nowPage="+nowPage+"&po_id="+po_id+"&inp="+inp,
 				type:"get",
 				dataType:"json",
-				async:false,
+			
 				success:function(){//alert(33);
 					//$(".paging-content").load(location.href+" .paging-content");按理有用，但妹达到效果
 					/* $(".paging-content").html($(".main").html()) */ /* 没用，只是单纯的把原数据加载，而不能让其重新加载$内容 */
 					//window.location.reload();刷新浏览器url，重载，
 					 $.ajax({
-						url:"bas-mainTheBlock.jsp ",
+						url:"bas-mainThePost.jsp",
 						type:"get",
 						dataType:"html",
-						success:function(data){
-							$(".pagingWhole").html($(data).find(".pagingWhole"));//很经典的处理**，相对于拼接页面，或者取另一个页面
+						success:function(data){//alert(44);
+							$(".mainReplay").html($(data).find(".mainReplay").html());//很经典的处理**，相对于拼接页面，或者取另一个页面
 							colorShow();
 						},
 					 error:function(){
@@ -407,6 +439,117 @@ width:100%;
 			});
 			
 		}
+		
+		function praiseToHost() {
+			var sp_praise=$(".sp_praise").html();
+			var po_id=$("#po_id").html();
+			
+			$.ajax({
+				url:"praiseToHost",
+				data:"sp_praise="+sp_praise+"&po_id="+po_id,
+				dataType:"json",
+				type:"get",
+				success:function(data){
+					$(".sp_praise").html(data.sta);
+					$.ajax({
+						url:"bas-mainThePost.jsp",
+						dataType:"html",
+						type:"get",
+						success:function(data1){
+							$(".host-left").html($(data1).find(".host-left").html());
+							colorShow();
+						},
+						error:function(){
+							alert("praiseToHost error");
+						}
+					})
+					
+				},
+				error:function(){
+					alert("praiseToHost error");
+				}
+			})
+			
+		}
+		
+		function praiseToReply(v,reply_id,c) {
+			var nowPage=$("#nowPage").html();
+			var s1=$(v).children(".rep-sp-praise");//获取子元素，锁定到该行的span，点赞
+			//var flashLeft=$(v).parents(".m1-right").prev();//获取到需要ajax刷新的元素//发现这样局部刷新某个回复，有点难度，且比较麻烦，所以直接刷新所有的回复就行了，好处理多。当然除了这种jquery选择器方式，还有可以用迭代出的id进行规律化设置id属性，这样完成小部分的局部刷新也很容易
+			var sp_praise=s1.html();
+			var po_id=$("#po_id").html();
+			var inp=$("#inPage").val();
+			$.ajax({
+				url:"praiseToReply",
+				data:"sp_praise="+sp_praise+"&po_id="+po_id+"&reply_id="+reply_id+"&nowPage="+nowPage+"&inp="+inp,
+				dataType:"json",
+				//async:"false",
+				type:"get",
+				success:function(data){
+					
+					$.ajax({
+						url:"bas-mainThePost.jsp",
+						dataType:"html",
+					//	async:"false",
+						type:"get",
+						success:function(data1){
+							//$(".flashLeft").html(data1.find(v).parents(".m1-right").prev().html());
+							//$(".mainReplay").empty();
+							
+							$(".down1").html( $(data1).find(".down1").html() );//刷新
+							//s1.html(data.sta);//当请求是"bas-mainThePost.jsps"此时并不能改变span内值，由于刷新之后this不再指向之前的span.所以有三种解决方法：1》把通过reply_id给每个栏目加上对应标识id，这样就可以找到，2》或者仅仅刷新左侧（有难度，因为它和右侧是公用的c:foreach)
+							//3》下是第三种,通过当前获取的第几个c:foreach迭代内容，从而就可以取到该 需要改变的span，从而完成值的刷新。
+							$(".rep-sp-praise").eq(c-1).html(data.sta);//
+							colorShow();
+							
+						},
+						error:function(){
+							alert("praiseToHost1 error");
+						}
+					})
+				
+					
+				},
+				error:function(){
+					alert("praiseToHost2 error");
+				}
+			}) 
+			
+		} 
+		function collectPost(po_id,user_id){
+			var host_col=$(".host-col").html();
+			$.ajax({
+				url:"collectPost",
+				data:"po_id="+po_id+"&user_id="+user_id+"&host_col="+host_col,
+				dataType:"json",
+				type:"get",
+				success:function(data){
+					$.ajax({
+						url:"bas-mainThePost.jsp",
+						dataType:"html",
+					
+						type:"get",
+						success:function(data1){
+							if(data.msg=="0"||data.msg==0){
+								//没登录，请登录，弹窗登录，
+								alert("请先去登录才能收藏");
+							}else{
+							$(".host-left").html( $(data1).find(".host-left").html() );//刷新
+							$(".host-col").html(data.msg);//
+							colorShow();
+							}
+						},
+						error:function(){
+							alert("collectPost error");
+						}
+					})
+				},
+				error:function(){
+					alert("collectPost error");
+				}
+			})
+			
+		} 
 	</script>
 </body>
 </html>

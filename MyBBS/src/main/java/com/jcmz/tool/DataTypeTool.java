@@ -1,6 +1,8 @@
 package com.jcmz.tool;
 
 import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Calendar;
 
 import org.junit.Test;
@@ -70,6 +72,19 @@ public class DataTypeTool {
 		c.set(year, month, day);
 		date=c.getTime();
 		return date;
+	}
+	public Timestamp getTimeStampByIJK(int i,int j,int k) {
+		int year=118-i%3;
+		int month=12-j%12;
+		int day=28-k%28;
+		
+		Timestamp t=new Timestamp(year, month, day, 13, 14, 52, 0);
+		java.util.Date date=new java.util.Date();
+		Calendar c=Calendar.getInstance();
+		//c.setTime(date);
+		c.set(year, month, day);
+		date=c.getTime();
+		return t;
 	}
 	
 	/***

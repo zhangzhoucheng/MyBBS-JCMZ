@@ -1,5 +1,7 @@
 package com.jcmz.model;
 
+import java.util.List;
+
 public class User {
     private Integer id;
 
@@ -8,8 +10,74 @@ public class User {
     private String userpassword;
 
     private String nickname;
+  
+    private int beFocusedNum;//被关注的数量
+ 
 
-    @Override
+	private int focusOtherNum;//关注其他人的数量
+    private int collectNum;//收藏帖子的数量
+    private int postNum;//自己拥有的帖子数
+    private String toWhoName;
+    public String getToWhoName() {
+		return toWhoName;
+	}
+
+	public void setToWhoName(String toWhoName) {
+		this.toWhoName = toWhoName;
+	}
+
+	public List<Postreply> getPostReplays() {
+		return postReplays;
+	}
+
+	public void setPostReplays(List<Postreply> postReplays) {
+		this.postReplays = postReplays;
+	}
+
+	private List<Post> posts;
+    private List<Postreply> postReplays;
+
+    public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
+
+	public int getBeFocusedNum() {
+		return beFocusedNum;
+	}
+
+	public void setBeFocusedNum(int beFocusedNum) {
+		this.beFocusedNum = beFocusedNum;
+	}
+
+	public int getFocusOtherNum() {
+		return focusOtherNum;
+	}
+
+	public void setFocusOtherNum(int focusOtherNum) {
+		this.focusOtherNum = focusOtherNum;
+	}
+
+	public int getCollectNum() {
+		return collectNum;
+	}
+
+	public void setCollectNum(int collectNum) {
+		this.collectNum = collectNum;
+	}
+
+	public int getPostNum() {
+		return postNum;
+	}
+
+	public void setPostNum(int postNum) {
+		this.postNum = postNum;
+	}
+
+	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", userpassword=" + userpassword + ", nickname=" + nickname
 				+ ", idtype=" + idtype + ", status=" + status + "]";

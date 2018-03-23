@@ -25,9 +25,9 @@ See here for more details: http://gordondickens.com/wordpress/2013/03/27/sawing-
     </appender>
     
     <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${rootPath}/${appName}/info/${appName}-ilog.log</file>
+        <file>${rootPath}/${appName}/info/${appName}-flog.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-        <fileNamePattern>${rootPath}/${appName}/info/${appName}-ilog-%d{yyyy-MM-dd}-i.log</fileNamePattern>
+        <fileNamePattern>${rootPath}/${appName}/info/${appName}-ilog-%d{yyyy-MM-dd}-%i-.log</fileNamePattern>
             <maxHistory>30</maxHistory>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>10MB</maxFileSize>
@@ -50,7 +50,7 @@ See here for more details: http://gordondickens.com/wordpress/2013/03/27/sawing-
         <file>${rootPath}/${appName}/debug/${appName}-dlog.log</file>
         <!-- 滚动记录文件，先将日志记录到指定文件，当符合某个条件时，将日志记录到其他文件。-->  
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${rootPath}/${appName}/debug/${appName}-dlog-%d{yyyy-MM-dd}-d.log</fileNamePattern>
+            <fileNamePattern>${rootPath}/${appName}/debug/${appName}-dlog-%d{yyyy-MM-dd}-%i-d.log</fileNamePattern>
             <maxHistory>30</maxHistory>
              <!-- 当天的日志大小 超过${logMaxSize}时,压缩日志并保存 --> 
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
@@ -75,7 +75,7 @@ See here for more details: http://gordondickens.com/wordpress/2013/03/27/sawing-
     <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${rootPath}/${appName}/error/${appName}-elog.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${rootPath}/${appName}/error/${appName}-elog-%d{yyyy-MM-dd}-e.log</fileNamePattern>
+            <fileNamePattern>${rootPath}/${appName}/error/${appName}-elog-%d{yyyy-MM-dd}-%i-e.log</fileNamePattern>
             <maxHistory>30</maxHistory>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>10MB</maxFileSize>

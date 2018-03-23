@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.FocusManager;
 import javax.tools.Tool;
 
 import org.slf4j.Logger;
@@ -15,10 +16,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jcmz.base.BasePropertise;
+import com.jcmz.mapper.CollectPostMapper;
+import com.jcmz.mapper.FocusUserMapper;
+import com.jcmz.mapper.PostMapper;
+import com.jcmz.mapper.PostreplyMapper;
 import com.jcmz.model.Block;
+import com.jcmz.model.CollectPost;
+import com.jcmz.model.FocusUser;
 import com.jcmz.model.Post;
 import com.jcmz.model.Postpage;
+import com.jcmz.model.Postreply;
 import com.jcmz.model.User;
+import com.jcmz.service.FocusCollectService;
 import com.jcmz.service.ZZ_TestService;
 import com.jcmz.tool.DataTypeTool;
 
@@ -44,6 +53,14 @@ public class ZZ_TestController {
 	private ZZ_TestService zz_testService;
 	@Autowired
 	private BasePropertise bp;
+	@Autowired
+	private FocusUserMapper fum;
+	@Autowired
+	private CollectPostMapper cpm;
+	@Autowired
+	private PostMapper pm;
+	@Autowired
+	private PostreplyMapper prm;
 	
 	@RequestMapping("test")
 	public void test() {
@@ -118,5 +135,80 @@ public class ZZ_TestController {
 				}
 			}
 			}
+	}
+	
+	/**
+	 * 插入关注信息，到关注用户表中
+	 */
+	@RequestMapping("insertFocus")
+	public void insertFocus() {
+		for(int i=1;i<61;i++) {
+			for(int k=1;k<61;k++) {
+				if(i==k) {
+					
+				}else {
+					if(((int)tool.getZeroOne())==1) {
+				    fum.insert(new FocusUser(i, k));
+					}
+				}
+			}
+			
+		}
+	}
+	
+	/*
+	 * 插入收藏信息到表中
+	 */
+	@RequestMapping("insertCollect")
+	public void insertCollect() {
+		for(int i=1;i<61;i++) {
+			if(((int)tool.getZeroOne())==0) {
+				i++;
+			}else {
+			
+			}
+			for(int k=1;k<17250;k++) {
+				
+				
+				
+					k+=80;
+					if(((int)tool.getZeroOne())==0) {
+						cpm.insert(new CollectPost(i, k));	
+					}else {
+					
+					}
+					
+					
+			}
+		}
+	}
+	/*
+	 * 插入帖子回复表信息
+	 */
+	
+	@RequestMapping("insertPostReply")
+	public void insertPostReply() {
+		for(int i=1;i<=100;i++) {
+			int towhoid=pm.selectByPrimaryKey(i).getUserid();
+			for(int k=1;k<=50;k++) {
+				int ran=(int)(1+Math.random()*23);
+				int uid=(int)(Math.random()*60+1);
+				
+				prm.insert(new Postreply(i, bp.getPropertiesValue("${p"+ran+"}"), ran==20?0:1, tool.getTimeStampByIJK(i, k, ran), uid,towhoid ) );
+			}
+		}
+	}
+	
+	/**
+	 * 给回复表的点赞列插入数据
+	 * 
+	 */
+	@RequestMapping("updateReplyPraiseNum")
+	public void updatePraiseNumToReply() {
+		for(int i=1;i<=5000;i++) {
+			Postreply p=prm.getPostReplyById(i);int r=(int)Math.floor(Math.random()*100);
+			p.setPraiseNum(r);
+			prm.updateByPrimaryKey(p);
+		}
 	}
 }

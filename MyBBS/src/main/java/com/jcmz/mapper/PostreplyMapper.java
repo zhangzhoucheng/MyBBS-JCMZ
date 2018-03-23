@@ -27,4 +27,16 @@ public interface PostreplyMapper {
     int updateByPrimaryKeySelective(Postreply record);
 
     int updateByPrimaryKey(Postreply record);
+
+	int getAllCount(int po_id);
+
+	List<Postreply> getPostUserReplyByPidLimit(@Param("po_id")int po_id, @Param("start")int start, @Param("perPageCount")int perPageCount);
+
+	Postreply getPostReplyById(int i);
+
+	void updateReply(Postreply p);
+
+	void canclePraise(int reply_id);
+
+	void addOnePraise(int reply_id);
 }
