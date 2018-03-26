@@ -38,7 +38,7 @@ public class FilterResource implements Filter{
 		HttpServletRequest httpRequest=(HttpServletRequest) arg0;
 		HttpServletResponse httpReponse=(HttpServletResponse) arg1;
 		HttpSession session=httpRequest.getSession();
-		User user=(User) session.getAttribute("user");
+		com.jcmz.model.User user=(com.jcmz.model.User) session.getAttribute("user");
 		String path=httpRequest.getServletPath();
 		if(path.indexOf("/login")!=-1||path.indexOf("/baseJsp")!=-1||path.indexOf("/css")!=-1
 				||path.indexOf("images")!=-1

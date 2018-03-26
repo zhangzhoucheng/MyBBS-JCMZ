@@ -76,7 +76,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, userName, userPassword, nickName, idType, status
+    id user_id, userName, userPassword, nickName, idType, status
   </sql>
   <sql id="Base_Column_List1">
     userName, userPassword, nickName, idType, status
@@ -96,7 +96,7 @@
   limit #{start},#{perPageCount}
   </select>
   <select id="getUserByName" resultMap="BaseResultMap">
-  	select * from tb_user where username=#{0}
+  	select  id user_id, userName, userPassword, nickName, idType, status,beFocusedNum,focusOtherNum,collectNum,postNum from tb_user where username=#{0}
   </select>
   <select id="getUserSById" resultMap="BaseResultMap">
   	select t.id as user_id ,<include refid="Base_Column_List1"></include> from tb_user t,tb_pagemanager tp where tp.pageId=#{0} and tp.userId=t.id

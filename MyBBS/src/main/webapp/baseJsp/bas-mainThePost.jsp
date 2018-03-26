@@ -208,7 +208,7 @@ width:100%;
 							<a href="#" class="art-ope1"><span class="glyphicon glyphicon-send art-ope2"></span>转发 </a>&nbsp;&nbsp;
 							<a href="#" class="art-ope1"><span class="glyphicon glyphicon-send art-ope2"></span>关注</a>&nbsp;&nbsp;
 							<a href="#" onclick="praiseToHost();return false;" class="art-ope1"><span class="glyphicon glyphicon-send art-ope2"></span><span class="sp_praise">点赞</span></a>&nbsp;&nbsp;							
-							<a href="javascript:collectPost(${po_id},${user.id});return false;" class="art-ope1"><span class="glyphicon glyphicon-send art-ope2"></span><span class="host-col">收藏</span> </a>&nbsp;&nbsp;
+							<a href="#" class="art-ope1" onclick="collectPost(${po_id});return false;"><span class="glyphicon glyphicon-send art-ope2"></span><span class="host-col">收藏</span> </a>&nbsp;&nbsp;
 							<a href="#" class="art-ope1"><span class="glyphicon glyphicon-send art-ope2"></span>回复 </a>
 				
 						</p>
@@ -516,11 +516,12 @@ width:100%;
 			}) 
 			
 		} 
-		function collectPost(po_id,user_id){
+		function collectPost(po_id){alert(11);
 			var host_col=$(".host-col").html();
+			var nowPage=$("#nowPage").html();
 			$.ajax({
 				url:"collectPost",
-				data:"po_id="+po_id+"&user_id="+user_id+"&host_col="+host_col,
+				data:"po_id="+po_id+"&host_col="+host_col+"&nowPage="+nowPage,
 				dataType:"json",
 				type:"get",
 				success:function(data){
@@ -529,7 +530,7 @@ width:100%;
 						dataType:"html",
 					
 						type:"get",
-						success:function(data1){
+						success:function(data1){alert(22);
 							if(data.msg=="0"||data.msg==0){
 								//没登录，请登录，弹窗登录，
 								alert("请先去登录才能收藏");
@@ -540,12 +541,12 @@ width:100%;
 							}
 						},
 						error:function(){
-							alert("collectPost error");
+							alert("collectPost1 error");
 						}
 					})
 				},
 				error:function(){
-					alert("collectPost error");
+					alert("collectPost2 error");
 				}
 			})
 			

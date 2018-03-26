@@ -45,15 +45,20 @@ public class FocusCollectController {
 	 * @time 2018/3/21 10:20
 	 */
 	@RequestMapping("collectPost")
-	private void collectPost(@Param("po_id") int po_id,@Param("user_id") int user_id ,@Param("nowPage") int nowPage,@Param("host_col") String host_col,HttpServletRequest request,HttpServletResponse response) throws IOException {
+	private void collectPost(@Param("po_id") int po_id, @Param("nowPage") int nowPage,@Param("host_col") String host_col,HttpServletRequest request,HttpServletResponse response) throws IOException {
+		
 		HttpSession session=request.getSession();	
 		PrintWriter pw=response.getWriter();
 		JSONObject j=new JSONObject();
 		PageBean<Postreply> pag;
+		int user_id=1;
+		User user;
 		String msg="";
 		if(null==session.getAttribute("user")||"".equals(session.getAttribute("user"))) {
 				msg="0";//此时用户没有登录
 		}else {//用户登录了
+			user=(User)session.getAttribute("user");
+			user_id=user.getId();
 			if(fcs.isCollectThePost(po_id,user_id)) {//检查一下用户有没有已经收藏该贴子
 				//当收藏了：
 				if("收藏".equals(host_col)) {
