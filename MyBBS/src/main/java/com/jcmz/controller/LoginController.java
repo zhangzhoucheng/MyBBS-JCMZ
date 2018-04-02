@@ -19,6 +19,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.aliyuncs.exceptions.ClientException;
 import com.jcmz.base.MyCookie;
 import com.jcmz.service.LoginService;
+import com.jcmz.service.UserService;
 import com.jcmz.tool.BaseSms;
 import com.jcmz.tool.GetRandom;
 import com.miaodiyun.httpApiDemo.IndustrySMS;
@@ -32,6 +33,8 @@ public class LoginController {
 	private Logger log=LoggerFactory.getLogger(this.getClass());//日志
 	@Autowired
 	private LoginService loginService;
+	@Autowired
+	private UserService us;
 	
 	@Autowired 
 	private MyCookie myCookie;//cookie方法
@@ -83,6 +86,8 @@ public class LoginController {
 			else {
 				myCookie.deleteCookie(response, username);
 			}
+			
+			request.getSession().setAttribute("user", us.getUserByName(username));
 		}
 		else {
 			myCookie.deleteCookie(response, username);

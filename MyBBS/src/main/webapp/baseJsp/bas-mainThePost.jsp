@@ -44,6 +44,11 @@ article{
 	width:75%;
 	margin-top: 20px;
 }
+.mainReplay{
+	margin:0 auto;
+	width:100%;
+	margin-top:20px;
+}
 .postHostMsg{
 	
 	
@@ -122,7 +127,13 @@ article{
 .paging-content{
 width:100%;
 }
-
+.title1{
+	font-weight: 700p;
+}
+.down1{
+	width:100%;
+	margin:0 auto;
+}
 /*footter的样式*/
 #footer {
 	width: 100%;
@@ -141,11 +152,60 @@ width:100%;
 #footer a {
 	color: inherit;
 }
+
+.black_overlay {
+	display: none;
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	z-index: 1001;
+  /*   background-color:#808080;  
+	
+	 -moz-opacity: 0.4;
+	opacity: .40;
+	filter: alpha(opacity=48);  */
+}
+			
+		
+.prompt_pop{
+	display: none;
+	position: absolute;
+	top: 25%;
+	left: 27.5%;
+	width: 45%;
+	height: 55%;
+	padding: 20px;
+	border:1px solid #EEEEEE;
+	border-top: 10px solid orange; 
+	background-color: white;
+	z-index: 1002;
+	overflow: auto;
+	color:black;
+	text-align:center;
+	
+	
+}
+.text-area{
+	margin-top:40px;
+	width:90%;
+	resize:none;
+	outline:none;
+}
+
+.reply-host{
+	color:	#FE0000;
+}
+.b-size{
+	font-size:16px;
+	/* //line-height:19px; */
+}
 </style>
 </head>
 <body>
 
-	<article>
+	<article class="my-all">
 		<header class="">
 			<br>
 		</header>
@@ -155,105 +215,134 @@ width:100%;
 						class="glyphicon glyphicon-home"></span>首页</a>>></li>
 				<li><a href="gotoBlocks?p_id=${p_id }"><span class="glyphicon glyphicon-list-alt"></span> ${pageName} </a>>></li>
 				<li><a href="gotoBlock?b_id=${b_id}&pageName=${pageName}&p_id=${p_id}"><span class="glyphicon glyphicon-th-large"></span> ${blockName} </a>>></li>
-				<li><a href="#"><span class="glyphicon glyphicon-send"></span> 该贴子 </a>>></li>
+				<li><a href="#"><span class="glyphicon glyphicon-send"></span>  ${userHost.posts[0].title}  </a>>></li>
 
 			</ul>
 		</nav>
 
 		<div class="main">
 			<section class="main1 postHostMsg">
-				<section class="m1-left">
+				<section class="m1-left host-left">
 					<p class="p-center">
 					<span class="glyphicon glyphicon-home headFlag"></span>
-					<span class="headColor">楼主:</span><span>张三四</span>
+					<span class="headColor">楼主:</span><span>${userHost.username }</span>      
 					</p>
 				
 					<img alt="图像" class="photoHead" src="../images/thePostImgs/rb.jpg">
-					<p style="margin-top:8px;"><span class="glyphicon glyphicon-send headFlag"></span><span class="headColor">&nbsp;帖子数:</span><span>1000</span></p>
-					<p><span class="glyphicon glyphicon-heart-empty headFlag"></span><span class="headColor">&nbsp;关注数:</span><span>1000</span></p>
-					<p><span class="glyphicon glyphicon-star-empty headFlag"></span><span class="headColor">&nbsp;收藏数:</span><span>1000</span></p>
-					<p><span class="glyphicon glyphicon-tint headFlag"></span><span class="headColor">&nbsp;我的关注:</span><span>1000</span></p>
+					<p style="margin-top:8px;"><span class="glyphicon glyphicon-send headFlag"></span><span class="headColor">&nbsp;帖子数:</span><span>${userHost.postNum }</span>
+												&nbsp;&nbsp;<span class="glyphicon glyphicon-hand-right headFlag"></span><span class="headColor">&nbsp;点赞数:</span><span>${userHost.posts[0].postisfocus}</span>
+					</p>
+					<p><span class="glyphicon glyphicon-heart-empty headFlag"></span><span class="headColor">&nbsp;关注数:</span><span>${userHost.beFocusedNum }</span>
+						&nbsp;&nbsp;<span class="glyphicon glyphicon-tree-deciduous headFlag"></span><span class="headColor">&nbsp;收藏数:</span><span>${userHost.posts[0].collectedNum}</span>
+					</p>
+					<p><span class="glyphicon glyphicon-star-empty headFlag"></span><span class="headColor">&nbsp;我的收藏:</span><span>${userHost.collectNum }</span></p>
+					<p><span class="glyphicon glyphicon-tint headFlag"></span><span class="headColor">&nbsp;我的关注:</span><span>${userHost.focusOtherNum }</span></p>
 					
 					<span></span>
 				</section>
 				<section class="m1-right">
 					<article class="mr-art">
-						<p class="p-center p-marTop"><span class="glyphicon glyphicon-home"></span><span>主题:</span><span>青春岁月我们一起</span></p>
+						<h3 class="p-center p-marTop"><span class="glyphicon glyphicon-home headFlag"></span><span class="title1">主题:</span><span class="title1">${userHost.posts[0].title }</span></h3>
 						<p style="text-indent: 2em;">
-							送走了凛冽的寒冬，迈着轻盈的脚步，伴着和煦的微风，走进了暖春，迎来了一年一度的樱花盛开的季节。 　　拥有“画中之王”称号的牡丹，有着国色天香，荣华富贵的象征；而荷兰的郁金香也有着“庄严华贵”的雅号，是成功地位的象征，然而，我却独爱那小小的碎碎的樱花，它没有牡丹的青天一色，也没有郁金香的雍容华贵，但当它盛开的时候，总是一树一树的怒放，一簇一簇的展开花瓣，即使花心破碎。正因如此，才决定了它的开放是凄凉的悲壮的美。 　　樱花的生命是如此的短暂，在日本有一句谚语：樱花七日。是说一朵樱花从开放到凋零只有7天的时间，整棵樱桃树从开花到凋谢也只有2周左右。这也形成了樱花边开边落的特点，但它经历短暂的灿烂后随即凋零的壮烈，也更加体现了它的凄美，它死在了生命中最美的一刻，将最美的一面展现给了世人，虽然花期短促，却定格了它永恒的美。 　　这春天派来的使者，最美的时节不在开放，而在凋谢之时，三月里的樱花已悄然绽放，开的如火如荼，貌美无比，极致细腻，深棕的枝干，墨绿的叶子，沾有清晨的露珠，在阳光的照耀下，闪闪发亮，但这并非最美之时。听，那如山下的潺潺流水，又如月下宝石的破碎声，清脆而响亮，在微风的吹拂下，一瓣一瓣的樱花带着股股幽香，像稚嫩的孩子的脸般，从枝桠一泻而下落了一地的樱花雨。 　　“樱花烂漫几多时，柳绿桃红两未知”，李商隐对此给出了最好的解释，。当樱花落尽，余下的只有空荡荡的孤独，那些早日的繁华早已落幕，随着它花瓣的零落而逝去，站在树下，望着一树的寂静，听着最后一朵樱花离落枝头时内心的呐喊以及泪水落地的声音，轻轻的叹息一声，为这凄美而震惊。原来，绚烂之极终归于平静，繁盛之度终归于澹雅，张狂一世的美妙也终会化成一地的缠绵。
-						该文章《樱花伤感散文》来源于出国留学网，网址：https://zw.liuxue86.com/z/3636982.html
+							${userHost.posts[0].content }
+							我们一起就发生了放假哦我金额返去破解紧迫非问卷去拍风景哦为附件配件发票就哦我i附件评价哦i发票就怕·佛经飞机票哦积分2风景破防金额皮肤就破额发奖金
+							去附近外婆风景区颇为费解去破解为其服务几千万佛俄方剧情片风景区金额为i求富婆我级风景区哦福气哦姐姐哦fjweapoppppipppppppppppppppipipipi我们一起就发生了放假哦我金额返去破解紧迫非问卷去拍风景哦为附件配件发票就哦我i附件评价哦i发票就怕·佛经飞机票哦积分2风景破防金额皮肤就破额发奖金
+							去附近外婆风景区颇为费解去破解为其服务几千万佛俄方剧情片风景区金额为i求富婆我级风景区哦福气哦姐姐哦fjweapoppppipppppppppppppppipipipi我们一起就发生了放假哦我金额返去破解紧迫非问卷去拍风景哦为附件配件发票就哦我i附件评价哦i发票就怕·佛经飞机票哦积分2风景破防金额皮肤就破额发奖金
+							去附近外婆风景区颇为费解去破解为其服务几千万佛俄方剧情片风景区金额为i求富婆我级风景区哦福气哦姐姐哦fjweapoppppipppppppppppppppipipipi我们一起就发生了放假哦我金额返去破解紧迫非问卷去拍风景哦为附件配件发票就哦我i附件评价哦i发票就怕·佛经飞机票哦积分2风景破防金额皮肤就破额发奖金
+							去附近外婆风景区颇为费解去破解为其服务几千万佛俄方剧情片风景区金额为i求富婆我级风景区哦福气哦姐姐哦fjweapoppppipppppppppppppppipipipi我们一起就发生了放假哦我金额返去破解紧迫非问卷去拍风景哦为附件配件发票就哦我i附件评价哦i发票就怕·佛经飞机票哦积分2风景破防金额皮肤就破额发奖金
+							去附近外婆风景区颇为费解去破解为其服务几千万佛俄方剧情片风景区金额为i求富婆我级风景区哦福气哦姐姐哦fjweapoppppipppppppppppppppipipipi我们一起就发生了放假哦我金额返去破解紧迫非问卷去拍风景哦为附件配件发票就哦我i附件评价哦i发票就怕·佛经飞机票哦积分2风景破防金额皮肤就破额发奖金
+							去附近外婆风景区颇为费解去破解为其服务几千万佛俄方剧情片风景区金额为i求富婆我级风景区哦福气哦姐姐哦fjweapoppppipppppppppppppppipipipi我们一起就发生了放假哦我金额返去破解紧迫非问卷去拍风景哦为附件配件发票就哦我i附件评价哦i发票就怕·佛经飞机票哦积分2风景破防金额皮肤就破额发奖金
+							去附近外婆风景区颇为费解去破解为其服务几千万佛俄方剧情片风景区金额为i求富婆我级风景区哦福气哦姐姐哦fjweapoppppipppppppppppppppipipipi我们一起就发生了放假哦我金额返去破解紧迫非问卷去拍风景哦为附件配件发票就哦我i附件评价哦i发票就怕·佛经飞机票哦积分2风景破防金额皮肤就破额发奖金
+							去附近外婆风景区颇为费解去破解为其服务几千万佛俄方剧情片风景区金额为i求富婆我级风景区哦福气哦姐姐哦
 						</p>
+						<p class="p-li">
+						 	  <a>${userHost.posts[0].time} </a>
+						</p>
+						
 					</article>	
 					<footer class="mr-fot">
 						<p class="p-li">
 						
 							<a href="#" class="art-ope1"><span class="glyphicon glyphicon-send art-ope2"></span>转发 </a>&nbsp;&nbsp;
-							<a href="#" class="art-ope1"><span class="glyphicon glyphicon-send art-ope2"></span>关注</a>&nbsp;&nbsp;
-							<a href="#" class="art-ope1"><span class="glyphicon glyphicon-send art-ope2"></span>点赞</a>&nbsp;&nbsp;							
-							<a href="#" class="art-ope1"><span class="glyphicon glyphicon-send art-ope2"></span>收藏 </a>&nbsp;&nbsp;
-							<a href="#" class="art-ope1"><span class="glyphicon glyphicon-send art-ope2"></span>回复 </a>
+							<a href="#" class="art-ope1" onclick="focusPostHost(${po_id});return false;"><span class="glyphicon glyphicon-send art-ope2"></span><span class="host-foc">关注</span></a>&nbsp;&nbsp;
+							<a href="#" onclick="praiseToHost();return false;" class="art-ope1"><span class="glyphicon glyphicon-send art-ope2"></span><span class="sp_praise">点赞</span></a>&nbsp;&nbsp;							
+							<a href="#" class="art-ope1" onclick="collectPost(${po_id});return false;"><span class="glyphicon glyphicon-send art-ope2"></span><span class="host-col">收藏</span> </a>&nbsp;&nbsp;
+							<a href="#" onclick="replyHost(${po_id},'${userHost.username}');return false;" class="art-ope1"><span class="glyphicon glyphicon-send art-ope2"></span>回复 </a>
 				
 						</p>
 					</footer>
 				</section>
 			</section>
 			
-			<section class="main1 wholeBlocks " id="tran-sec2">
-				
-				
-				<div class="pagingWhole">
-				<div id="paging">
-					<p>
-						<a href="#" onclick="paging(1);return false;"><span class="glyphicon glyphicon-step-backward"></span>上一页</a>&nbsp;&nbsp;
-						<span>当前页:<span id="nowPage">${nowPage}</span></span>/<span id="allPage">${allCount }</span>
-						<span><input class="form-control" id="inPage" value="${inp }" style="width:50px;display:inline;" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"  oninput="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" /></span>
-						<a href="#" onclick="paging(2);return false;"><span class="glyphicon glyphicon-hand-left"></span>跳转</a>
-						&nbsp;&nbsp;<a href="#" onclick="paging(3);return false;"><span class="glyphicon glyphicon-step-forward"></span>下一页</a><span class="pageJump" style="color:red;"></span>
-					</p><span id="b_id" style="display:none"> ${b_id} </span>
-				</div>
-				<div class="paging-content">
-				<table class="" id="my-table">
-					
-				</table>
-				</div>
-				</div>
-			</section>
-			
-			<section class="main1 postHostMsg">
-				<section class="m1-left">
-					<p class="p-center">
-					<span class="glyphicon glyphicon-home headFlag"></span>
-					<span class="headColor">1楼:</span><span>张三四</span>
-					</p>
-				
-					<img alt="图像" class="photoHead" src="../images/thePostImgs/rb.jpg">
-					<p style="margin-top:8px;"><span class="glyphicon glyphicon-send headFlag"></span><span class="headColor">&nbsp;帖子数:</span><span>1000</span></p>
-					<p><span class="glyphicon glyphicon-send headFlag"></span><span class="headColor">&nbsp;关注数:</span><span>1000</span></p>
-					<p><span class="glyphicon glyphicon-star-empty headFlag"></span><span class="headColor">&nbsp;收藏数:</span><span>1000</span></p>
-					<p><span class="glyphicon glyphicon-tint headFlag"></span><span class="headColor">&nbsp;我的关注:</span><span>1000</span></p>
-					
-					<span></span>
-				</section>
-				<section class="m1-right">
-					<article class="mr-art">
-						<p class="p-center p-marTop"><span class="glyphicon glyphicon-home"></span><span>主题:</span><span>青春岁月我们一起</span></p>
-						<p><span style="color:#299727;">张三</span><span>回复</span><span style="color:#FF571C">李四</span><span>说:</span></p>
-						<p style="text-indent: 2em;">
-							写的挺不错嘛
-						</p>
-					</article>	
-					<footer class="mr-fot">
-						<p class="p-li">
+			<div class="mainReplay">
+					<section class=" wholeBlocks main1 " id="tran-sec2">
 						
-							<a href="#" class="art-ope3"><span class="glyphicon glyphicon-send art-ope4"></span>关注 </a>&nbsp;&nbsp;
-							<a href="#" class="art-ope3"><span class="glyphicon glyphicon-send art-ope4"></span>点赞</a>&nbsp;&nbsp;
-							<a href="#" class="art-ope3"><span class="glyphicon glyphicon-send art-ope4"></span>回复 </a>
-				
-						</p>
-					</footer>
-				</section>
-			</section>
-
+						
+						
+						
+							<p>
+								<a href="#" onclick="paging(1);return false;"><span class="glyphicon glyphicon-step-backward"></span>上一页</a>&nbsp;&nbsp;
+								<span>当前页:<span id="nowPage">${nowPage}</span></span>/<span id="allPage">${allPages }</span>
+								<span><input class="form-control" id="inPage" value="${inp }" style="width:50px;display:inline;" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"  oninput="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" /></span>
+								<a href="#" onclick="paging(2);return false;"><span class="glyphicon glyphicon-hand-left"></span>跳转</a>
+								&nbsp;&nbsp;<a href="#" onclick="paging(3);return false;"><span class="glyphicon glyphicon-step-forward"></span>下一页</a><span class="pageJump" style="color:red;"></span>
+							</p><span id="po_id" style="display:none">${po_id}</span>
+					
+						
+					
+					</section>
+					<div class="down1">
+					
+						<c:forEach items="${Postreplys}" var="p" varStatus="vs">
+						
+						<section class="main1 postHostMsg users">
+							
+									<section class="m1-left">
+										<p class="p-center">
+										<span class="glyphicon glyphicon-home headFlag"></span>
+										<span class="headColor"> ${vs.count} 楼:</span><span>${p.user.username }</span>
+										</p>
+									
+										<img alt="图像" class="photoHead" src="../images/thePostImgs/rb.jpg">
+										<p style="margin-top:8px;"><span class="glyphicon glyphicon-send headFlag"></span><span class="headColor">&nbsp;帖子数:</span><span>${p.user.postNum }</span>
+										 <span class="glyphicon glyphicon-thumbs-up headFlag"></span><span class="headColor">&nbsp;点赞数:</span><span>${p.praiseNum }</span>
+										</p>
+										<p>
+										<span class="glyphicon glyphicon-send headFlag"></span><span class="headColor">&nbsp;关注数:</span><span>${p.user.beFocusedNum }</span>
+										
+										</p>
+										<p><span class="glyphicon glyphicon-star-empty headFlag"></span><span class="headColor">&nbsp;我的收藏:</span><span>${p.user.collectNum }</span></p>
+										<p><span class="glyphicon glyphicon-tint headFlag"></span><span class="headColor">&nbsp;我的关注:</span><span>${p.user.focusOtherNum }</span></p>
+										
+										<span></span>
+									</section>
+									<section class="m1-right">
+										<article class="mr-art">
+											<h3 class="p-center p-marTop"><span class="glyphicon glyphicon-home headFlag"></span><span class="title1">主题:</span><span class="title1">${userHost.posts[0].title }</span></h3>
+											<p><span style="color:#299727;">${p.user.username}</span><span>回复</span><span style="color:#FF571C"> ${p.toWhoName} </span><span>说:</span></p>
+											<p style="text-indent: 2em;">
+												${p.replycontet}
+											</p>
+											<p class="p-li">
+							 	  				<a>${p.time} </a>
+											</p>
+										</article>	
+										<footer class="mr-fot">
+											<p class="p-li">
+											
+												<a href="#" class="art-ope3" onclick="focusReplyUser(this,${p.userid},${vs.count});return false;"><span class="glyphicon glyphicon-send art-ope4"></span><span class="rep-sp-focus">关注</span> </a>&nbsp;&nbsp;
+												<a href="#" onclick="praiseToReply(this,${p.id},${vs.count});return false;"class="art-ope3"><span class="glyphicon glyphicon-send art-ope4"></span><span class="rep-sp-praise">点赞</span></a>&nbsp;&nbsp;
+												<a href="#" class="art-ope3" onclick="replyReply(${p.postid},'${p.user.username }',' ${vs.count}');return false;"><span class="glyphicon glyphicon-send art-ope4"></span>回复 </a>
+									
+											</p>
+										</footer>
+									</section>
+							
+						</section>
+					
+						</c:forEach>
+					</div>
+			</div>
 		</div>
 		<footer id="footer" style="" class="">
 			<p>
@@ -265,8 +354,15 @@ width:100%;
 			</p>
 			<p>© 2017–2018 人文科技BBS</p>
 		</footer>
+		<div class="black_overlay"></div>
+		<div class="prompt_pop">
+				<p style="visibility: hidden;"><span class="po_id-hid"></span><span class="toWho-hid"></span></p>
+				<p>回复<span class="floor1"></span><span class="reply-host"></span>(限制500字)</p>
+			   <textarea class="text-area" rows="10" cols="90" maxlength="500" ></textarea><br><br>
+			   <a href="#" class="label label-warning b-size" onclick="cancleRep();return false;">取消</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="label label-success b-size" onclick="goRep();return false;">回复</a>
+		</div>
 	</article>
-
+	
 	<!-- jQuery (Bootstrap 插件需要引入) -->
 	<!-- <script
 		src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script> -->
@@ -276,10 +372,96 @@ width:100%;
 		src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 	<script type="text/javascript">
+	
+		//有时间把div弹窗以及能够移动封装起来，直接通过class就可以引用，**
+	    var staX,staY;//鼠标的初始位置
+	    var mouseSta=false;
+	    var proNowX;//当前弹窗位置，定义在这里是优化，点击弹窗自动居中的bug
+	    var proNowY;
+	    var sTop;//滚轮位置
+	    var winTop;//浏览器高度
+		var winLeft;//浏览器宽度
+		var nowTop//弹窗的初始位置纵坐标
+		var nowLeft;//弹窗的初始位置横坐标
+		var mouX,mouY;//当前鼠标位置
+		var befTop;
 		$(function() {
-			colorShow();
+			colorShow();//颜色渲染函数
+			
+			//初始化div移动和滚轮滚动相关的参数
+			sTop=$(window).scrollTop();
+			winTop=$(window).height();
+			winLeft=$(window).width();
+			nowTop=sTop+winTop*0.25;
+			nowLeft=winLeft*0.275;
+			movX=0;movY=0;staX=0;staY=0;
+			proNowX=nowLeft;
+			proNowY=nowTop;
+			befTop=winTop*0.25;
+			
+			//绑定函数
+			$(window).on("scroll",setMoveLock);//滚动条滚动，弹窗保持浏览器中部不移动
+			$(".prompt_pop").on("mousedown",mouseDow);
+			$(".prompt_pop").on("mousemove",mouseMov);//待优化
+			$(".prompt_pop").on("mouseup",mouseUp);
+			$(".prompt_pop").on("mouseleave",function(e){mouseSta=false;})
+			$(".text-area").on("mousedown mousemove",function(e){ mouseSta=false;e.stopPropagation();e.cancelBubble=true;});//阻止事件冒泡，不触发父元素
+			
+			//禁止复制等
+			document.oncontextmenu=new Function('event.returnValue=false;');
+			document.onselectstart=new Function('event.returnValue=false;');
+			
 			
 		})
+		function mouseDow(e){
+			console.log("t1");
+		    $(".prompt_pop").css("cursor","Move");
+			  e = e||window.event;//由于不是通过function(e)传参格式，所以要这样获取参数，表示是事件
+			staX = e.pageX || e.clientY ;
+			staY = e.pageY || e.clientY + document.body.scrollTop;
+			console.log(staX+","+staY);
+			mouseSta=true;
+			//$(".prompt_pop").css({"top":""+proNowY+"px","left":""+proNowX+"px"});
+			
+		    
+		}
+		function mouseMov(){
+			console.log("t2");
+			if(mouseSta){
+			sTop=$(window).scrollTop();//滚轮到顶部高度
+			console.log("b:"+sTop);
+			var  e = window.event;//由于不是通过function(e)传参格式，所以要这样获取参数，表示是事件
+			mouX = e.pageX || e.clientY ;//当前鼠标位置
+			mouY = e.pageY || e.clientY + document.body.scrollTop;
+	        proNowX=nowLeft+mouX-staX;
+		    proNowY=nowTop+mouY-staY;
+			$(".prompt_pop").css({"top":""+proNowY+"px","left":""+proNowX+"px"});
+			}
+		}
+		function mouseUp(){
+			befTop=proNowY-sTop;
+			nowLeft=proNowX;
+			nowTop=proNowY;
+			$(".prompt_pop").css("cursor","default");
+			mouseSta=false;
+		}
+		function setMoveLock(e){
+			//给大的窗口即在外部的滚轮加上事件,让弹窗一直保持屏幕中
+				//alert(1);
+				sTop=$(window).scrollTop();//获取滚动条高度
+				befTop=befTop;//获取上次状态的距离window上边缘的高度
+				nowTop=sTop+befTop;//获取上次状态的距离window上边缘的高度
+				$(".prompt_pop").css("top",""+nowTop+"px");/* $(".prompt_pop").css("display","block"); */
+				
+				
+	
+			/* $(".mr-art").on("scroll",function(){
+				//alert(1);
+				var sTop=$(".mr-art").scrollTop();
+				console.log("b:"+sTop);
+				alert("b:"+sTop);
+			}) */
+		}
 		function colorShow(){
 			//$("#a2").css("display","none");
 			var colors = new Array("#F7A95E", "#5CAE97", "#8DB1B6", "#E97C62");
@@ -357,8 +539,9 @@ width:100%;
 		
 		function paging(flag){//alert(1);
 			var nowPage=$("#nowPage").html();
-			var b_id=$("#b_id").html();
+			var po_id=$("#po_id").html();
 			var inp=$("#inPage").val();
+			//alert(15);
 			if(flag==1){
 				
 				if(nowPage<=1){
@@ -377,21 +560,21 @@ width:100%;
 				nowPage++;
 			}
 			$.ajax({
-				url:"postPaging",
-				data:"nowPage="+nowPage+"&b_id="+b_id+"&inp="+inp,
+				url:"postReplyPaging",
+				data:"nowPage="+nowPage+"&po_id="+po_id+"&inp="+inp,
 				type:"get",
 				dataType:"json",
-				async:false,
+			
 				success:function(){//alert(33);
 					//$(".paging-content").load(location.href+" .paging-content");按理有用，但妹达到效果
 					/* $(".paging-content").html($(".main").html()) */ /* 没用，只是单纯的把原数据加载，而不能让其重新加载$内容 */
 					//window.location.reload();刷新浏览器url，重载，
 					 $.ajax({
-						url:"bas-mainTheBlock.jsp ",
+						url:"bas-mainThePost.jsp",
 						type:"get",
 						dataType:"html",
-						success:function(data){
-							$(".pagingWhole").html($(data).find(".pagingWhole"));//很经典的处理**，相对于拼接页面，或者取另一个页面
+						success:function(data){//alert(44);
+							$(".mainReplay").html($(data).find(".mainReplay").html());//很经典的处理**，相对于拼接页面，或者取另一个页面
 							colorShow();
 						},
 					 error:function(){
@@ -406,6 +589,267 @@ width:100%;
 				
 			});
 			
+		}
+		
+		function praiseToHost() {
+			var sp_praise=$(".sp_praise").html();
+			var po_id=$("#po_id").html();
+			
+			$.ajax({
+				url:"praiseToHost",
+				data:"sp_praise="+sp_praise+"&po_id="+po_id,
+				dataType:"json",
+				type:"get",
+				success:function(data){
+					$(".sp_praise").html(data.sta);
+					$.ajax({
+						url:"bas-mainThePost.jsp",
+						dataType:"html",
+						type:"get",
+						success:function(data1){
+							$(".host-left").html($(data1).find(".host-left").html());
+							colorShow();
+						},
+						error:function(){
+							alert("praiseToHost error");
+						}
+					})
+					
+				},
+				error:function(){
+					alert("praiseToHost error");
+				}
+			})
+			
+		}
+		
+		function praiseToReply(v,reply_id,c) {
+			var nowPage=$("#nowPage").html();
+			var s1=$(v).children(".rep-sp-praise");//获取子元素，锁定到该行的span，点赞
+			//var flashLeft=$(v).parents(".m1-right").prev();//获取到需要ajax刷新的元素//发现这样局部刷新某个回复，有点难度，且比较麻烦，所以直接刷新所有的回复就行了，好处理多。当然除了这种jquery选择器方式，还有可以用迭代出的id进行规律化设置id属性，这样完成小部分的局部刷新也很容易
+			var sp_praise=s1.html();
+			var po_id=$("#po_id").html();
+			var inp=$("#inPage").val();
+			$.ajax({
+				url:"praiseToReply",
+				data:"sp_praise="+sp_praise+"&po_id="+po_id+"&reply_id="+reply_id+"&nowPage="+nowPage+"&inp="+inp,
+				dataType:"json",
+				//async:"false",
+				type:"get",
+				success:function(data){
+					
+					$.ajax({
+						url:"bas-mainThePost.jsp",
+						dataType:"html",
+					//	async:"false",
+						type:"get",
+						success:function(data1){
+							//$(".flashLeft").html(data1.find(v).parents(".m1-right").prev().html());
+							//$(".mainReplay").empty();
+							
+							$(".down1").html( $(data1).find(".down1").html() );//刷新
+							//s1.html(data.sta);//当请求是"bas-mainThePost.jsps"此时并不能改变span内值，由于刷新之后this不再指向之前的span.所以有三种解决方法：1》把通过reply_id给每个栏目加上对应标识id，这样就可以找到，2》或者仅仅刷新左侧（有难度，因为它和右侧是公用的c:foreach)
+							//3》下是第三种,通过当前获取的第几个c:foreach迭代内容，从而就可以取到该 需要改变的span，从而完成值的刷新。
+							$(".rep-sp-praise").eq(c-1).html(data.sta);//
+							colorShow();
+							
+						},
+						error:function(){
+							alert("praiseToHost1 error");
+						}
+					})
+				
+					
+				},
+				error:function(){
+					alert("praiseToHost2 error");
+				}
+			}) 
+			
+		} 
+		function collectPost(po_id){alert(11);
+			var host_col=$(".host-col").html();
+			var nowPage=$("#nowPage").html();
+			$.ajax({
+				url:"collectPost",
+				data:"po_id="+po_id+"&host_col="+host_col+"&nowPage="+nowPage,
+				dataType:"json",
+				type:"get",
+				success:function(data){
+					$.ajax({
+						url:"bas-mainThePost.jsp",
+						dataType:"html",
+					
+						type:"get",
+						success:function(data1){alert(22);
+							if(data.msg=="0"||data.msg==0){
+								//没登录，请登录，弹窗登录，
+								alert("请先去登录才能收藏");
+							}else{
+							$(".host-left").html( $(data1).find(".host-left").html() );//刷新
+							$(".host-col").html(data.msg);//
+							colorShow();
+							}
+						},
+						error:function(){
+							alert("collectPost1 error");
+						}
+					})
+				},
+				error:function(){
+					alert("collectPost2 error");
+				}
+			})
+			
+		} 
+		
+		function focusPostHost(po_id){
+			alert(11);
+		var host_foc=$(".host-foc").html();
+	
+		$.ajax({
+			url:"focusPostHost",
+			data:"po_id="+po_id+"&host_foc="+host_foc,
+			dataType:"json",
+			type:"get",
+			success:function(data){
+				$.ajax({
+					url:"bas-mainThePost.jsp",
+					dataType:"html",
+				
+					type:"get",
+					success:function(data1){alert(22);
+						if(data.msg=="0"||data.msg==0){
+							//没登录，请登录，弹窗登录，
+							alert("请先去登录才能关注");
+						}else{
+						$(".host-left").html( $(data1).find(".host-left").html() );//刷新
+						$(".host-foc").html(data.msg);//
+						colorShow();
+						}
+					},
+					error:function(){
+						alert("focusPostHost1 error");
+					}
+				})
+			},
+			error:function(){
+				alert("focusPostHost2 error");
+			}
+		})
+		
+	} 
+		
+		
+		function focusReplyUser(v,reply_id,c) {
+			var nowPage=$("#nowPage").html();
+			var s1=$(v).children(".rep-sp-focus");//获取子元素，锁定到该行的span，关注
+			//var flashLeft=$(v).parents(".m1-right").prev();//获取到需要ajax刷新的元素//发现这样局部刷新某个回复，有点难度，且比较麻烦，所以直接刷新所有的回复就行了，好处理多。当然除了这种jquery选择器方式，还有可以用迭代出的id进行规律化设置id属性，这样完成小部分的局部刷新也很容易
+			var sp_praise=s1.html();
+			var po_id=$("#po_id").html();
+			var inp=$("#inPage").val();
+			$.ajax({
+				url:"focusReplyUser",
+				data:"sp_focus="+sp_praise+"&po_id="+po_id+"&reply_userId="+reply_id+"&nowPage="+nowPage+"&inp="+inp,
+				dataType:"json",
+				//async:"false",
+				type:"get",
+				success:function(data){
+					
+					$.ajax({
+						url:"bas-mainThePost.jsp",
+						dataType:"html",
+					//	async:"false",
+						type:"get",
+						success:function(data1){
+							//$(".flashLeft").html(data1.find(v).parents(".m1-right").prev().html());
+							//$(".mainReplay").empty();
+							if(data.sta=="0"||data.sta==0){
+								//没登录，请登录，弹窗登录，
+								alert("请先去登录才能关注");
+							}else{
+							$(".down1").html( $(data1).find(".down1").html() );//刷新
+							//s1.html(data.sta);//当请求是"bas-mainThePost.jsps"此时并不能改变span内值，由于刷新之后this不再指向之前的span.所以有三种解决方法：1》把通过reply_id给每个栏目加上对应标识id，这样就可以找到，2》或者仅仅刷新左侧（有难度，因为它和右侧是公用的c:foreach)
+							//3》下是第三种,通过当前获取的第几个c:foreach迭代内容，从而就可以取到该 需要改变的span，从而完成值的刷新。
+							$(".rep-sp-focus").eq(c-1).html(data.sta);//
+							colorShow();
+							}
+							
+						},
+						error:function(){
+							alert("focusReplyUser1 error");
+						}
+					})
+				
+					
+				},
+				error:function(){
+					alert("focusReplyUser2 error");s
+				}
+			}) 
+			
+		} 
+		
+		/* function GetPageScroll() 
+		{ 
+		    var x, y; if(window.pageYOffset) 
+		    {    // all except IE    
+		        y = window.pageYOffset;    
+		        x = window.pageXOffset; 
+		    } else if(document.documentElement && document.documentElement.scrollTop) 
+		    {    // IE 6 Strict    
+		        y = document.documentElement.scrollTop;    
+		        x = document.documentElement.scrollLeft; 
+		    } else if(document.body) {    // all other IE    
+		        y = document.body.scrollTop;    
+		        x = document.body.scrollLeft;   
+		    } 
+		    return {X:x, Y:y};
+		} */
+		function replyHost(po_id,user){//回复楼主
+			$(".my-all").children().not(".prompt_pop").css({"opacity":"0.5"});
+			$(".black_overlay").css("display","block");
+			$(".prompt_pop").css({"display":"block"});
+			$(".reply-host").html(user);
+			setMoveLock();
+			
+		}
+		function replyReply(replyToPostId,user,floor){//点击回复后弹窗
+			$(".my-all").children().not(".prompt_pop").css({"opacity":"0.5"});
+			$(".black_overlay").css("display","block");
+			$(".prompt_pop").css({"display":"block"});
+			$(".floor1").html(floor+"楼:");
+			$(".reply-host").html(user);
+			$(".toWho-hid").html(user);
+			$(".po_id-hid").html(replyToPostId);
+			setMoveLock();
+		}
+		function goRep(){//弹窗确认回复
+			var poid=$(".po_id-hid").html();
+			var toWho=$(".toWho-hid").html();
+			var textArea=$(".text-area").text();
+			$.ajax({
+				url:"goRep",
+				data:"poid="+poid+"&toWho="+toWho+"&textArea="+textArea,
+				dataType:"json",
+				type:"post",
+				success:function(){
+					
+					$(".my-all").children().not(".prompt_pop").css({"opacity":"1"});
+					$(".black_overlay").css("display","none");
+					$(".prompt_pop").css({"display":"none"});
+				},
+				error:function(){
+					alert("goRep error");
+				}
+			})
+			
+		}
+		
+		function cancleRep(){//弹窗取消回复
+			$(".my-all").children().not(".prompt_pop").css({"opacity":"1"});
+			$(".black_overlay").css("display","none");
+			$(".prompt_pop").css({"display":"none"});
 		}
 	</script>
 </body>

@@ -11,6 +11,7 @@
     <result column="managerStatus" jdbcType="INTEGER" property="managerstatus" />
     <result column="postIsFocus" jdbcType="INTEGER" property="postisfocus" />
     <result column="setTopTime" jdbcType="TIMESTAMP" property="setTopTime"/>
+    <result column="collectedNum" jdbcType="INTEGER" property="collectedNum" />
    <association property="user" resultMap="com.jcmz.mapper.UserMapper.BaseResultMap"/> 
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -96,6 +97,21 @@
  
  	<!-- select * from tb_post p where p.blockTypeId=#{b_id} and (p.managerStatus=0 or p.managerStatus=1 ) limit #{start},#{perPageCount} -->
  </select>
+ 
+ <update id="canclePraise"><!-- 根据po_id减少其一个赞 -->
+	 update tb_post t set t.postIsFocus=t.postIsFocus-1 where id=#{0}
+</update>
+ <update id="addOnePraise"><!-- 根据po_id减少其一个赞 -->
+	 update tb_post t set t.postIsFocus=t.postIsFocus+1 where id=#{0}
+</update>
+
+<update id="subCollectedNumInPostTable"><!-- 根据po_id减少其一个收藏 数量-->
+	 update tb_post t set t.collectedNum=t.collectedNum-1 where id=#{0}
+</update>
+<update id="addCollectedNumInPostTable"><!-- 根据po_id增加其一个收藏数量 -->
+	 update tb_post t set t.collectedNum=t.collectedNum+1 where id=#{0}
+</update>
+
   <select id="selectByExample" parameterType="com.jcmz.model.PostExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

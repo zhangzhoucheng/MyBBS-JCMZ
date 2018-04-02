@@ -50,7 +50,9 @@
 		<table tableName="tb_user" domainObjectName="User"></table>
 		<table tableName="tb_userdetail" domainObjectName="Userdetail"></table>
 		<table tableName="tb_basetype" domainObjectName="Basetype"></table> -->
-		 <table tableName="tb_blocksofpagehot" domainObjectName="BlocksHotNum"></table>
+		<!--  <table tableName="tb_blocksofpagehot" domainObjectName="BlocksHotNum"></table> -->
+		 <table tableName="tb_colletpost" domainObjectName="CollectPost"></table>
+		  <table tableName="tb_focususer" domainObjectName="FocusUser"></table>
 		
 	</context>
 

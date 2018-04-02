@@ -8,6 +8,14 @@
     <result column="nickName" jdbcType="VARCHAR" property="nickname" />
     <result column="idType" jdbcType="INTEGER" property="idtype" />
     <result column="status" jdbcType="INTEGER" property="status" />
+   
+      <result column="beFocusedNum" jdbcType="INTEGER" property="beFocusedNum" />
+      <result column="focusOtherNum" jdbcType="INTEGER" property="focusOtherNum" />
+       <result column="collectNum" jdbcType="INTEGER" property="collectNum" />
+        <result column="postNum" jdbcType="INTEGER" property="postNum" />
+        <result column="toWhoName" jdbcType="VARCHAR" property="toWhoName" />
+        <collection property="posts" ofType="com.jcmz.model.Post" resultMap="com.jcmz.mapper.PostMapper.BaseResultMap"></collection>
+        <collection property="postReplays" ofType="com.jcmz.model.Postreply" resultMap="com.jcmz.mapper.PostreplyMapper.BaseResultMap"></collection>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,13 +76,58 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, userName, userPassword, nickName, idType, status
+    id user_id, userName, userPassword, nickName, idType, status
   </sql>
   <sql id="Base_Column_List1">
     userName, userPassword, nickName, idType, status
   </sql>
+   <select id="getUserAndPostByPid" resultMap="BaseResultMap"><!-- 通过帖子的id，去获取帖子信息和该贴子用户的信息 -->
+  	  select u.id user_id, u.userName,u.userPassword,u.idType,u.status,u.beFocusedNum,u.focusOtherNum,u.collectNum,u.postNum,u.nickName,p.* from tb_user u ,tb_post p where 
+  	  u.id=(select p1.userId from tb_post p1 where p1.id=#{po_id}) and p.id=#{po_id}
+  </select>
+  <select id="getUserPostReplyByPid" resultMap="BaseResultMap"><!-- 通过帖子的id获取回复用户的基础信息，以及他对应的回复的内容 -->
+  select l.*,u.id user_id, u.userName,u.userPassword,u.idType,u.beFocusedNum,u.focusOtherNum,u.collectNum,u.postNum,u.nickName
+  from	 (select w.*,t1.username toWhoName from(select * from tb_postreply tp where postId=#{po_id} and status!=0) w left join tb_user t1 on t1.id=w.toWhoId) l left join tb_user u on u.id=l.userId order by l.time desc
+  
+  </select>
+  <select id="getUserPostReplyByPidLimit" resultMap="BaseResultMap"><!-- 通过帖子的id获取回复用户的基础信息，以及他对应的回复的内容 ,并且分页获取，但是有问题，一个用户回复多条时候bug，所以转到postreplymapper去完成数据获取-->
+  	select l.*,u.id user_id, u.userName,u.userPassword,u.idType,u.beFocusedNum,u.focusOtherNum,u.collectNum,u.postNum,u.nickName
+  from	 (select w.*,t1.username toWhoName from(select * from tb_postreply tp where postId=#{po_id} and status!=0) w left join tb_user t1 on t1.id=w.toWhoId) l left join tb_user u on u.id=l.userId order by l.time desc
+  limit #{start},#{perPageCount}
+  </select>
+  <select id="getUserByName" resultMap="BaseResultMap">
+  	select  id user_id, userName, userPassword, nickName, idType, status,beFocusedNum,focusOtherNum,collectNum,postNum from tb_user where username=#{0}
+  </select>
   <select id="getUserSById" resultMap="BaseResultMap">
   	select t.id as user_id ,<include refid="Base_Column_List1"></include> from tb_user t,tb_pagemanager tp where tp.pageId=#{0} and tp.userId=t.id
+  </select>
+  <update id="subFocusNumInUserTable"><!-- 减少关注数，在用户表中,通过贴主的帖子id -->
+  	update tb_user u set u.beFocusedNum=u.beFocusedNum-1 where id=(select t.userId from tb_post t where t.id=#{0}) 
+  </update>
+  <update id="subFocusNum"><!-- 减少关注数，在用户表中,通过对象用户的id -->
+  	update tb_user u set u.beFocusedNum=u.beFocusedNum-1 where id=#{0}
+  </update>
+   <update id="addFocusNumInUserTable"><!-- 增加关注数，在用户表中 -->
+  	update tb_user u set u.beFocusedNum=u.beFocusedNum+1 where id=#{0}
+  </update>
+  <update id="subMyFocusNum"><!-- 减少我关注其他人的数量，在用户表中 -->
+  	update tb_user u set u.focusOtherNum=u.focusOtherNum-1 where id=#{0}
+  </update>
+   <update id="addMyFocusNum"><!-- 增加我关注其他人的数量，在用户表中 -->
+  	update tb_user u set u.focusOtherNum=u.focusOtherNum+1 where id=#{0}
+  </update>
+  
+  <update id="subMyCollectNum"><!-- 减少我的收藏数 -->
+  	update tb_user set collectNum=collectNum-1 where id=#{0}
+  </update>
+  <update id="addMyCollectNum"><!-- 增加我的收藏数 -->
+  	update tb_user set collectNum=collectNum+1 where id=#{0}
+  </update>
+  <select id="getOnlyUsers" resultMap="BaseResultMap">
+  	
+  </select>
+  <select id="getBefocusedUserIdByPoid" resultType="java.lang.Integer">
+  	select t.userId from tb_post t where t.id=#{0}
   </select>
   <select id="selectByExample" parameterType="com.jcmz.model.UserExample" resultMap="BaseResultMap">
     select

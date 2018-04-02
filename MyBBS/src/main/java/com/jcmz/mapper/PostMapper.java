@@ -37,5 +37,15 @@ public interface PostMapper {
 
 	List<Post> getPostsByPaging(@Param("b_id")int b_id,@Param("start")int start, @Param("perPageCount")int perPageCount);
 
+	void canclePraise(int po_id);
+
+	void addOnePraise(int po_id);
+
+	void subCollectedNumInPostTable(int po_id);
+
+	void addCollectedNumInPostTable(int po_id);
+
+	
+
 	
 }

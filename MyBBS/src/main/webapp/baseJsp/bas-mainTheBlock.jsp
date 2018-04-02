@@ -303,6 +303,7 @@ font-size:18px;
 				</c:forEach>
 				
 				<div class="pagingWhole">
+				<span id="b_id" style="display:none" >${b_id}</span><span id="p_id" style="display:none">${p_id}</span><span id="pageName" style="display:none">${pageName}</span><span id="blockName" style="display:none">${blockName}</span>
 				<div id="paging">
 					<p>
 						<a href="#" onclick="paging(1);return false;"><span class="glyphicon glyphicon-step-backward"></span>上一页</a>&nbsp;&nbsp;
@@ -310,7 +311,7 @@ font-size:18px;
 						<span><input class="form-control" id="inPage" value="${inp}" style="width:50px;display:inline;" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"  oninput="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" /></span>
 						<a href="#" onclick="paging(2);return false;"><span class="glyphicon glyphicon-hand-left"></span>跳转</a>
 						&nbsp;&nbsp;<a href="#" onclick="paging(3);return false;"><span class="glyphicon glyphicon-step-forward"></span>下一页</a><span class="pageJump" style="color:red;"></span>
-					</p><span id="b_id" style="display:none">${b_id}</span><span id="p_id" style="display:none"> ${p_id} </span><span id="pageName" style="display:none"> ${pageName} </span><span id="blockName" style="display:none"> ${blockName} </span>
+					</p>
 				</div>
 				<div class="paging-content">
 				<table class="" id="my-table">
@@ -440,6 +441,7 @@ font-size:18px;
 			var p_id=$("#p_id").html();
 			var pageName=$("#pageName").html();
 			var blockName=$("#blockName").html();
+			
 			if(flag==1){
 				
 				if(nowPage<=1){
@@ -459,7 +461,7 @@ font-size:18px;
 			}
 			$.ajax({
 				url:"postPaging",
-				data:"nowPage="+nowPage+"&b_id="+b_id+"&inp="+inp+"&p_id="+p_id+"&pageName="+pageName+"$blockName="+blockName,
+				data:"nowPage="+nowPage+"&b_id="+b_id+"&inp="+inp+"&p_id="+p_id+"&pageName="+pageName+"&blockName="+blockName,
 				type:"get",
 				dataType:"json",
 				async:false,

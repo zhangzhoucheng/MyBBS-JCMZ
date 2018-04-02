@@ -17,8 +17,18 @@ public class Post {
     private Timestamp time;
     private Integer managerstatus;
 
-    private Integer postisfocus;
+    public int getCollectedNum() {
+		return collectedNum;
+	}
+
+	public void setCollectedNum(int collectedNum) {
+		this.collectedNum = collectedNum;
+	}
+
+	private Integer postisfocus;//帖子被点赞数
+    private int collectedNum;//帖子被收藏的数量
     private Timestamp setTopTime;
+    
     
     public Timestamp getSetTopTime() {
 		return setTopTime;
