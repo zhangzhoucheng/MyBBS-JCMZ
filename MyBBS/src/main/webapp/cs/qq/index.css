@@ -1,0 +1,365 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+a{
+	text-decoration: none;
+}
+.ul-top{
+	padding-left:32px;
+}
+li{
+
+}
+#left-nav {
+    width: 160px;
+    background-color: #86a9b7;
+    float: left;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 151;
+}
+#left-nav #logo {
+    height: 160px;
+    text-align: center;
+    line-height: 160px;
+    z-index: 99;
+}
+#left-nav #logo a {
+    display: block;
+}
+#left-nav #logo a img{
+	position: fixed;
+    top: 0;
+    left: 0;
+    width: 160px;
+    height: auto;
+}
+#left-nav #user-info {
+    background-color: #c3d8dc;
+}
+#left-nav #user-info .portrait-container {
+    height: 125px;
+    line-height: 0;
+}
+#left-nav #user-info .have-login .portrait {
+    cursor: pointer;
+}
+#left-nav #user-info .pic {
+    margin: 25px 35px 10px;
+    border-radius: 45px;
+    width: 90px;
+}
+img {
+    border-width: 0;
+}
+#left-nav #user-info .username.clicked {
+    background-color: #515a5d;
+    border-radius: 3px;
+}
+#left-nav #user-info .username {
+    position: relative;
+    height: 21px;
+    line-height: 21px;
+    width: 120px;
+    margin: 0 auto;
+    color: #666;
+    font-family: -apple-system, "BlinkMacSystemFont", "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+    text-align: center;
+    font-size: 16px;
+    padding: 5px 0;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+#left-nav #user-info .username .user-list-trigger {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 31px;
+    line-height: 21px;
+    width: 120px;
+    cursor: pointer;
+    z-index: 9;
+}
+#left-nav #user-info .username .triangle {
+    display: inline-block;
+    cursor: pointer;
+    width: 0;
+    height: 0;
+    margin-left: 8px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 7px solid #666666;
+    position: absolute;
+    top: 13px;
+}
+#left-nav #user-info .username .btn-list {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 27px;
+    margin-top: 5px;
+    padding-top: 5px;
+    background-color: #293134;
+    width: 120px;
+    border-radius: 3px;
+    z-index: 9;
+}
+#left-nav #user-info .username .btn-list a {
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    vertical-align: middle;
+    font-size: 13px;
+    font-family: -apple-system, "BlinkMacSystemFont", "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+    color: #eeeeee;
+    cursor: pointer;
+}
+#left-nav #user-info .username .btn-list a:last-child {
+    border-top: 1px solid #4f5557;
+}
+#left-nav #user-info #detail-list {
+    margin: 0;
+    padding: 15px 25px 35px;
+    font-family: -apple-system, "BlinkMacSystemFont", "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+    font-size: 12px;
+    color: #666;
+}
+#left-nav #user-info #detail-list > li {
+    height: 20px;
+    line-height: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#left-nav #user-info .sub-button {
+    display: inline-block;
+    margin: 0 39px;
+    position: relative;
+    top: -24px;
+}
+#left-nav #user-info .sub-button.red > span {
+    color: white;
+    background: #e97c62;
+}
+#left-nav #user-info .sub-button > span {
+    display: inline-block;
+    text-align: center;
+    width: 72px;
+    font-size: 12px;
+    line-height: 12px;
+    border-radius: 3px;
+    padding: 5px;
+    color: #d2d2d2;
+    background: #5a6266;
+}
+#left-nav #user-info .not-login {
+    font-family: -apple-system, "BlinkMacSystemFont", "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+    text-align: center;
+}
+#left-nav #user-info .portrait-container {
+    height: 125px;
+    line-height: 0;
+}
+#left-nav #user-info .pic {
+    margin: 25px 35px 10px;
+    border-radius: 45px;
+    width: 90px;
+}
+#left-nav #user-info .not-login .input-wrapper {
+    padding: 5px;
+}
+#left-nav #user-info .not-login input {
+    width: 115px;
+    border-radius: 3px;
+    border: none;
+    font-size: 11px;
+    padding: 4px;
+}
+#left-nav #user-info .not-login input[type=checkbox] {
+    display: none;
+}
+#left-nav #user-info .not-login input[type=checkbox] + label {
+    position: relative;
+    font-size: 12px;
+    color: white;
+}
+#left-nav #user-info .not-login input[type=checkbox]:checked + label:before {
+    content: '\2714';
+    color: #e97c62;
+}
+#left-nav #user-info .not-login input[type=checkbox] + label:before {
+    display: inline-block;
+    content: "";
+    height: 12px;
+    width: 12px;
+    line-height: 12px;
+    margin-right: 5px;
+    background: white;
+    border: 1px solid #dcdcdc;
+    border-radius: 2px;
+    vertical-align: middle;
+    font-size: 10px;
+}
+#left-nav #user-info .not-login .btn-group {
+    display: inline-block;
+    padding: 15px 0;
+}
+#left-nav #user-info .not-login #btn-login {
+    background-color: #e97c62;
+    margin-right: 10px;
+}
+#left-nav #user-info .not-login .btn {
+    border-radius: 3px;
+    padding: 4px 8px;
+    font-size: 11px;
+    color: white;
+}
+#left-nav #user-info .not-login #btn-register {
+    background-color: #5cae97;
+}
+#left-nav #user-info .not-login .btn {
+    border-radius: 3px;
+    padding: 4px 8px;
+    font-size: 11px;
+    color: white;
+}
+#left-nav #user-info .not-login .white-link {
+    color: #aaa;
+    display: inline-block;
+    margin: 0 30px 30px;
+    font-size: 12px;
+}
+#link-buttons{
+	
+}
+#left-nav #link-buttons >a {
+    padding: 0 25px;
+    color: #fefefe;
+    display: block;
+    font-family: -apple-system, "BlinkMacSystemFont", "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+    font-size: 13px;
+    height: 50px;
+    line-height: 50px;
+    text-decoration: none;
+    text-indent: 6px;
+
+
+    
+}
+#left-nav #link-buttons > a > img {
+    position: relative;
+	right: 6px;
+  
+
+}
+#left-nav #link-buttons > a.cur {
+    background-color: #5c7079;
+    border-left: 4px #e97c62 solid;
+    padding-left: 21px;
+}
+#left-nav #link-buttons > a:hover {
+    border-left: 4px #e97c62 solid;
+    background-color: #5c7079;
+    padding-left: 21px;
+}
+/*#left-nav #link-buttons ul{*/
+   /*display: block;*/
+/*}*/
+/*#left-nav #link-buttons ul:hover{*/
+    /*display: block;*/
+    /*position: relative;*/
+/*}*/
+/*ul.main {*/
+    /*display: none;*/
+/*}*/
+/*ul.main:hover {*/
+    /*display: block;*/
+/*}*/
+/*#left-nav #link-buttons ul li{*/
+    /*font-size: 13px;*/
+    /*height: 30px;*/
+    /*line-height: 30px;*/
+    /*padding-left: 21px;*/
+/*}*/
+#left-nav #link-buttons ul li{
+    height: 50px;
+    line-height: 50px;
+    padding-left: 45px;
+    color: #fefefe;
+    display: block;
+    font-family: -apple-system, "BlinkMacSystemFont", "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+}
+/*#left-nav #link-buttons ul li:hover{*/
+    /*!*border-left: 4px #e97c62 solid;*!*/
+    /*background-color: #5c7079;*/
+/*}*/
+#top-nav {
+    height: 50px;
+    margin-left: 160px;
+    background-color: #eeeeee;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 150;
+}
+#top-nav .wrapper {
+    padding: 0 40px;
+    margin-right: 160px;
+    position: relative;
+}
+#top-nav .wrapper .inner-wrapper {
+    width: 1030px;
+    margin: auto;
+    position: relative;
+}
+.bdwm-search-box {
+    display: inline-block;
+}
+.bdwm-search-box .search-ipt {
+    margin: 10px 0;
+    padding: 0 0 0 10px;
+    height: 28px;
+    line-height: 28px;
+    width: 338px;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+}
+.bdwm-search-box>img {
+    position: relative;
+    right: 30px;
+    top: 4px;
+    cursor: pointer;
+}
+#top-nav .top-right-links {
+    height: 50px;
+    line-height: 50px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding-right: 6px;
+    font-family: -apple-system, "BlinkMacSystemFont", "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+    color: #959595;
+    font-size: 14px;
+}
+a {
+    text-decoration: none;
+    outline: none;
+    color: inherit;
+}
+#footer {
+    margin-left: 160px;
+    min-width: 1110px;
+    padding: 20px 0;
+    background-color: #e5e5e5;
+    text-align: center;
+    font: 10px -apple-system, "BlinkMacSystemFont", "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+    color: #696969;
+    position: absolute;
+    bottom: 0px; 
+    width: 1701px;
+}

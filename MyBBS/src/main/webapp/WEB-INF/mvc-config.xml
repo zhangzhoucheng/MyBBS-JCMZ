@@ -35,4 +35,11 @@
 	<!-- 数据校验的bean -->
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
 	</bean>
+	
+	 <!-- springmvc文件过滤器 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10240000000000"></property>
+		<property name="defaultEncoding" value="UTF-8"/>
+		
+	</bean> 
 </beans>

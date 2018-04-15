@@ -39,7 +39,7 @@ public class Block {
 		this.posts = posts;
 	}
 
-
+	
 
 	public Block(String blockname, String blockremark, Integer blockstatus, Integer pageid) {
 		super();

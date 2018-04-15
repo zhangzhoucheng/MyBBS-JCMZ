@@ -188,6 +188,18 @@
       <if test="status != null">
         status,
       </if>
+      <if test="beFocusedNum != null">
+        beFocusedNum,
+      </if>
+      <if test="collectNum != null">
+        collectNum,
+      </if>
+      <if test="focusOtherNum != null">
+        focusOtherNum,
+      </if>
+      <if test="postNum != null">
+        postNum,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -208,6 +220,18 @@
       <if test="status != null">
         #{status,jdbcType=INTEGER},
       </if>
+      <if test="beFocusedNum != null">
+        #{beFocusedNum,jdbcType=INTEGER},
+      </if>
+      <if test="collectNum != null">
+        #{collectNum,jdbcType=INTEGER},
+      </if>
+      <if test="focusOtherNum != null">
+        #{focusOtherNum,jdbcType=INTEGER},
+      </if>
+      <if test="postNum != null">
+        #{postNum,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.jcmz.model.UserExample" resultType="java.lang.Long">
@@ -215,6 +239,9 @@
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
+  </select>
+  <select id="getIdByUsername" resultType="java.lang.Integer">
+  	select id from tb_user where userName=#{0}
   </select>
   <update id="updateByExampleSelective" parameterType="map">
     update tb_user

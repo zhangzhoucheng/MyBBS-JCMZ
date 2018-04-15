@@ -28,4 +28,9 @@ public class PostReplyService {
 		// TODO Auto-generated method stub
 		prm.addOnePraise(reply_id);
 	}
+
+	public void insertRep(Postreply pr) {
+		// TODO Auto-generated method stub
+		prm.insertSelective(pr);
+	}
 }

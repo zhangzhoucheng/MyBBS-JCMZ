@@ -64,6 +64,34 @@ public class PostPagingService {
 		return pag;
 	}
 	
+	
+	
+	
+	//获取所有满足条件的post集合
+	public PageBean<Post> findAllResultsByPageBean( int nowPage) {//即通过当前页码从而获取到对应的输出的集合
+		List<Post> pageLists=new ArrayList<>();
+		PageBean<Post> pag=new PageBean<>();
+		
+		
+		//封装总记录数，通过总的查询语句
+		pag.setAllCount(pm.getAllPostAndItsBlockPageCount());
+		//封装一页显示多少条，配置写在了properties文件中的postPagingTrs\
+		//int perCoun=bp.getPropertiesValue("$")
+		pag.setPerPageCount(Integer.parseInt(bp.getPropertiesValue("10")));
+		//封装总页数,向上取整数
+		int allPage=(pag.getAllCount()+pag.getPerPageCount()-1)/pag.getPerPageCount();
+		//封装当前页码
+		if(nowPage<1) {nowPage=1;}
+		if(nowPage>allPage) {nowPage=allPage;}
+		pag.setNowPage(nowPage);System.out.println("页："+allPage);
+		pag.setPageCount(allPage);//不理解参照工具类datatypetool的数学证明；
+		//获取开始行数
+		int start=(nowPage-1)*pag.getPerPageCount();
+		pageLists=pm.getAllPostAndItsBlockPageLimit(start,pag.getPerPageCount());
+		pag.setPageLists(pageLists);
+		return pag;
+	}
+	
 	public PageBean<User> findResultsByPageBeanOfReply( int nowPage,int po_id) {//即通过当前页码从而获取到对应的输出的集合存在问题，集合是针对user的当一个user多条回复，不好页面渲染所以回复
 		List<User> users=new ArrayList<>();
 		PageBean<User> pag=new PageBean<>();

@@ -8,7 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-<title>Insert title here</title>
+<title>论坛系统BBS</title>
 <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
 <link rel="stylesheet"
 	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -223,10 +223,12 @@ font-size:18px;
 		</header>
 		<nav class="">
 			<ul class="nav-ul">
+				<li><a href="${rootPath}/homePage.jsp"><span class="glyphicon glyphicon-file nav-fon"></span>首页</a>>></li>
+				<c:if test="${not empty user}"><li><a href="index.jsp"><span class="glyphicon glyphicon-home nav-fon"></span>主页</a>>></li></c:if>
 				<li><a href="tourist"><span
-						class="glyphicon glyphicon-home"></span>首页</a>>></li>
-				<li><a href="gotoBlocks?p_id=${p_id }"><span class="glyphicon glyphicon-list-alt"></span> ${pageName} </a>>></li>
-				<li><a href="#"><span class="glyphicon glyphicon-th-large"></span> ${blockName} </a>>></li>
+						class="glyphicon glyphicon-align-justify nav-fon"></span>版面列表</a>>></li>
+				<li><a href="gotoBlocks?p_id=${p_id }"><span class="glyphicon glyphicon-list-alt nav-fon"></span> ${pageName} </a>>></li>
+				<li><a href="#"><span class="glyphicon glyphicon-th-large nav-fon"></span> ${blockName} </a>>></li>
 
 			</ul>
 		</nav>
@@ -384,6 +386,10 @@ font-size:18px;
 			var colors2=new Array("#FEEE53", "#FB699A", "#BFA656");
 			var colors3=new Array("#FF00FE", "#61FE00");
 			var colors4 = new Array("#F7A95E", "#5CAE97", "#8DB1B6", "#E97C62","#FF5C05", "#FF00FE", "#61FE00","#FEEE53", "#FB699A", "#BFA656");
+			var colors7 = new Array("#F7A95E", "#5CAE97", "#8DB1B6", "#E97C62","#FF5C05", "#FF00FE");
+			 $(".nav-fon").each(function(index) {
+					$(this).css("color", colors7[index % 6]);
+				})
 			$(".section1").each(function(index) {
 				$(this).css("border-top-color", colors[index % 4]);
 			})

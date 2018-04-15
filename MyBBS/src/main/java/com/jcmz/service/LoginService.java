@@ -49,12 +49,12 @@ public class LoginService {
 	 */
 	public void registerGo(String name,String tel,String pas) {
 		System.out.println("name:"+name+",tel:"+tel+",pas:"+pas);
-		User user=new User(name,null, pas) ;
+		User user=new User(name, pas, "", 0, 0, 0, 0, 0, 1);
 		//添加普通用户权限0
-		user.setStatus(0);
-		userMp.insert(user);
+		
+		userMp.insertSelective(user);
 		//添加tel
-		udmp.insert(new Userdetail() {{this.setUserid(userMp.getIdByUsername(name));;this.setTel(tel);}});
+		udmp.insert(new Userdetail() {{this.setUserid(userMp.getIdByUsername(name));this.setTel(tel);}});
 		
 	}
 

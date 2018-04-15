@@ -1,9 +1,12 @@
 package com.jcmz.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jcmz.mapper.PostMapper;
+import com.jcmz.model.Post;
 
 @Service
 public class PostService {
@@ -28,6 +31,26 @@ public class PostService {
 	public void addCollectedNumInPostTable(int po_id) {
 		// TODO Auto-generated method stub
 		pm.addCollectedNumInPostTable(po_id);
+	}
+
+	public void insetPostConImg(Post post) {
+		// TODO Auto-generated method stub
+		pm.insert(post);
+	}
+
+	public List<Post> getAllPostAndItsBlockPage() {
+		// TODO Auto-generated method stub
+		return pm.getAllPostAndItsBlockPage();
+	}
+
+	public int getAllPostAndItsBlockPageCount() {
+		// TODO Auto-generated method stub
+		return pm.getAllPostAndItsBlockPageCount();
+	}
+
+	public List<Post> getPostByName(String search) {
+		// TODO Auto-generated method stub
+		return pm.getPostByName(search);
 	}
 
 	

@@ -18,7 +18,21 @@ public class User {
     private int collectNum;//收藏帖子的数量
     private int postNum;//自己拥有的帖子数
     private String toWhoName;
-    public String getToWhoName() {
+    public User(String username, String userpassword, String nickname, int beFocusedNum, int focusOtherNum,
+			int collectNum, int postNum, Integer idtype, Integer status) {
+		super();
+		this.username = username;
+		this.userpassword = userpassword;
+		this.nickname = nickname;
+		this.beFocusedNum = beFocusedNum;
+		this.focusOtherNum = focusOtherNum;
+		this.collectNum = collectNum;
+		this.postNum = postNum;
+		this.idtype = idtype;
+		this.status = status;
+	}
+
+	public String getToWhoName() {
 		return toWhoName;
 	}
 

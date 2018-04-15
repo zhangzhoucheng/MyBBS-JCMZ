@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name='viewport'
 	content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'>
-<title>校园论坛</title>
+<title>论坛系统BBS</title>
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="pingback" href="https://themes.getbootstrap.com/xmlrpc.php" /> 
 
@@ -233,7 +233,7 @@ var userSettings = {"url":"\/","uid":"0","time":"1519800600","secure":"1"};
 	<nav class="navbar navbar-expand-lg navbar-light">
 		<div class="container">
 			<a href="../homePage.jsp" class="navbar-brand"
-				href="/">QuickFood go</a>
+				href="/">校园论坛</a>
 			<div class="d-flex ml-auto">
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#globalNavbar" aria-controls="globalNavbar"
@@ -251,7 +251,7 @@ var userSettings = {"url":"\/","uid":"0","time":"1519800600","secure":"1"};
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
 						href="#" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false">公司介绍</a>
+						aria-expanded="false">学校介绍</a>
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownMenuLink">
 							<div class="navbar-collapse navbar-top-collapse">
@@ -259,36 +259,27 @@ var userSettings = {"url":"\/","uid":"0","time":"1519800600","secure":"1"};
 									<li id="menu-item-601"
 										class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-601"><a
 										title="Admin &amp; Dashboard"
-										href="https://themes.getbootstrap.com/product-category/admin-dashboard/">Admin
-											&#038; Dashboard</a></li>
+										href="#">美丽校园
+										</a></li>
 									<li id="menu-item-603"
 										class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-603"><a
 										title="Landing &amp; Corporate"
-										href="https://themes.getbootstrap.com/product-category/landing-corporate/">Landing
-											&#038; Corporate</a></li>
+										href="#">社团风采
+											</a></li>
 									<li id="menu-item-1537"
 										class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1537"><a
 										title="Application"
-										href="https://themes.getbootstrap.com/product-category/application/">Application</a></li>
+										href="#">文化长廊</a></li>
 									<li id="menu-item-602"
 										class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-602"><a
 										title="E-Commerce &amp; Retail"
-										href="https://themes.getbootstrap.com/product-category/ecommerce-retail/">E-Commerce
-											&#038; Retail</a></li>
-									<li id="menu-item-1538"
-										class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1538"><a
-										title="Portfolio &amp; Blog"
-										href="https://themes.getbootstrap.com/product-category/portfolio-blog/">Portfolio
-											&#038; Blog</a></li>
-									<li id="menu-item-1539"
-										class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1539"><a
-										title="Specialty"
-										href="https://themes.getbootstrap.com/product-category/specialty/">Specialty</a></li>
+										href="#">校园热点
+											</a></li>
+									
 								</ul>
 							</div>
 						</div></li>
-					<li class="nav-item"><a class="nav-link"
-						href="sellerRegister.jsp">商家注册</a></li>
+					
 				</ul>
 				<ul class="navbar-nav d-none d-lg-flex ml-2 order-3">
 					<li class="nav-item"><a class="nav-link" href="login.jsp">登录</a></li>
@@ -450,13 +441,13 @@ var userSettings = {"url":"\/","uid":"0","time":"1519800600","secure":"1"};
 							</form>
 
 							<p class="text-gray-soft text-center small mb-2">
-								当点击"注册"后您将会同意 <a href="serviceTerms.jsp">服务条款</a>.
+								当点击"注册"后您将会同意 <a href="#">服务条款</a>.
 							</p>
 							<p class="text-gray-soft text-center small mb-2">
 								已存在一个账户? <a href="login.jsp">登入</a>
 							</p>
 							<p class="text-gray-soft text-center small">
-								想要注册成一个商家? <a href="sellerRegister.jsp">进入注册</a>
+								想要注册成一个商家? <a href="#">进入注册</a>
 							</p>
 
 						</div>
@@ -476,14 +467,14 @@ var userSettings = {"url":"\/","uid":"0","time":"1519800600","secure":"1"};
 					<ul id="menu-footer" class="nav sub-nav footer__sub-nav">
 						<li id="menu-item-1194"
 							class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1194"><a
-							title="Help Center" href="https://themes.zendesk.com/hc/en-us">帮助中心</a></li>
+							title="Help Center" href="#">帮助中心</a></li>
 						<li id="menu-item-119"
 							class="menu-item menu-item-type-post_type menu-item-object-page menu-item-119"><a
 							title="Terms of Service"
-							href="https://themes.getbootstrap.com/terms/">服务条款</a></li>
+							href="#">服务条款</a></li>
 						<li id="menu-item-117"
 							class="menu-item menu-item-type-post_type menu-item-object-page menu-item-117"><a
-							title="Licenses" href="https://themes.getbootstrap.com/licenses/">身份许可</a></li>
+							title="Licenses" href="#">身份许可</a></li>
 					</ul>
 					<p class="hidden-sm-down d-none d-lg-block">
 						©京ICP证070791号 京公网安备11010502025545号 <a href="../homePage.jsp">首页</a>

@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>登录JustEating</title>
+    <title>论坛系统BBS</title>
         <!-- link样式引入和js引入 -->
     <link rel="icon" href="../images/loginImg/favicon.ico">
         <!-- Custom styles for this template -->
@@ -25,7 +25,7 @@
 				<li><a href="#">帮助</a></li>
 				<li><a href="register.jsp">注册|</a></li>
 				<li><a href="login.jsp">登录|</a></li>
-				<li><a href="../homePage.jsp">首页|</a></li>
+				<li><a href="${rootPath}/baseJsp/index.jsp">首页|</a></li>
 			</ul>
 		</div>
 	  	
@@ -39,7 +39,7 @@
 	      <label for="inputPassword" class="sr-only" >密码</label> 
 	      <input type="password" id="userpassword" class="form-control" placeholder="密码" required>
 	      <label class="sr-only1"  id="prompt_pas" style="color:red;"></label><label style="opacity: 0">women</label><br>
-	      <div class="checkbox mb-3">
+	      <div class="checkbox ">
 	        <label>
 	          <input type="checkbox" value="remember-me" id="remberP" checked="checked" name="remberP" required="required"> 记住密码
 	        </label>
@@ -99,7 +99,7 @@
    			},
    			error:function(){
    				alert("error");
-   				window.location.href("../homePage.jsp");
+   				window.location.href("${rootPath}/homePage.jsp");
    			}
    		})
    	}
@@ -145,16 +145,16 @@
 						$("#prompt").html("");
 						$("#prompt_pas").html("");
 					}
-					if(flag==2){
+					if(flag==2){alert(2);
 						//flag为2表示是按钮调用的此方法，且msg是2，用户存在跳转到首页
-						window.location.href="../homePage.jsp";
+						window.location.href="baseJsp/loginSuccess";
 					}
 					
 				}
 			},
 			error:function(){
 				alert("error");
-				window.location.href("../homePage.jsp");
+				window.location.href("${rootPath}/homePage.jsp");
 			}
 		})
 	}
@@ -170,7 +170,7 @@
    			},
    			error:function(){
    				alert("error");
-   				window.location.href("../homePage.jsp");
+   				window.location.href("${rootPath}/homePage.jsp");
    			}
    		})
    	}

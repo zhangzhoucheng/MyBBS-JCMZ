@@ -91,6 +91,9 @@
     from tb_userdetail
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="getIdByUsername" resultType="java.lang.Integer">
+  	select id where userName=#{0}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tb_userdetail
     where id = #{id,jdbcType=INTEGER}

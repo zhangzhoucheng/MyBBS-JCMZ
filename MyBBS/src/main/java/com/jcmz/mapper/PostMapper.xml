@@ -12,7 +12,10 @@
     <result column="postIsFocus" jdbcType="INTEGER" property="postisfocus" />
     <result column="setTopTime" jdbcType="TIMESTAMP" property="setTopTime"/>
     <result column="collectedNum" jdbcType="INTEGER" property="collectedNum" />
+    <result column="imgPath" jdbcType="VARCHAR" property="imgPath"/>
    <association property="user" resultMap="com.jcmz.mapper.UserMapper.BaseResultMap"/> 
+   <association property="block" resultMap="com.jcmz.mapper.BlockMapper.BaseResultMap"></association>
+   <association property="postPage" resultMap="com.jcmz.mapper.PostpageMapper.BaseResultMap"></association>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -73,31 +76,57 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, content, title, userId, blockTypeId, time, managerStatus, postIsFocus
+    id, content, title, userId, blockTypeId, time, managerStatus, postIsFocus,imgPath
   </sql>
   
  <!--  <select id="getPostsByBid">
   	select * from tb_post p where p.blockTypeId=#{0}  order by p.postIsFocus desc
   </select> -->
   <select id="getPostsByBid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-  	select p.id as id ,p.content,p.title,p.userId,p.blockTypeId,p.time,p.managerStatus,p.postIsFocus ,u.id as user_id,u.userName,u.userPassword,u.nickName,u.idType,u.status from tb_post p,tb_user u  where p.blockTypeId=#{0} and p.userId=u.id and p.managerStatus=0 order by p.postIsFocus desc
+  	select p.id as id ,p.content,p.title,p.userId,p.blockTypeId,p.time,p.managerStatus,p.postIsFocus ,p.imgPath,u.id as user_id,u.userName,u.userPassword,u.nickName,u.idType,u.status from tb_post p,tb_user u  where p.blockTypeId=#{0} and p.userId=u.id and p.managerStatus=0 order by p.postIsFocus desc
   </select>
   <select id="getoBlockSetTop" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-  	select p.id as id ,p.content,p.title,p.userId,p.blockTypeId,p.time,p.setTopTime,p.managerStatus,p.postIsFocus ,u.id as user_id,u.userName,u.userPassword,u.nickName,u.idType,u.status from tb_post p,tb_user u  where p.blockTypeId=#{0} and p.userId=u.id and p.managerStatus=1 order by p.setTopTime desc
+  	select p.id as id ,p.imgPath,p.content,p.title,p.userId,p.blockTypeId,p.time,p.setTopTime,p.managerStatus,p.postIsFocus ,u.id as user_id,u.userName,u.userPassword,u.nickName,u.idType,u.status from tb_post p,tb_user u  where p.blockTypeId=#{0} and p.userId=u.id and p.managerStatus=1 order by p.setTopTime desc
   </select>
    <select id="getoBlockByTime" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-  	select p.id as id ,p.content,p.title,p.userId,p.blockTypeId,p.time,p.managerStatus,p.postIsFocus ,u.id as user_id,u.userName,u.userPassword,u.nickName,u.idType,u.status from tb_post p,tb_user u  where p.blockTypeId=#{0} and p.userId=u.id order by p.time desc
+  	select p.id as id ,p.content,p.imgPath,p.title,p.userId,p.blockTypeId,p.time,p.managerStatus,p.postIsFocus ,u.id as user_id,u.userName,u.userPassword,u.nickName,u.idType,u.status from tb_post p,tb_user u  where p.blockTypeId=#{0} and p.userId=u.id order by p.time desc
   </select>
   <select id="getAllCount"  resultType="java.lang.Integer" >
   	select count(*) from tb_post p where p.blockTypeId=#{0} and (p.managerStatus=0 or p.managerStatus=1 )
   </select>
+  <select id="getAllPostAndItsBlockPage" resultMap="BaseResultMap">
+  	 select p.id as id ,p.content,p.imgPath,p.title,p.userId,p.blockTypeId,p.time,p.managerStatus,p.postIsFocus,b.id block_id,b.blockName,b.blockRemark,b.blockStatus,b.pageId ,b.countNum,pa.id page_id,pa.pageName,pa.pageStatus,pa.pageManagerId,pa.pageRemark ,u.id user_id, u.userName,u.userPassword,u.idType,u.beFocusedNum,u.focusOtherNum,u.collectNum,u.postNum,u.nickName
+  	 from tb_post p ,tb_block b,tb_postpage pa ,tb_user u
+  	 where p.blockTypeId=b.id and b.pageId=pa.id 
+  	 and pa.pageStatus=1 and p.managerStatus=0 and b.blockStatus=1 
+  	 and p.userId=u.id order by p.time desc limit 0,10
+  </select>
+   <select id="getAllPostAndItsBlockPageLimit" resultMap="BaseResultMap">
+  	 select p.id as id ,p.content,p.imgPath,p.title,p.userId,p.blockTypeId,p.time,p.managerStatus,p.postIsFocus,b.id block_id,b.blockName,b.blockRemark,b.blockStatus,b.pageId ,b.countNum,pa.id page_id,pa.pageName,pa.pageStatus,pa.pageManagerId,pa.pageRemark ,u.id user_id, u.userName,u.userPassword,u.idType,u.beFocusedNum,u.focusOtherNum,u.collectNum,u.postNum,u.nickName
+  	 from tb_post p ,tb_block b,tb_postpage pa ,tb_user u
+  	 where p.blockTypeId=b.id and b.pageId=pa.id 
+  	 and pa.pageStatus=1 and p.managerStatus=0 and b.blockStatus=1 
+  	 and p.userId=u.id order by p.time desc limit #{start},#{perPageCount}
+  </select>
+  <select id="getAllPostAndItsBlockPageCount" resultType="java.lang.Integer">
+  	 select count(*) from tb_post p ,tb_block b,tb_postpage pa 
+  	 where p.blockTypeId=b.id and b.pageId=pa.id
+  	 and pa.pageStatus=1 and p.managerStatus=0 and b.blockStatus=1
+  </select>
  <select id="getPostsByPaging" resultMap="BaseResultMap" >
-   	select p.id as id ,p.content,p.title,p.userId,p.blockTypeId,p.time,p.managerStatus,p.postIsFocus ,u.id as user_id,u.userName,u.userPassword,u.nickName,u.idType,u.status from tb_post p,tb_user u  where p.blockTypeId=#{b_id} and p.userId=u.id 
+   	select p.id as id ,p.content,p.imgPath,p.title,p.userId,p.blockTypeId,p.time,p.managerStatus,p.postIsFocus ,u.id as user_id,u.userName,u.userPassword,u.nickName,u.idType,u.status from tb_post p,tb_user u  where p.blockTypeId=#{b_id} and p.userId=u.id 
    	and (p.managerStatus=0 or p.managerStatus=1 ) order by p.time desc limit #{start},#{perPageCount}
  
  	<!-- select * from tb_post p where p.blockTypeId=#{b_id} and (p.managerStatus=0 or p.managerStatus=1 ) limit #{start},#{perPageCount} -->
  </select>
- 
+ <select id="getPostByName" resultMap="BaseResultMap">
+ 	 select p.id as id ,p.content,p.imgPath,p.title,p.userId,p.blockTypeId,p.time,p.managerStatus,p.postIsFocus,b.id block_id,b.blockName,b.blockRemark,b.blockStatus,b.pageId ,b.countNum,pa.id page_id,pa.pageName,pa.pageStatus,pa.pageManagerId,pa.pageRemark ,u.id user_id, u.userName,u.userPassword,u.idType,u.beFocusedNum,u.focusOtherNum,u.collectNum,u.postNum,u.nickName
+  	 from tb_post p ,tb_block b,tb_postpage pa ,tb_user u
+  	 where p.blockTypeId=b.id and b.pageId=pa.id 
+  	 and pa.pageStatus=1 and p.managerStatus=0 and b.blockStatus=1 
+  	 and p.userId=u.id  and p.title=#{0}
+  	 order  by p.time desc limit 0,10
+ </select>
  <update id="canclePraise"><!-- 根据po_id减少其一个赞 -->
 	 update tb_post t set t.postIsFocus=t.postIsFocus-1 where id=#{0}
 </update>
@@ -143,12 +172,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.jcmz.model.Post">
-    insert into tb_post (id, content, title, 
+    insert into tb_post (content, title, 
       userId, blockTypeId, time, 
-      managerStatus, postIsFocus)
-    values (#{id,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      managerStatus, postIsFocus,imgPath,collectedNum)
+    values (#{content,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
       #{userid,jdbcType=INTEGER}, #{blocktypeid,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, 
-      #{managerstatus,jdbcType=INTEGER}, #{postisfocus,jdbcType=INTEGER})
+      #{managerstatus,jdbcType=INTEGER}, #{postisfocus,jdbcType=INTEGER},#{imgPath,jdbcType=VARCHAR},#{collectedNum,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.jcmz.model.Post">
     insert into tb_post
@@ -177,6 +206,9 @@
       <if test="postisfocus != null">
         postIsFocus,
       </if>
+      <if test="imgPath != null">
+        imgPath,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -202,6 +234,9 @@
       </if>
       <if test="postisfocus != null">
         #{postisfocus,jdbcType=INTEGER},
+      </if>
+      <if test="imgPath != null">
+        #{imgPath,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -237,6 +272,9 @@
       </if>
       <if test="record.postisfocus != null">
         postIsFocus = #{record.postisfocus,jdbcType=INTEGER},
+      </if>
+       <if test="record.imgPath != null">
+        postIsFocus = #{record.imgPath,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">

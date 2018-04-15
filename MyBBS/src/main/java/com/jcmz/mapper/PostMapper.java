@@ -45,6 +45,14 @@ public interface PostMapper {
 
 	void addCollectedNumInPostTable(int po_id);
 
+	List<Post> getAllPostAndItsBlockPage();
+
+	int getAllPostAndItsBlockPageCount();
+
+	List<Post> getAllPostAndItsBlockPageLimit(@Param("start")int start,@Param("perPageCount") int perPageCount);
+
+	List<Post> getPostByName(String search);
+
 	
 
 	

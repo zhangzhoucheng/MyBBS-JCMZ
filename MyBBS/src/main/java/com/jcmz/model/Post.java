@@ -1,5 +1,6 @@
 package com.jcmz.model;
 
+import java.io.File;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -16,8 +17,50 @@ public class Post {
 
     private Timestamp time;
     private Integer managerstatus;
+    private String imgPath;//存储路径，发帖图片的存储路径
+    private Block block;
+    private Postpage postPage;
 
-    public int getCollectedNum() {
+    public Postpage getPostPage() {
+		return postPage;
+	}
+
+	public void setPostPage(Postpage postPage) {
+		this.postPage = postPage;
+	}
+
+	public Block getBlock() {
+		return block;
+	}
+
+	public void setBlock(Block block) {
+		this.block = block;
+	}
+
+	public Post(String content, String title, Integer userid, Integer blocktypeid, Timestamp time,
+			Integer managerstatus, String imgPath, Integer postisfocus, int collectedNum, Timestamp setTopTime) {
+		super();
+		this.content = content;
+		this.title = title;
+		this.userid = userid;
+		this.blocktypeid = blocktypeid;
+		this.time = time;
+		this.managerstatus = managerstatus;
+		this.imgPath = imgPath;
+		this.postisfocus = postisfocus;
+		this.collectedNum = collectedNum;
+		this.setTopTime = setTopTime;
+	}
+
+	public String getImgPath() {
+		return imgPath;
+	}
+
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
+	}
+
+	public int getCollectedNum() {
 		return collectedNum;
 	}
 
@@ -28,9 +71,18 @@ public class Post {
 	private Integer postisfocus;//帖子被点赞数
     private int collectedNum;//帖子被收藏的数量
     private Timestamp setTopTime;
+    private File file;
     
     
-    public Timestamp getSetTopTime() {
+    public File getFile() {
+		return file;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
+	}
+
+	public Timestamp getSetTopTime() {
 		return setTopTime;
 	}
 

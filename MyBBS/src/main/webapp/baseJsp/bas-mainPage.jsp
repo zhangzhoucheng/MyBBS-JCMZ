@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-<title>Insert title here</title>
+<title>论坛系统BBS</title>
 <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
 <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 
@@ -77,6 +77,13 @@ body {
 #footer a {
 	color: inherit;
 }
+nav ul li{
+	float:left;
+	
+}
+nav ul li{
+	list-style:none;
+}
 </style>
 </head>
 <body>
@@ -87,10 +94,12 @@ body {
 		</header>
 		<nav class="">
 		<ul>
-			<li><a href="#"><span class="glyphicon glyphicon-home"></span>首页</a>>></li>
+			<li><a href="${rootPath}/homePage.jsp"><span class="glyphicon glyphicon-file nav-fon"></span>首页</a>>></li>
+			<c:if test="${not empty user}"><li><a href="index.jsp"><span class="glyphicon glyphicon-home nav-fon"></span>主页</a>>></li></c:if>
+			<li><a href="#"><span class="glyphicon glyphicon-align-justify nav-fon"></span>版面列表</a>>></li>
 		</ul>
 		</nav> 
-		
+		<br>
 	   <div class="main">
 		   	<c:forEach items="${pageList}" var="p">
 				<section class=" section">
@@ -140,9 +149,14 @@ body {
 	<script type="text/javascript">
 		 $(function(){
 			var colors= new Array("#F7A95E","#5CAE97","#8DB1B6","#E97C62");
+			var colors7 = new Array("#F7A95E", "#5CAE97", "#8DB1B6", "#E97C62","#FF5C05", "#FF00FE");
+			 $(".nav-fon").each(function(index) {
+					$(this).css("color", colors7[index % 6]);
+				})
 			 $("section").each(function(index){
 				 $(this).css("border-top-color",colors[index%4]);
 			 })
+			
 		 })
 	</script>
 	</body>

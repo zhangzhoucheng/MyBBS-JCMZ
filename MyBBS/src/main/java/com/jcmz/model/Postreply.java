@@ -17,7 +17,20 @@ public class Postreply {
     private Integer userid;
     private int toWhoId;
     private String toWhoName;//仅仅是为了取值，表中并没有这个字段
-    private User user;
+    public Postreply(Integer postid, String replycontet, Integer status, Timestamp time, Integer userid, int toWhoId,
+			int praiseNum) {
+		super();
+		this.postid = postid;
+		this.replycontet = replycontet;
+		this.status = status;
+		this.time = time;
+		this.userid = userid;
+		this.toWhoId = toWhoId;
+		this.praiseNum = praiseNum;
+	}
+
+	
+	private User user;
     private int praiseNum;
 
     public int getPraiseNum() {

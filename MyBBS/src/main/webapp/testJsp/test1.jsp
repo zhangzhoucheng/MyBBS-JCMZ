@@ -22,6 +22,7 @@ a{
 <a href="../baseJsp/tourist">获取page版面以及对应的用户，和板块信息</a><br>
 <a href="../baseJsp/insertPosts">插入数据到post帖子表</a><br>
 <a href="../baseJsp/tourist">到首页版面</a><br>
+<a href="../baseJsp/bas-publishPost.jsp">发表帖子</a><br>
 <a href="../baseJsp/insertFocus">插入数据到关注用户表</a><br>
 <a href="../baseJsp/insertCollect">插入数据到收藏帖子表</a><br>
 <a href="../baseJsp/insertPostReply">插入帖子回复信息表</a><br>

@@ -8,7 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-<title>Insert title here</title>
+<title>论坛系统BBS</title>
 <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
 <link rel="stylesheet"
 	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -193,6 +193,10 @@ width:100%;
 	resize:none;
 	outline:none;
 }
+.post-img:hover{
+	width:677px;
+	height:800px;
+}
 
 .reply-host{
 	color:	#FE0000;
@@ -211,11 +215,13 @@ width:100%;
 		</header>
 		<nav class="">
 			<ul class="nav-ul">
+				<li><a href="${rootPath}/homePage.jsp"><span class="glyphicon glyphicon-file nav-fon"></span>首页</a>>></li>
+				<c:if test="${not empty user}"><li><a href="index.jsp"><span class="glyphicon glyphicon-home nav-fon"></span>主页</a>>></li></c:if>
 				<li><a href="tourist"><span
-						class="glyphicon glyphicon-home"></span>首页</a>>></li>
-				<li><a href="gotoBlocks?p_id=${p_id }"><span class="glyphicon glyphicon-list-alt"></span> ${pageName} </a>>></li>
-				<li><a href="gotoBlock?b_id=${b_id}&pageName=${pageName}&p_id=${p_id}"><span class="glyphicon glyphicon-th-large"></span> ${blockName} </a>>></li>
-				<li><a href="#"><span class="glyphicon glyphicon-send"></span>  ${userHost.posts[0].title}  </a>>></li>
+						class="glyphicon glyphicon-align-justify nav-fon"></span>版面列表</a>>></li>
+				<li><a href="gotoBlocks?p_id=${p_id }"><span class="glyphicon glyphicon-list-alt nav-fon"></span> ${pageName} </a>>></li>
+				<li><a href="gotoBlock?b_id=${b_id}&pageName=${pageName}&p_id=${p_id}"><span class="glyphicon glyphicon-th-large nav-fon"></span> ${blockName} </a>>></li>
+				<li><a href="#"><span class="glyphicon glyphicon-send nav-fon"></span>  ${userHost.posts[0].title}  </a>>></li>
 
 			</ul>
 		</nav>
@@ -243,8 +249,10 @@ width:100%;
 				<section class="m1-right">
 					<article class="mr-art">
 						<h3 class="p-center p-marTop"><span class="glyphicon glyphicon-home headFlag"></span><span class="title1">主题:</span><span class="title1">${userHost.posts[0].title }</span></h3>
+						<img alt="不见了·" src="/imgRoot/${userHost.posts[0].imgPath}" width="100px;" height="100px;" class="post-img">
 						<p style="text-indent: 2em;">
-							${userHost.posts[0].content }
+						
+							${userHost.posts[0].content}
 							我们一起就发生了放假哦我金额返去破解紧迫非问卷去拍风景哦为附件配件发票就哦我i附件评价哦i发票就怕·佛经飞机票哦积分2风景破防金额皮肤就破额发奖金
 							去附近外婆风景区颇为费解去破解为其服务几千万佛俄方剧情片风景区金额为i求富婆我级风景区哦福气哦姐姐哦fjweapoppppipppppppppppppppipipipi我们一起就发生了放假哦我金额返去破解紧迫非问卷去拍风景哦为附件配件发票就哦我i附件评价哦i发票就怕·佛经飞机票哦积分2风景破防金额皮肤就破额发奖金
 							去附近外婆风景区颇为费解去破解为其服务几千万佛俄方剧情片风景区金额为i求富婆我级风景区哦福气哦姐姐哦fjweapoppppipppppppppppppppipipipi我们一起就发生了放假哦我金额返去破解紧迫非问卷去拍风景哦为附件配件发票就哦我i附件评价哦i发票就怕·佛经飞机票哦积分2风景破防金额皮肤就破额发奖金
@@ -282,8 +290,8 @@ width:100%;
 						
 							<p>
 								<a href="#" onclick="paging(1);return false;"><span class="glyphicon glyphicon-step-backward"></span>上一页</a>&nbsp;&nbsp;
-								<span>当前页:<span id="nowPage">${nowPage}</span></span>/<span id="allPage">${allPages }</span>
-								<span><input class="form-control" id="inPage" value="${inp }" style="width:50px;display:inline;" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"  oninput="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" /></span>
+								<span>当前页:<span id="nowPage">${nowPage}</span></span>/<span id="allPage">${allPages}</span>
+								<span><input class="form-control" id="inPage" value="${inp}" style="width:50px;display:inline;" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"  oninput="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" /></span>
 								<a href="#" onclick="paging(2);return false;"><span class="glyphicon glyphicon-hand-left"></span>跳转</a>
 								&nbsp;&nbsp;<a href="#" onclick="paging(3);return false;"><span class="glyphicon glyphicon-step-forward"></span>下一页</a><span class="pageJump" style="color:red;"></span>
 							</p><span id="po_id" style="display:none">${po_id}</span>
@@ -357,9 +365,9 @@ width:100%;
 		<div class="black_overlay"></div>
 		<div class="prompt_pop">
 				<p style="visibility: hidden;"><span class="po_id-hid"></span><span class="toWho-hid"></span></p>
-				<p>回复<span class="floor1"></span><span class="reply-host"></span>(限制500字)</p>
+				<span style="font-size:28px;font-weight:450">回复<span class="floor1"></span><span class="reply-host"></span>(限制500字)</span>
 			   <textarea class="text-area" rows="10" cols="90" maxlength="500" ></textarea><br><br>
-			   <a href="#" class="label label-warning b-size" onclick="cancleRep();return false;">取消</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="label label-success b-size" onclick="goRep();return false;">回复</a>
+			   <a href="#" class="label label-warning b-size" onclick="cancleRep();return false;">取消</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="opacity:0;color:red" class="re-re-pro">回复不为空</span> &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="label label-success b-size" onclick="goRep();return false;">回复</a>
 		</div>
 	</article>
 	
@@ -399,13 +407,15 @@ width:100%;
 			proNowY=nowTop;
 			befTop=winTop*0.25;
 			
+			
+			
 			//绑定函数
 			$(window).on("scroll",setMoveLock);//滚动条滚动，弹窗保持浏览器中部不移动
 			$(".prompt_pop").on("mousedown",mouseDow);
 			$(".prompt_pop").on("mousemove",mouseMov);//待优化
 			$(".prompt_pop").on("mouseup",mouseUp);
 			$(".prompt_pop").on("mouseleave",function(e){mouseSta=false;})
-			$(".text-area").on("mousedown mousemove",function(e){ mouseSta=false;e.stopPropagation();e.cancelBubble=true;});//阻止事件冒泡，不触发父元素
+			$(".prompt_pop").children().on("mousedown mouseup mousemove",function(e){ mouseSta=false;e.stopPropagation();e.cancelBubble=true;});//阻止事件冒泡，不触发父元素
 			
 			//禁止复制等
 			document.oncontextmenu=new Function('event.returnValue=false;');
@@ -471,7 +481,7 @@ width:100%;
 			var colors4 = new Array("#F7A95E", "#5CAE97", "#8DB1B6", "#E97C62","#FF5C05", "#FF00FE", "#61FE00","#FEEE53", "#FB699A", "#BFA656");
 			var colors5 = new Array("#FEF104", "#ED1B24", "#8DB1B6", "#BFA656","#2F841C");
 			var colors6 = new Array( "#ED1B24", "#8DB1B6", "#2F841C");
-			
+			var colors7 = new Array("#F7A95E", "#5CAE97", "#8DB1B6", "#E97C62","#FF5C05", "#FF00FE");
 			$(".section1").each(function(index) {
 				$(this).css("border-top-color", colors[index % 4]);
 			})
@@ -501,6 +511,9 @@ width:100%;
 			})
 			$(".art-ope4").each(function(index) {
 				$(this).css("color", colors6[index % 3]);
+			})
+			$(".nav-fon").each(function(index) {
+				$(this).css("color", colors7[index % 6]);
 			})
 		}
 		function aShow(flag){
@@ -667,7 +680,7 @@ width:100%;
 			}) 
 			
 		} 
-		function collectPost(po_id){alert(11);
+		function collectPost(po_id){//alert(11);
 			var host_col=$(".host-col").html();
 			var nowPage=$("#nowPage").html();
 			$.ajax({
@@ -681,7 +694,7 @@ width:100%;
 						dataType:"html",
 					
 						type:"get",
-						success:function(data1){alert(22);
+						success:function(data1){//alert(22);
 							if(data.msg=="0"||data.msg==0){
 								//没登录，请登录，弹窗登录，
 								alert("请先去登录才能收藏");
@@ -704,7 +717,7 @@ width:100%;
 		} 
 		
 		function focusPostHost(po_id){
-			alert(11);
+			//alert(11);
 		var host_foc=$(".host-foc").html();
 	
 		$.ajax({
@@ -718,7 +731,7 @@ width:100%;
 					dataType:"html",
 				
 					type:"get",
-					success:function(data1){alert(22);
+					success:function(data1){//alert(22);
 						if(data.msg=="0"||data.msg==0){
 							//没登录，请登录，弹窗登录，
 							alert("请先去登录才能关注");
@@ -810,7 +823,10 @@ width:100%;
 			$(".my-all").children().not(".prompt_pop").css({"opacity":"0.5"});
 			$(".black_overlay").css("display","block");
 			$(".prompt_pop").css({"display":"block"});
+			$(".floor1").html("楼主:");
 			$(".reply-host").html(user);
+			$(".toWho-hid").html(user);
+			$(".po_id-hid").html(po_id);
 			setMoveLock();
 			
 		}
@@ -827,17 +843,49 @@ width:100%;
 		function goRep(){//弹窗确认回复
 			var poid=$(".po_id-hid").html();
 			var toWho=$(".toWho-hid").html();
-			var textArea=$(".text-area").text();
+			var textArea=$(".text-area").val();
+			var nowPage=$("#nowPage").html();
+			var inp=$("#inPage").val();
+			console.log("po:"+poid+",wo:"+toWho+",te:"+textArea+",no:"+nowPage+",in:"+inp);
+			if(textArea==null||""==textArea){
+				$(".re-re-pro").css("opacity","1");
+				return;
+			}
+			else{
+				$(".re-re-pro").css("opacity","0");
+			}
 			$.ajax({
 				url:"goRep",
-				data:"poid="+poid+"&toWho="+toWho+"&textArea="+textArea,
+				data:"poid="+poid+"&toWho="+toWho+"&textArea="+textArea+"&nowPage="+nowPage+"&inp="+inp,
 				dataType:"json",
 				type:"post",
-				success:function(){
+				success:function(data){
+					if(data.sta==0){
+						alert("请先去登录！")
+					}else{
+						$.ajax({
+							url:"bas-mainThePost.jsp",
+							dataType:"html",						
+							type:"get",
+							success:function(data1){
+							
+								$(".down1").html( $(data1).find(".down1").html() );//刷新
+								$(".my-all").children().not(".prompt_pop").css({"opacity":"1"});
+								$(".black_overlay").css("display","none");
+								$(".prompt_pop").css({"display":"none"});
+								$(".re-re-pro").css("opacity","0");
+								colorShow();
+							
+								
+							},
+							error:function(){
+								alert("focusReplyUser1 error");
+							}
+							
+							
+						});
+					}
 					
-					$(".my-all").children().not(".prompt_pop").css({"opacity":"1"});
-					$(".black_overlay").css("display","none");
-					$(".prompt_pop").css({"display":"none"});
 				},
 				error:function(){
 					alert("goRep error");
@@ -847,6 +895,8 @@ width:100%;
 		}
 		
 		function cancleRep(){//弹窗取消回复
+			$(".re-re-pro").css("opacity","0");
+		    $(".text-area").val("");
 			$(".my-all").children().not(".prompt_pop").css({"opacity":"1"});
 			$(".black_overlay").css("display","none");
 			$(".prompt_pop").css({"display":"none"});

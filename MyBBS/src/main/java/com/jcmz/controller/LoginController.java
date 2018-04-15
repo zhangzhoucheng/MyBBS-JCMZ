@@ -2,6 +2,8 @@ package com.jcmz.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -13,12 +15,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.aliyuncs.exceptions.ClientException;
 import com.jcmz.base.MyCookie;
+import com.jcmz.model.Post;
+import com.jcmz.model.User;
 import com.jcmz.service.LoginService;
+import com.jcmz.service.PostService;
 import com.jcmz.service.UserService;
 import com.jcmz.tool.BaseSms;
 import com.jcmz.tool.GetRandom;
@@ -35,7 +42,8 @@ public class LoginController {
 	private LoginService loginService;
 	@Autowired
 	private UserService us;
-	
+	@Autowired
+	private PostService ps;
 	@Autowired 
 	private MyCookie myCookie;//cookie方法
 	private GetRandom getRandom=new GetRandom();//随机数类
@@ -121,7 +129,7 @@ public class LoginController {
 	     pw.println(js.toJSONString());
 	}
 	/***
-	 * @remark 注册页面校验数据成功后，直接插入用户到数据库
+	 * @remark 注册页面校验数据成功后，直接插入用户到数据库,并且跳转到主页
 	 * @param firstname
 	 * @param lastname
 	 * @param password
@@ -129,10 +137,35 @@ public class LoginController {
 	 * @author for jld
 	 */
 	@RequestMapping("registerGo")
-	public String  registerGo(@Param(value="firstname") String firstname,@Param("lastname") String lastname,@Param("password") String password) {
+	public String  registerGo(@Param(value="firstname") String firstname,@Param("lastname") String lastname,@Param("password") String password,Model model) {
 		log.info("【registerGo方法参数】"+"1:"+firstname+",2:"+lastname+",3:"+password);
 		loginService.registerGo(firstname, lastname, password);
+		
 		return "/homePage";
+	}
+	
+	@RequestMapping("loginSuccess")
+	public String  loginSuccess(Model model,HttpServletRequest request) {
+		getAllPostAndItsBlockPage(model);
+		ModelAndView mv=new ModelAndView();
+		
+		return "/baseJsp/index";
+	}
+	
+	/***
+	 * @remark 得到所有帖子列表，除了相应帖子、板块，版面状态为锁住的，
+	 * @param model
+	 */
+	public void getAllPostAndItsBlockPage(Model model) {
+		int allCount =0;
+		List<Post> posts=new ArrayList<>();
+		allCount=ps.getAllPostAndItsBlockPageCount()/10;
+		posts=ps.getAllPostAndItsBlockPage();
+		
+		model.addAttribute("posts", posts);
+		model.addAttribute("allCount", allCount);
+		model.addAttribute("nowPage", 1);
+		model.addAttribute("inp", 1);
 	}
 	
 	/***
@@ -177,10 +210,18 @@ public class LoginController {
 		String checkCode=Integer.toString(getRandom.getRandomByBit(6));
 		HttpSession session=request.getSession();
 		session.setAttribute("checkCode", checkCode);
-		//baseSms.sendSms(tel, checkCode, username);//阿里短信
-		IndustrySMS.senMsg(tel, username, checkCode);//秒滴短信
+		baseSms.sendSms(tel, checkCode, username);//阿里短信
+		//IndustrySMS.senMsg(tel, username, checkCode);//秒滴短信
 		PrintWriter pw=response.getWriter();
 		pw.println("{\"msg\":\"1\"}");
 		
+	}
+	@RequestMapping("removeSession")
+	public void removeSesson(HttpServletRequest request,HttpServletResponse response,@Param(value="name") String name) throws IOException {
+		request.getSession().removeAttribute(name);
+		System.out.println("here----------------------------------------");
+		JSONObject json=new JSONObject();
+		json.put("msg", "1");
+		response.getWriter().println(json.toJSONString());
 	}
 }

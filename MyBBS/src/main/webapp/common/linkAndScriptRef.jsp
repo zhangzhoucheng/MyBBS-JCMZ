@@ -8,5 +8,5 @@
     
     <script type="text/javascript" src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
 		<script>
-			window.jQuery || document.write('<script type="text/javascript" src='js/jquery-3.2.1.js'><\/script>')
+			window.jQuery || document.write("<script type='text/javascript' src='js/jquery-3.2.1.js'><\/script>")
 		</script>

@@ -40,19 +40,27 @@ public class FilterResource implements Filter{
 		HttpSession session=httpRequest.getSession();
 		com.jcmz.model.User user=(com.jcmz.model.User) session.getAttribute("user");
 		String path=httpRequest.getServletPath();
-		if(path.indexOf("/login")!=-1||path.indexOf("/baseJsp")!=-1||path.indexOf("/css")!=-1
+		if((path.indexOf("/login")!=-1||path.indexOf("/baseJsp")!=-1||path.indexOf("/css")!=-1
 				||path.indexOf("images")!=-1
 				||path.indexOf("/img")!=-1
+				||path.indexOf("/cs")!=-1
+				||path.indexOf("/image")!=-1
+				||path.indexOf("/imgRoot")!=-1
 				||path.indexOf("/js")!=-1
 				||path.indexOf("/plugins")!=-1
 				||path.indexOf("/Scripts")!=-1
 				||path.indexOf("/styles")!=-1
-				||path.indexOf("/index.jsp")!=-1
+				//||path.indexOf("/index.jsp")!=-1//游客无法访问index.jsp
 				||path.indexOf("/myRegister.jsp")!=-1
 				||path.indexOf("LoginAction")!=-1
 				||path.indexOf("/testJsp")!=-1
 				||path.indexOf("/homePage.jsp")!=-1
-				||path.indexOf("RegisterAction")!=-1){
+				||path.indexOf("RegisterAction")!=-1)
+				&&(
+						!(path.indexOf("/baseJsp")!=-1&&path.indexOf("/index")!=-1)//由于不小心把basejsp释放了，不好改，就只能单独处理index.jsp,拦截它
+					&&	!(path.indexOf("/baseJsp")!=-1&&path.indexOf("/bas-publishPost")!=-1)//必须登陆才能访问发帖页面
+				  )
+				){
 			System.out.println("go1");
 			arg2.doFilter(arg0, arg1);
 			return;

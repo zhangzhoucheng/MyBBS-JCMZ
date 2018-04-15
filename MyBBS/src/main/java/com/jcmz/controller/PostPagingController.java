@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.alibaba.fastjson.JSONObject;
+import com.aliyuncs.http.HttpResponse;
 import com.jcmz.model.PageBean;
 import com.jcmz.model.Post;
 import com.jcmz.model.Postbase;
@@ -66,6 +67,29 @@ public class PostPagingController {
 		session.setAttribute("blockName",blockName);
 
 		session.setAttribute("b_id", b_id);
+		jons.put("suc", 1);
+		pw.print(jons.toJSONString());
+	}
+	
+	//对于index主页的帖子列表，进行分页，（是针对所有帖子）
+	@RequestMapping("postAllPaging")
+	public void postAllPaging(@Param("nowPage") int nowPage , int inp,Model model,HttpServletResponse response,HttpServletRequest request) throws IOException {
+		PrintWriter pw=response.getWriter();
+		JSONObject jons=new JSONObject();
+		HttpSession session=request.getSession();
+		PageBean<Post> pag=pps.findAllResultsByPageBean(nowPage);
+		if(inp==0) {
+			inp=1;
+		}else if(inp>pag.getPageCount()){
+			inp=pag.getPageCount();
+					
+		}else {
+			
+		}
+		session.setAttribute("posts", pag.getPageLists());
+		session.setAttribute("nowPage", pag.getNowPage());
+		session.setAttribute("allCount", pag.getPageCount());
+		session.setAttribute("inp", inp);
 		jons.put("suc", 1);
 		pw.print(jons.toJSONString());
 	}

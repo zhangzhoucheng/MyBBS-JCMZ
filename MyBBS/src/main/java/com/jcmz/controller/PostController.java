@@ -1,7 +1,11 @@
 package com.jcmz.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,12 +19,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSONObject;
 import com.jcmz.base.BasePropertise;
 import com.jcmz.base.MyCookie;
 import com.jcmz.mapper.PostreplyMapper;
 import com.jcmz.model.PageBean;
+import com.jcmz.model.Post;
 import com.jcmz.model.Postreply;
 import com.jcmz.model.User;
 import com.jcmz.service.PostPagingService;
@@ -183,7 +190,98 @@ public class PostController {
 	
 	
 	//回复该帖子
-	public void goRep(@Param("poid") int poid ,@Param("toWho") String  toWho,@Param("textArea") String  textArea ) {
+	@RequestMapping("goRep")
+	public void goRep(@RequestParam("poid") int poid ,@Param("toWho") String  toWho,@Param("textArea") String  textArea,@RequestParam("nowPage")int  nowPage,@RequestParam("inp") int inp,HttpServletRequest request ,HttpServletResponse response ) throws IOException {
+		  PrintWriter pw=response.getWriter();
+		  JSONObject json=new JSONObject();
+		  HttpSession session=request.getSession();
+		  String sta="";
+		  User user;
+		  int toWhoId=0;
+		  if(null==session.getAttribute("user")||"".equals(session.getAttribute("user"))) {
+				sta="0";//此时用户没有登录
+		  }else {
+			  //登陆成功了，执行相关的插入操作
+			  user=(User) session.getAttribute("user");
+			  int userid=user.getId();
+			  toWhoId=us.getUserByName(toWho).getId();
+			  System.out.println("tw:"+toWhoId);
+			  Postreply pr=new Postreply(poid, textArea, 1, new Timestamp(System.currentTimeMillis()), userid, toWhoId, 0);
+			  prs.insertRep(pr);
+			  sta="1";
+		  }
+		  PageBean<Postreply> pag=pps.findResultsByPageBeanOfPostReply(nowPage, poid);
+		  session.setAttribute("Postreplys", pag.getPageLists());
+		  session.setAttribute("nowPage", pag.getNowPage());
+		  session.setAttribute("allPages", pag.getPageCount());
+		  session.setAttribute("inp",inp); session.setAttribute("po_id",poid);
+		  json.put("sta", sta);
+		  pw.print(json.toJSONString());
+	}
+	
+	@RequestMapping("fileUp")//上传文件
+	public String fileUp( @RequestParam("file") MultipartFile[] files,@Param("title") String title,@Param("content") String content,HttpServletRequest requeset) throws IOException{
+		//service.test();
+	     
+		System.out.println("begin1");
+		System.out.println("1:"+title+",2;"+content);
+		InputStream in=null;
+		//String root="/mybbs/project/img"; //在远程服务器
+	   	String root="d:/img";//本地测试
+		FileOutputStream fileOutputStream=null;
+		HttpSession session=requeset.getSession();
+		String filename="";
+		User usr = null;
+		 if(null!=session.getAttribute("user")||!"".equals(session.getAttribute("user"))) {
+				usr=(User) session.getAttribute("user");
+		  }
+		Post post=new Post(content, title, usr.getId(), null, new Timestamp(System.currentTimeMillis()), 4, null, 0, 0, null);
+		post.setTitle(title);
+		post.setTime(new Timestamp(System.currentTimeMillis()));
+		post.setContent(content);
+		File dir=new File(root);
+		if(!dir.exists()) {
+			dir.mkdirs();
+		}
+		for(MultipartFile file:files){
+			if(!file.isEmpty()){
+				//获取文件控制流
+				in=file.getInputStream();
+				File newFile=new File(root,file.getOriginalFilename());
+				System.out.println("na:"+file.getOriginalFilename());
+				newFile.createNewFile();
+				filename=file.getOriginalFilename();
+				post.setImgPath(filename);
+				//创建文件输出流
+				fileOutputStream=new FileOutputStream(newFile);
+				byte[] b=new byte[1024];
+				int length=0;
+				while((length=in.read(b))!=-1){
+					//输出文件流
+					fileOutputStream.write(b, 0, length);
+				}
+				break;
+			}
+		}
+	
+	   ps.insetPostConImg(post);
+		
+		
+		System.out.println("end1");
+		return "baseJsp/bas-publishPost";
 		
 	}
+	
+	@RequestMapping("getPostByName")
+	public void getPostByName(@Param("search") String search,HttpServletRequest request ,HttpServletResponse response) throws IOException {
+		 PrintWriter pw=response.getWriter();
+		  JSONObject json=new JSONObject();
+		  HttpSession session=request.getSession();
+		  json.put("stu", "1");
+		List<Post> posts=ps.getPostByName(search);
+		session.setAttribute("posts", posts);
+		pw.println(json.toJSONString());
+		
+	}
+	
 }
