@@ -53,5 +53,10 @@ public class PostService {
 		return pm.getPostByName(search);
 	}
 
+	public List<Post> getPrisePostById(int id) {
+		// TODO Auto-generated method stub
+		return pm.getPrisePostByUserId(id);
+	}
+
 	
 }

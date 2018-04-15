@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.alibaba.fastjson.JSONObject;
 import com.jcmz.base.BasePropertise;
 import com.jcmz.base.MyCookie;
+import com.jcmz.mapper.PostMapper;
 import com.jcmz.mapper.PostreplyMapper;
 import com.jcmz.model.PageBean;
 import com.jcmz.model.Post;
@@ -49,6 +50,8 @@ public class PostController {
 	private UserService us;
 	@Autowired
 	private PostPagingService pps;
+	@Autowired
+	private PostMapper pm;
 	@Autowired
 	private PostreplyMapper prm;
 	@Autowired
@@ -283,5 +286,28 @@ public class PostController {
 		pw.println(json.toJSONString());
 		
 	}
+	
+	@RequestMapping("myPrise")
+	public void myPrise(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		User user = null;
+		List<Post> posts = null;
+		JSONObject json=new JSONObject();
+		PrintWriter pw=response.getWriter();
+		String msg="1";
+		if(request.getSession().getAttribute("user")!=null) {
+			user=(User) request.getSession().getAttribute("user");
+			posts=ps.getPrisePostById(user.getId());
+			json.put("posts", posts);
+		}else {
+			msg="0";
+			
+		}
+		json.put("msg", msg);
+		json.put("inp", "1");
+		json.put("nowPage","1");
+		json.put("allCount",Math.ceil(pm.getCollectPostAndItsBlockPageCount(user.getId())/10));
+		pw.println(json.toJSONString());
+	}
+	
 	
 }

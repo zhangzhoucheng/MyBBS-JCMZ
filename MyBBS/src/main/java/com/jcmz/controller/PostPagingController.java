@@ -94,6 +94,33 @@ public class PostPagingController {
 		pw.print(jons.toJSONString());
 	}
 	
+	
+	//对于index主页的我的收藏贴子列表，进行分页，
+	@RequestMapping("postCollectPaging")
+	public void postCollectPaging(@Param("nowPage") int nowPage , int inp,Model model,HttpServletResponse response,HttpServletRequest request) throws IOException {
+		PrintWriter pw=response.getWriter();
+		JSONObject jons=new JSONObject();
+		User user=null;
+		if(request.getSession().getAttribute("user")!=null) {
+			user=(User) request.getSession().getAttribute("user");
+		}
+		PageBean<Post> pag=pps.findPriseResultsByPageBean(nowPage,user.getId());
+		if(inp==0) {
+			inp=1;
+		}else if(inp>pag.getPageCount()){
+			inp=pag.getPageCount();
+					
+		}else {
+			
+		}
+		
+		jons.put("nowPage", pag.getNowPage());
+		jons.put("allCount", pag.getPageCount());
+		jons.put("inp", inp);
+		jons.put("posts", pag.getPageLists());
+		pw.print(jons.toJSONString());
+	}
+	
 	/***
 	 * @remark 分页操作，对于帖子详情的回复者的基础信息的错操作
 	 * @param nowPage

@@ -53,6 +53,12 @@ public interface PostMapper {
 
 	List<Post> getPostByName(String search);
 
+	List<Post> getPrisePostByUserId(int id);
+
+	int getCollectPostAndItsBlockPageCount(@Param("userId")int userId);
+
+	List<Post> getPrisePostByUserIdLimit(@Param("start") int start, @Param("perPageCount") int perPageCount,@Param("userId") int userId);
+
 	
 
 	

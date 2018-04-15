@@ -29,6 +29,7 @@ public class MyCookie  {
 	 * @time 2018/3/20 19:23
 	 */
 	public Cookie getCookie(HttpServletResponse response,int hour,String cookieName,String cookieValue) {
+		deleteCookie(response,cookieName);
 		Cookie cookie=new Cookie(cookieName,cookieValue);
 		cookie.setMaxAge(hour*60*60);
 		response.addCookie(cookie);
