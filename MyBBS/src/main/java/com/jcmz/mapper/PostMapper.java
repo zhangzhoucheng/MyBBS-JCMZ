@@ -2,6 +2,8 @@ package com.jcmz.mapper;
 
 import com.jcmz.model.Post;
 import com.jcmz.model.PostExample;
+import com.jcmz.model.User;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -58,6 +60,16 @@ public interface PostMapper {
 	int getCollectPostAndItsBlockPageCount(@Param("userId")int userId);
 
 	List<Post> getPrisePostByUserIdLimit(@Param("start") int start, @Param("perPageCount") int perPageCount,@Param("userId") int userId);
+
+	List<Post> getMyPostById(int id);
+
+	int getMyPostByIdCount(int id);
+
+	List<Post> getMyPostByIdLimit(@Param("start") int start,@Param("perPageCount")  int perPageCount, @Param("userId")int userId);
+
+	
+
+	
 
 	
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.jcmz.mapper.PostMapper;
 import com.jcmz.model.Post;
+import com.jcmz.model.User;
 
 @Service
 public class PostService {
@@ -58,5 +59,11 @@ public class PostService {
 		return pm.getPrisePostByUserId(id);
 	}
 
+	public List<Post> getMyPostById(int id) {
+		// TODO Auto-generated method stub
+		return pm.getMyPostById(id);
+	}
+
+	
 	
 }

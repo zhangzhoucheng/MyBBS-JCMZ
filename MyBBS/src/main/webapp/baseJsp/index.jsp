@@ -109,8 +109,8 @@
         <a href="#" onclick="reStart();return false;" id="tab_home" class="cur"><span class="glyphicon glyphicon-file " style="color:#FEE94E"></span>&nbsp;&nbsp;&nbsp;重新登录</a>
         <a href="tourist" id="tab_favorite" class=""><span class="glyphicon glyphicon-align-justify nav-fon"></span>&nbsp;&nbsp;&nbsp;版面</a>
         <a href="#"  onclick="myPrise();return flase;" id="tab_zone"><span class="glyphicon glyphicon-star-empty nav-fon"></span>&nbsp;&nbsp;&nbsp;我的收藏</a>
-        <a href="#" id="tab_favorite_collection"><span class="glyphicon glyphicon-tint nav-fon"></span>&nbsp;&nbsp;&nbsp;我的关注</a>
-        <a href="#" id="tab_friend1" class=""><span class="glyphicon glyphicon-send nav-fon"></span>&nbsp;&nbsp;&nbsp;我的帖子</a>
+        <a href="#" onclick="myFocus();return flase;" id="tab_favorite_collection"><span class="glyphicon glyphicon-tint nav-fon"></span>&nbsp;&nbsp;&nbsp;我的关注</a>
+        <a href="#" onclick="myPosts();return false;" id="tab_friend1" class=""><span class="glyphicon glyphicon-send nav-fon"></span>&nbsp;&nbsp;&nbsp;我的帖子</a>
         <a href="bas-publishPost.jsp"  id="tab_friend2" class=""><span class="glyphicon glyphicon-pencil nav-fon"></span>&nbsp;&nbsp;&nbsp;发表帖子</a>
         <a href="#" id="tab_friend" class=""><span class="glyphicon glyphicon-user nav-fon"></span>&nbsp;&nbsp;&nbsp;个人信息</a>
     </div>
@@ -371,6 +371,190 @@
 		
 	}
 	
+	function pagingMyposts(flag){//alert(13);
+		var pingTableAll="<table  id='my-table' style='margin:0 auto'>";
+		var nowPage=$("#nowPage").html();
+		var inp=$("#inPage").val();
+		if(nowPage==""||nowPage=="0"){
+			nowPage="1";	
+		}
+		if(inp==""||inp=="0"){
+		  inp="1";
+		}
+		
+		
+		
+		if(flag==1){
+			
+			if(nowPage<=1){
+				
+			}else{
+				nowPage--;
+			}
+			
+		}
+		if(flag==2){
+			nowPage=$("#inPage").val();
+			//inp=$("#inPage").val();
+		}
+		if(flag==3){
+			
+			nowPage++;
+		}
+		$.ajax({
+			url:"${rootPath}/baseJsp/pagingMyposts",
+			data:"nowPage="+nowPage+"&inp="+inp,
+			type:"get",
+			dataType:"json",
+			async:false,
+			success:function(data){//alert(33);
+				$(".paging-content").children().remove();
+				 $(".pagP").children().remove();
+			
+				$.each(data.posts,function(index,e){
+					  
+					  console.log(e.time);
+					  pingTableAll+=regexpTable(e);
+				
+					});
+				 pingTableAll+="</table>";
+				 $(".pagP").html(regexpPagingNew(data,"pagingMyposts"));
+				 $(".paging-content").html(pingTableAll);
+				 colorShow();
+					colorShowAll();
+					},
+				 error:function(){
+					 alert("error2");
+				 }
+					
+				}) 
+	
+		
+	}
+	
+	
+	function pagingMyFocus(flag){//alert(13);
+		var pingTableAll="<table  id='my-table' style='margin:0 auto'>";
+		var nowPage=$("#nowPage").html();
+		var inp=$("#inPage").val();
+		if(nowPage==""||nowPage=="0"){
+			nowPage="1";	
+		}
+		if(inp==""||inp=="0"){
+		  inp="1";
+		}
+		
+		
+		
+		if(flag==1){
+			
+			if(nowPage<=1){
+				
+			}else{
+				nowPage--;
+			}
+			
+		}
+		if(flag==2){
+			nowPage=$("#inPage").val();
+			//inp=$("#inPage").val();
+		}
+		if(flag==3){
+			
+			nowPage++;
+		}
+		$.ajax({
+			url:"${rootPath}/baseJsp/pagingMyFocus",
+			data:"nowPage="+nowPage+"&inp="+inp,
+			type:"get",
+			dataType:"json",
+			async:false,
+			success:function(data){//alert(33);
+				$(".paging-content").children().remove();
+				 $(".pagP").children().remove();
+			
+				$.each(data.posts,function(index,e){
+					  
+					  console.log(e.time);
+					  pingTableAll+=regexpTableMyFocus(e);
+				
+					});
+				 pingTableAll+="</table>";
+				 $(".pagP").html(regexpPagingMyFocus(data));
+				 $(".paging-content").html(pingTableAll);
+				 colorShow();
+					colorShowAll();
+					},
+				 error:function(){
+					 alert("error2");
+				 }
+					
+				}) 
+	
+		
+	}
+	
+	function pagingTheUserPost(flag,userId){//alert(13);
+		var pingTableAll="<table  id='my-table' style='margin:0 auto'>";
+		var nowPage=$("#nowPage").html();
+		var inp=$("#inPage").val();
+		if(nowPage==""||nowPage=="0"){
+			nowPage="1";	
+		}
+		if(inp==""||inp=="0"){
+		  inp="1";
+		}
+		
+		
+		
+		if(flag==1){
+			
+			if(nowPage<=1){
+				
+			}else{
+				nowPage--;
+			}
+			
+		}
+		if(flag==2){
+			nowPage=$("#inPage").val();
+			//inp=$("#inPage").val();
+		}
+		if(flag==3){
+			
+			nowPage++;
+		}
+		$.ajax({
+			url:"${rootPath}/baseJsp/pagingTheUserPost",
+			data:"nowPage="+nowPage+"&inp="+inp+"&userId="+userId,
+			type:"get",
+			dataType:"json",
+			async:false,
+			success:function(data){//alert(33);
+				$(".paging-content").children().remove();
+				 $(".pagP").children().remove();
+			
+				$.each(data.posts,function(index,e){
+					  
+					  console.log(e.time);
+					  pingTableAll+=regexpTableMyFocus(e);
+				
+					});
+				 pingTableAll+="</table>";
+				 $(".pagP").html(regexpPagingMyFocus(data));
+				 $(".paging-content").html(pingTableAll);
+				 colorShow();
+					colorShowAll();
+					},
+				 error:function(){
+					 alert("error2");
+				 }
+					
+				}) 
+	
+		
+	}
+	
 	function searchPost(){
 		var search=$(".search-ipt").val();
 		//alert(2);
@@ -428,6 +612,40 @@
 				+"</tr>"; 
 				return pingTable;
 	}
+	function regexpTableMyFocus(p){
+		var pingTable="<tr>"
+			    +"	<td><a href='#'><span class='glyphicon glyphicon-arrow-right'></span>&nbsp;&nbsp;"
+			 +"	<span class='wc-span2 '>姓名:</span> <span class='wc-span1-v wc-topic'>"+ p.user.username+"</span></a>&nbsp;&nbsp;&nbsp;&nbsp;"
+					+"</td>"
+					+"<td><span class='wc-span2 wc-table'>昵称:</span> <span"
+						+"class='wc-span2-v'>"+ p.user.nickname  +"</span>&nbsp;&nbsp;"
+					+"</td>&nbsp;&nbsp;"
+					+"<td><span class='glyphicon glyphicon-tint'></span>&nbsp;&nbsp;"
+						+"<span class='wc-span2 wc-author wc-table'>关注数:</span> <span class='wc-span1-v'>"+ p.user.beFocusedNum+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+					+"</td>"
+					+"<td><span class='glyphicon glyphicon-star-empty'></span>&nbsp;&nbsp;"
+					+"<span class='wc-span2 wc-author wc-table'>收藏数:</span> <span class='wc-span1-v'>"+ p.user.collectNum+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+				+"</td>"
+				+"<td><span class='glyphicon glyphicon-send'></span>&nbsp;&nbsp;"
+				+"<span class='wc-span2 wc-author wc-table'>帖子数:</span> <span class='wc-span1-v'>"+ p.user.postNum+"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+			+"</td>"
+					+"<td>"
+						+"<a href='#' onclick='seeTheUser("+p.user.id+")'>"
+					  +" <button type='button' class='btn btn-default btn-lg btn-s1'>"
+					  	 +"<span class='glyphicon glyphicon-eye-open' aria-hidden='true'></span> 查看"
+					   +"</button>"
+					  +"</a>"
+					+"</td>"
+					+"<td>"
+					+"<a href='#' onclick='deleteMyFocus("+p.user.id+")'>"
+				  +" <button type='button' class='btn btn-default btn-lg btn-s1'>"
+				  	 +"<span class='glyphicon glyphicon-eye-open' aria-hidden='true'></span>删除"
+				   +"</button>"
+				  +"</a>"
+				+"</td>"
+		+"</tr>"; 
+				return pingTable;
+	}
 	function regexpPaging(p){
 		var r=""
 		+"<a href='#' onclick='pagingCollect(1);return false;'><span class='glyphicon glyphicon-step-backward'></span>上一页</a>&nbsp;&nbsp;"
@@ -438,6 +656,39 @@
 	return r;	
 	    
 	}
+	function regexpPagingNew(p,pagingFunc){
+		
+	
+		var r=""
+		+"<a href='#' onclick='pagingMyposts(1)';return false;'><span class='glyphicon glyphicon-step-backward'></span>上一页</a>&nbsp;&nbsp;"
+		+"<span>当前页:<span id='nowPage'>"+p.nowPage+"</span></span>/<span id='allPage'>"+p.allCount+"</span>"
+		+"<span><input class='form-control' id='inPage' value='"+p.inp+"' style='width:50px;display:inline;' onkeyup='onlyNum(this)'  oninput='onlyNum(this)' /></span>"
+		+"<a href='#' onclick='pagingMyposts(2)';return false;'><span class='glyphicon glyphicon-hand-left'></span>跳转</a>"
+		+"&nbsp;&nbsp;<a href='#' onclick='pagingMyposts(3)';return false;'><span class='glyphicon glyphicon-step-forward'></span>下一页</a><span class='pageJump' style='color:red;'></span>";
+	return r;	
+	    
+	}
+	function regexpPagingMyFocus(p){
+		var r=""
+		+"<a href='#' onclick='pagingMyFocus(1);return false;'><span class='glyphicon glyphicon-step-backward'></span>上一页</a>&nbsp;&nbsp;"
+		+"<span>当前页:<span id='nowPage'>"+p.nowPage+"</span></span>/<span id='allPage'>"+p.allCount+"</span>"
+		+"<span><input class='form-control' id='inPage' value='"+p.inp+"' style='width:50px;display:inline;' onkeyup='onlyNum(this)'  oninput='onlyNum(this)' /></span>"
+		+"<a href='#' onclick='pagingMyFocus(2);return false;'><span class='glyphicon glyphicon-hand-left'></span>跳转</a>"
+		+"&nbsp;&nbsp;<a href='#' onclick='pagingMyFocus(3);return false;'><span class='glyphicon glyphicon-step-forward'></span>下一页</a><span class='pageJump' style='color:red;'></span>";
+	return r;	
+	    
+	}
+	function regexpPagingTheUserPost(p,userId){
+		var r=""
+		+"<a href='#' onclick='pagingTheUserPost(1,"+userId+");return false;'><span class='glyphicon glyphicon-step-backward'></span>上一页</a>&nbsp;&nbsp;"
+		+"<span>当前页:<span id='nowPage'>"+p.nowPage+"</span></span>/<span id='allPage'>"+p.allCount+"</span>"
+		+"<span><input class='form-control' id='inPage' value='"+p.inp+"' style='width:50px;display:inline;' onkeyup='onlyNum(this)'  oninput='onlyNum(this)' /></span>"
+		+"<a href='#' onclick='pagingTheUserPost(2,"+userId+");return false;'><span class='glyphicon glyphicon-hand-left'></span>跳转</a>"
+		+"&nbsp;&nbsp;<a href='#' onclick='pagingTheUserPost(3,"+userId+");return false;'><span class='glyphicon glyphicon-step-forward'></span>下一页</a><span class='pageJump' style='color:red;'></span>";
+	return r;	
+	    
+	}
+	
 	function myPrise(){//alert(1);
 	    var pingTableAll="<table  id='my-table' style='margin:0 auto'>";
 		var p;
@@ -479,6 +730,128 @@ $.ajax({
 		})
 	
 	}
+	function myPosts(){
+		 var pingTableAll="<table  id='my-table' style='margin:0 auto'>";
+			var p;
+			
+			
+	$.ajax({
+				url:"myPosts",
+				type:"get",
+				dataType:"json",
+				success:function(data){//alert(0);
+					$(".paging-content").children().remove();
+					 $(".pagP").children().remove();
+					if(data.msg==0){
+						alert("请先去登录！");
+						return;
+					}
+					
+				
+					$.each(data.posts,function(index,e){
+						  
+						  console.log(e.time);
+						  pingTableAll+=regexpTable(e);
+					
+						});
+					 pingTableAll+="</table>";
+					 $(".pagP").html(regexpPagingNew(data,"pagingMyposts"));
+					 $(".paging-content").html(pingTableAll);
+					
+					colorShow();
+					colorShowAll();
+					styleTable();
+					
+					
+				},
+				error:function(){
+					alert("myPrise error");
+					window.location.href="${rootPath}/baseJsp/index.jsp";
+				}
+			})
+	}
+	function seeTheUser(userId){
+		 var pingTableAll="<table  id='my-table' style='margin:0 auto'>";
+			var p;
+			
+			
+	$.ajax({
+				url:"seeTheUser?userId="+userId,
+				type:"get",
+				dataType:"json",
+				success:function(data){//alert(0);
+					$(".paging-content").children().remove();
+					 $(".pagP").children().remove();
+					if(data.msg==0){
+						alert("请先去登录！");
+						return;
+					}
+					
+				
+					$.each(data.posts,function(index,e){
+						  
+						  console.log(e.time);
+						  pingTableAll+=regexpTable(e);
+					
+						});
+					 pingTableAll+="</table>";
+					 $(".pagP").html(regexpPagingTheUserPost(data,userId));
+					 $(".paging-content").html(pingTableAll);
+					
+					colorShow();
+					colorShowAll();
+					styleTable();
+					
+					
+				},
+				error:function(){
+					alert("myPrise error");
+					window.location.href="${rootPath}/baseJsp/index.jsp";
+				}
+			})
+	}
+	
+	function myFocus(){
+		 var pingTableAll="<table  id='my-table' style='margin:0 auto'>";
+			var p;
+			
+			
+	$.ajax({
+				url:"myFocus",
+				type:"get",
+				dataType:"json",
+				success:function(data){//alert(0);
+					$(".paging-content").children().remove();
+					 $(".pagP").children().remove();
+					if(data.msg==0){
+						alert("请先去登录！");
+						return;
+					}
+					
+				
+					$.each(data.posts,function(index,e){
+						  
+						  
+						  pingTableAll+=regexpTableMyFocus(e);
+					
+						});
+					 pingTableAll+="</table>";
+					 $(".pagP").html(regexpPagingMyFocus(data));
+					 $(".paging-content").html(pingTableAll);
+					
+					colorShow();
+					colorShowAll();
+					styleTable();
+					
+					
+				},
+				error:function(){
+					alert("myPrise error");
+					window.location.href="${rootPath}/baseJsp/index.jsp";
+				}
+			})
+	}
+	
 	function styleTable(){
 		//没必要写
 		//$(".paging-content").css("background-color","red");
@@ -488,6 +861,9 @@ $.ajax({
 		 $(".btn-s1").css({"float":"right","size":"20px","color":"#61FE00"});
 		 $(".btn-s1-f1").css("color","#FF00FE");
 		 $(".btn-s1 span").css("font-size","18px"); */
+	}
+	window.rr=function(){
+		alert("123456rrrrr");
 	}
 	function reStart(){
 		$.ajax({
@@ -503,6 +879,59 @@ $.ajax({
 			
 		})
 	
+	}
+	
+	function deleteMyFocus(toUserId){
+		var nowPage=$("#nowPage").html();
+		var inp=$("#inPage").val();
+		if(nowPage==""||nowPage=="0"){
+			nowPage="1";	
+		}
+		if(inp==""||inp=="0"){
+		  inp="1";
+		}
+	
+		var pingTableAll="<table  id='my-table' style='margin:0 auto'>";
+		var p;
+			
+			
+			
+	$.ajax({
+				url:"deleteMyFocus",
+				data:"nowPage="+nowPage+"&inp="+inp+"&toUserId="+toUserId,
+				type:"get",
+				dataType:"json",
+				success:function(data){//alert(0);
+					$(".paging-content").children().remove();
+					 $(".pagP").children().remove();
+					if(data.msg==0){
+						alert("请先去登录！");
+						return;
+					}
+					
+				
+					$.each(data.posts,function(index,e){
+						  
+						  
+						  pingTableAll+=regexpTableMyFocus(e);
+					
+						});
+					 pingTableAll+="</table>";
+					 $(".pagP").html(regexpPagingMyFocus(data));
+					 $(".paging-content").html(pingTableAll);
+					
+					colorShow();
+					colorShowAll();
+					styleTable();
+					
+					
+				},
+				error:function(){
+					alert("myPrise error");
+					window.location.href="${rootPath}/baseJsp/index.jsp";
+				}
+			})
+		
 	}
 </script>
 </body>

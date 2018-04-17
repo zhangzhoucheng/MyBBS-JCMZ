@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.jcmz.mapper.FocusUserMapper">
   <resultMap id="BaseResultMap" type="com.jcmz.model.FocusUser">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="beFocusUserId" jdbcType="INTEGER" property="befocususerid" />
     <result column="focuserId" jdbcType="INTEGER" property="focuserid" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <association property="user" resultMap="com.jcmz.mapper.UserMapper.BaseResultMap"></association>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,6 +70,29 @@
   <sql id="Base_Column_List">
     id, beFocusUserId, focuserId, remark
   </sql>
+  
+   <!-- 获取到我关注的人的相关操作 -->
+   		<!-- 获取我关注的所有人 -->
+  <select id="getMyFocus" resultMap="BaseResultMap">
+  	select f.id,f.beFocusUserId,f.focuserId,f.remark,u.id user_id, u.userName,u.userPassword,u.idType,u.beFocusedNum,u.focusOtherNum,u.collectNum,u.postNum,u.nickName
+  	from tb_focususer f ,tb_user u 
+  	where focuserId=#{0} and u.id=f.beFocusUserId limit 0,10
+  </select>
+  <!-- 获取我关注的人的总数量 -->
+  <select id="getMyFocusByIdCount" resultType="java.lang.Integer">
+  	select count(*)
+  	from tb_focususer f ,tb_user u 
+  	where focuserId=#{0} and u.id=f.beFocusUserId
+  </select>
+  <!--  获取我关注人的集合，分页 -->
+  <select id="getMyFocusUsersByIdLimit" resultMap="BaseResultMap">
+  	select f.id,f.beFocusUserId,f.focuserId,f.remark,u.id user_id, u.userName,u.userPassword,u.idType,u.beFocusedNum,u.focusOtherNum,u.collectNum,u.postNum,u.nickName
+  	from tb_focususer f ,tb_user u 
+  	where focuserId=#{id} and u.id=f.beFocusUserId limit #{start},#{perPageCount}
+  </select>
+  
+  
+  
   <select id="selectByExample" parameterType="com.jcmz.model.FocusUserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

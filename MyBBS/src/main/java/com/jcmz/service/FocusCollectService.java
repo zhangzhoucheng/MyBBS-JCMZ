@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.jcmz.mapper.CollectPostMapper;
 import com.jcmz.mapper.FocusUserMapper;
 import com.jcmz.model.CollectPost;
+import com.jcmz.model.User;
 
 /***
  * @remark 收藏和关注的服务类
@@ -132,6 +133,15 @@ public class FocusCollectService {
 		// TODO Auto-generated method stub
 		us.addMyCollectNum(user_id);
 	}
+	public List<User> getMyFocus(int id) {
+		// TODO Auto-generated method stub
+		return fum.getMyFocus(id);
+	}
+	public int getMyFocusByIdCount(int id) {
+		// TODO Auto-generated method stub
+		return fum.getMyFocusByIdCount(id);
+	}
+	
 	
 	
 }

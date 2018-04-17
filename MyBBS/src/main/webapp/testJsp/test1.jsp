@@ -28,5 +28,7 @@ a{
 <a href="../baseJsp/insertPostReply">插入帖子回复信息表</a><br>
 <a href="../baseJsp/updateReplyPraiseNum">给回复贴的点赞字段加上数据</a><br>
 
+<a href="#" onclick="rr();return false;">插入帖子回复信息表</a><br>
+
 </body>
 </html>
