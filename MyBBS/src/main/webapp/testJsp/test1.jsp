@@ -32,7 +32,8 @@ a{
 
 <p>测试git合并操作</p>
 
-<span>测试merge冲突，来自本地张周分支的改动</span>
+<span>测试merge冲突，来自本地张周分支的</span>
+<p>提交版的改变</p>
 
 </body>
 </html>
