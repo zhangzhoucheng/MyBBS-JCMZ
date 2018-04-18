@@ -145,7 +145,7 @@ body {
 		</header>
 		<nav class="">
 			<ul class="nav-ul">
-				<li><a href="${rootPath}/homePage.jsp"><span class="glyphicon glyphicon-file nav-fon"></span>首页</a>>></li>
+				<li><a href="#" onclick="reStart();return false;"><span class="glyphicon glyphicon-file nav-fon"></span>重登</a>>></li>
 				<c:if test="${not empty user}"><li><a href="index.jsp"><span class="glyphicon glyphicon-home nav-fon"></span>主页</a>>></li></c:if>
 				<li><a href="tourist"><span
 						class="glyphicon glyphicon-align-justify nav-fon"></span>版面列表</a>>></li>
@@ -312,6 +312,22 @@ body {
 				}
 			}
 		}
+		
+		 function reStart(){
+				$.ajax({
+					url:"${rootPath}/baseJsp/reStart",
+					type:"get",
+					dataType:"json",
+					success:function(){
+						window.location.href="${rootPath}/homePage.jsp";
+					},
+					error:function(){
+						alert("reStart error");
+					}
+					
+				})
+			
+			}
 	</script>
 </body>
 </html>

@@ -1,5 +1,7 @@
 package com.jcmz.model;
 
+
+
 public class FocusUser {
     private Integer id;
 
@@ -8,8 +10,19 @@ public class FocusUser {
     private Integer focuserid;
 
     private String remark;
+   private User user;
 
-    public Integer getId() {
+	
+
+	public User getUser() {
+	return user;
+}
+
+public void setUser(User user) {
+	this.user = user;
+}
+
+	public Integer getId() {
         return id;
     }
 

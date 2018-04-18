@@ -30,7 +30,7 @@
 <div class="form-group">
     <label for="inputEmail3" class="col-sm-4 control-label">用户名</label>
     <div class="col-sm-8">
-        <input type="text" class="form-control" id="username" placeholder="Username" style="display:inline;">
+        <input type="text" class="form-control" id="username" placeholder="Username" style="display:inline;" autocomplete="off">
         <label class="sr-only1"  id="prompt" style="color:red;">&nbsp;</label><label style="opacity: 0">women</label><br>
     </div>
 </div>
@@ -82,7 +82,7 @@
    		
    	})
    	function visitor(){
-	  alert(1);
+	  //alert(1);
 	//有问题 $.session.set('user1','123');
 	 removeSession("user");
 	  window.location.href="baseJsp/tourist";
@@ -111,7 +111,7 @@
    	}
    	function checkName(username){
    		$.ajax({
-   			url:"baseJsp/checkName?username="+username,
+   			url:"${rootPath}/baseJsp/checkName?username="+username,
    			type:"get",
    			dataType:"json",
    			success:function(data){

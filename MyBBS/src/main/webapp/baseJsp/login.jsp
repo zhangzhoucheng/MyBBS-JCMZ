@@ -34,7 +34,7 @@
 	      <img class="mb-4" src="../images/loginImg/bootstrap-solid.svg" alt="" width="72" height="72">
 	      <h1 class="h4 mb-3 font-weight-normal">校园论坛</h1>
 	      <label for="inputEmail" class="sr-only" >名称</label>
-	      <input type="email" id="username" class="form-control" placeholder="名称" required autofocus><br>
+	      <input type="text" id="username" class="form-control" placeholder="名称" required autofocus><br>
 	      <label class="sr-only1"  id="prompt" style="color:red;">&nbsp;</label><label style="opacity: 0">women</label><br>
 	      <label for="inputPassword" class="sr-only" >密码</label> 
 	      <input type="password" id="userpassword" class="form-control" placeholder="密码" required>
@@ -147,7 +147,8 @@
 					}
 					if(flag==2){alert(2);
 						//flag为2表示是按钮调用的此方法，且msg是2，用户存在跳转到首页
-						window.location.href="baseJsp/loginSuccess";
+						//window.location.href="baseJsp/loginSuccess";
+					window.location.href="${rootPath}/baseJsp/loginSuccess";
 					}
 					
 				}
@@ -159,7 +160,9 @@
 		})
 	}
    	function cookieInputPas(){//当cookie中有该用户时候，则输入记住的密码到iput表单
+   
    		var username=$("#username").val();
+		alert(username);
    		$.ajax({
    			url:"checkNameCookie?username="+username,
    			type:"get",

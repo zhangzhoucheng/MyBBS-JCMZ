@@ -2,6 +2,8 @@ package com.jcmz.mapper;
 
 import com.jcmz.model.FocusUser;
 import com.jcmz.model.FocusUserExample;
+import com.jcmz.model.User;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -37,4 +39,10 @@ public interface FocusUserMapper {
 	int isFocusTheUserByIdId(@Param("user_id")int user_id, @Param("uid")int uid);
 
 	void inserFocusByIdId(@Param("user_id")int user_id,@Param("uid") int uid);
+
+	List<User> getMyFocus(int id);
+	int getMyFocusByIdCount(Integer id);
+	List<FocusUser> getMyFocusUsersByIdLimit(@Param("id")int id, @Param("start")int start,@Param("perPageCount") int perPageCount);
+
+	
 }

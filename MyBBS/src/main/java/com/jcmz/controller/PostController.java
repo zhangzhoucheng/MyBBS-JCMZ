@@ -25,11 +25,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.alibaba.fastjson.JSONObject;
 import com.jcmz.base.BasePropertise;
 import com.jcmz.base.MyCookie;
+import com.jcmz.mapper.PostMapper;
 import com.jcmz.mapper.PostreplyMapper;
 import com.jcmz.model.PageBean;
 import com.jcmz.model.Post;
 import com.jcmz.model.Postreply;
 import com.jcmz.model.User;
+import com.jcmz.service.FocusCollectService;
 import com.jcmz.service.PostPagingService;
 import com.jcmz.service.PostReplyService;
 import com.jcmz.service.PostService;
@@ -50,6 +52,8 @@ public class PostController {
 	@Autowired
 	private PostPagingService pps;
 	@Autowired
+	private PostMapper pm;
+	@Autowired
 	private PostreplyMapper prm;
 	@Autowired
 	private BasePropertise bp;
@@ -57,6 +61,8 @@ public class PostController {
 	private MyCookie myCookie;
 	@Autowired
 	private PostReplyService prs;
+	@Autowired
+	private FocusCollectService fcs;
 	
 	
 	
@@ -283,5 +289,99 @@ public class PostController {
 		pw.println(json.toJSONString());
 		
 	}
+	
+	
+	//获取我的收藏的帖子
+	@RequestMapping("myPrise")
+	public void myPrise(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		User user = null;
+		List<Post> posts = null;
+		JSONObject json=new JSONObject();
+		PrintWriter pw=response.getWriter();
+		String msg="1";
+		if(request.getSession().getAttribute("user")!=null) {
+			user=(User) request.getSession().getAttribute("user");
+			posts=ps.getPrisePostById(user.getId());
+			json.put("posts", posts);
+		}else {
+			msg="0";
+			
+		}
+		json.put("msg", msg);
+		json.put("inp", "1");
+		json.put("nowPage","1");
+		json.put("allCount",Math.ceil(pm.getCollectPostAndItsBlockPageCount(user.getId())/10));
+		pw.println(json.toJSONString());
+	}
+	
+	//获取我的帖子
+	@RequestMapping("myPosts")
+	public void myPosts(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		User user = null;
+		List<Post> posts = null;
+		JSONObject json=new JSONObject();
+		PrintWriter pw=response.getWriter();
+		String msg="1";
+		if(request.getSession().getAttribute("user")!=null) {
+			user=(User) request.getSession().getAttribute("user");
+			posts=ps.getMyPostById(user.getId());
+			json.put("posts", posts);
+		}else {
+			msg="0";
+			
+		}
+		json.put("msg", msg);
+		json.put("inp", "1");
+		json.put("nowPage","1");
+		json.put("allCount",Math.ceil(pm.getMyPostByIdCount(user.getId())/10.0));
+		pw.println(json.toJSONString());
+	}
+	
+	//获取某个人的帖子集合
+		@RequestMapping("seeTheUser")
+		public void seeTheUser(HttpServletRequest request,HttpServletResponse response ,@Param("userId") int userId) throws IOException {
+			User user = null;
+			List<Post> posts = null;
+			JSONObject json=new JSONObject();
+			PrintWriter pw=response.getWriter();
+			String msg="1";
+			if(request.getSession().getAttribute("user")!=null) {
+				user=(User) request.getSession().getAttribute("user");
+				posts=ps.getMyPostById(userId);
+				json.put("posts", posts);
+			}else {
+				msg="0";
+				
+			}
+			json.put("msg", msg);
+			json.put("inp", "1");
+			json.put("nowPage","1");
+			json.put("allCount",Math.ceil(pm.getMyPostByIdCount(user.getId())/10.0));
+			pw.println(json.toJSONString());
+		}
+	
+	//获取我关注的人
+		@RequestMapping("myFocus")
+		public void myFocus(HttpServletRequest request,HttpServletResponse response) throws IOException {
+			User user = null;
+			List<User> posts = null;
+			JSONObject json=new JSONObject();
+			PrintWriter pw=response.getWriter();
+			String msg="1";
+			if(request.getSession().getAttribute("user")!=null) {
+				user=(User) request.getSession().getAttribute("user");
+				posts=fcs.getMyFocus(user.getId());
+				json.put("posts", posts);
+			}else {
+				msg="0";
+				
+			}
+			json.put("msg", msg);
+			json.put("inp", "1");
+			json.put("nowPage","1");
+			json.put("allCount",Math.ceil(fcs.getMyFocusByIdCount(user.getId())/10.0));
+			pw.println(json.toJSONString());
+		}
+	
 	
 }

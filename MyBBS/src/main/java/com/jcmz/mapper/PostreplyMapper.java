@@ -1,7 +1,10 @@
 package com.jcmz.mapper;
 
+import com.jcmz.model.FocusUser;
 import com.jcmz.model.Postreply;
 import com.jcmz.model.PostreplyExample;
+import com.jcmz.model.User;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -39,6 +42,8 @@ public interface PostreplyMapper {
 	void canclePraise(int reply_id);
 
 	void addOnePraise(int reply_id);
+
+	
 
 	
 }

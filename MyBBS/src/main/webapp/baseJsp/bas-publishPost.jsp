@@ -133,7 +133,7 @@ textarea{
 		                               </li>
 		              
 		                               <li>
-		                                 <a href="${rootPath}/homePage.jsp" class="tab" target="_blank">首页</a>
+		                               <a href="#" onclick="reStart();return false;" class="tab" target="_blank">重登</a>
 		                               </li>
 		                </ul>
 		            </div>
@@ -201,6 +201,22 @@ textarea{
 			
 			
 		}
+		
+		 function reStart(){
+				$.ajax({
+					url:"${rootPath}/baseJsp/reStart",
+					type:"get",
+					dataType:"json",
+					success:function(){
+						window.location.href="${rootPath}/homePage.jsp";
+					},
+					error:function(){
+						alert("reStart error");
+					}
+					
+				})
+			
+			}
 	</script>
 </body>
 </html>

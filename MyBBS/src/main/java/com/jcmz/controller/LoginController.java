@@ -30,6 +30,7 @@ import com.jcmz.service.UserService;
 import com.jcmz.tool.BaseSms;
 import com.jcmz.tool.GetRandom;
 import com.miaodiyun.httpApiDemo.IndustrySMS;
+import com.mysql.fabric.Response;
 
 import sun.net.util.IPAddressUtil;
 
@@ -89,7 +90,7 @@ public class LoginController {
 		String msg=loginService.checkPas(username,userpassword);
 		if("2".equals(msg)) {//当用户存在且密码输入正确
 			if("true".equals(remberP)) {
-				Cookie cookie=myCookie.getCookie(response, 24*7, username,userpassword);//利用写好的cookie方法
+				Cookie cookie=myCookie.getCookie(response, 24*7, "usernamecookie",userpassword);//利用写好的cookie方法
 			}
 			else {
 				myCookie.deleteCookie(response, username);
@@ -116,6 +117,7 @@ public class LoginController {
 	 */
 	@RequestMapping("checkNameCookie")
 	public void checkNameCookie(HttpServletRequest request,HttpServletResponse response,@Param("username") String username) throws IOException {
+		username="usernamecookie";
 		Cookie []coos= request.getCookies();
 		JSONObject js=new JSONObject();
 		PrintWriter pw=response.getWriter();
@@ -223,5 +225,18 @@ public class LoginController {
 		JSONObject json=new JSONObject();
 		json.put("msg", "1");
 		response.getWriter().println(json.toJSONString());
+	}
+	@RequestMapping("reStart")
+	public void reStart(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		HttpSession s=request.getSession();
+		JSONObject  j=new JSONObject();
+		if(s.getAttribute("user")==null) {
+			
+		}else {
+			s.removeAttribute("user");
+		}
+		j.put("msg", 1);
+		response.getWriter().println(j.toJSONString());
+		
 	}
 }

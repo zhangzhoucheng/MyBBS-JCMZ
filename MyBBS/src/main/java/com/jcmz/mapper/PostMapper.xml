@@ -101,6 +101,7 @@
   	 and pa.pageStatus=1 and p.managerStatus=0 and b.blockStatus=1 
   	 and p.userId=u.id order by p.time desc limit 0,10
   </select>
+ 
    <select id="getAllPostAndItsBlockPageLimit" resultMap="BaseResultMap">
   	 select p.id as id ,p.content,p.imgPath,p.title,p.userId,p.blockTypeId,p.time,p.managerStatus,p.postIsFocus,b.id block_id,b.blockName,b.blockRemark,b.blockStatus,b.pageId ,b.countNum,pa.id page_id,pa.pageName,pa.pageStatus,pa.pageManagerId,pa.pageRemark ,u.id user_id, u.userName,u.userPassword,u.idType,u.beFocusedNum,u.focusOtherNum,u.collectNum,u.postNum,u.nickName
   	 from tb_post p ,tb_block b,tb_postpage pa ,tb_user u
@@ -127,6 +128,59 @@
   	 and p.userId=u.id  and p.title=#{0}
   	 order  by p.time desc limit 0,10
  </select>
+ 
+ <!-- 获取我的收藏的帖子相关操作， -->
+ 	<!-- 通过id获取收藏帖子 -->
+  <select id="getPrisePostByUserId" resultMap="BaseResultMap">
+  	 select p.id as id ,p.content,p.imgPath,p.title,p.userId,p.blockTypeId,p.time,p.managerStatus,p.postIsFocus,b.id block_id,b.blockName,b.blockRemark,b.blockStatus,b.pageId ,b.countNum,pa.id page_id,pa.pageName,pa.pageStatus,pa.pageManagerId,pa.pageRemark ,u.id user_id, u.userName,u.userPassword,u.idType,u.beFocusedNum,u.focusOtherNum,u.collectNum,u.postNum,u.nickName
+  	 from tb_post p ,tb_block b,tb_postpage pa ,tb_user u,tb_colletpost c
+  	 where  p.blockTypeId=b.id and b.pageId=pa.id 
+  	 and pa.pageStatus=1 and p.managerStatus=0 and b.blockStatus=1 
+  	 and p.userId=u.id  and p.id=c.postId and c.userId=#{0} order by p.time desc limit 0,10
+  </select>
+  	<!-- 获取我收藏帖子的数量 -->
+  <select id="getCollectPostAndItsBlockPageCount" resultType="java.lang.Integer">
+  	 select count(*)
+  	 from tb_post p ,tb_block b,tb_postpage pa ,tb_user u,tb_colletpost c
+  	 where  p.blockTypeId=b.id and b.pageId=pa.id 
+  	 and pa.pageStatus=1 and p.managerStatus=0 and b.blockStatus=1 
+  	 and p.userId=u.id  and p.id=c.postId and c.userId=#{userId} 
+  </select>
+  	<!-- 分页获取我的收藏的帖子，通过传入的三个参数获取 -->
+   <select id="getPrisePostByUserIdLimit" resultMap="BaseResultMap">
+  	 select p.id as id ,p.content,p.imgPath,p.title,p.userId,p.blockTypeId,p.time,p.managerStatus,p.postIsFocus,b.id block_id,b.blockName,b.blockRemark,b.blockStatus,b.pageId ,b.countNum,pa.id page_id,pa.pageName,pa.pageStatus,pa.pageManagerId,pa.pageRemark ,u.id user_id, u.userName,u.userPassword,u.idType,u.beFocusedNum,u.focusOtherNum,u.collectNum,u.postNum,u.nickName
+  	 from tb_post p ,tb_block b,tb_postpage pa ,tb_user u,tb_colletpost c
+  	 where  p.blockTypeId=b.id and b.pageId=pa.id 
+  	 and pa.pageStatus=1 and p.managerStatus=0 and b.blockStatus=1 
+  	 and p.userId=u.id  and p.id=c.postId and c.userId=#{userId} order by p.time desc limit #{start},#{perPageCount}
+  </select>
+  
+  <!-- 获取我的帖子相关的操作 -->
+  	<!-- 获取我的帖子集合 -->
+  <select id="getMyPostById" resultMap="BaseResultMap">
+	select p.id as id ,p.content,p.imgPath,p.title,p.userId,p.blockTypeId,p.time,p.managerStatus,p.postIsFocus,b.id block_id,b.blockName,b.blockRemark,b.blockStatus,b.pageId ,b.countNum,pa.id page_id,pa.pageName,pa.pageStatus,pa.pageManagerId,pa.pageRemark ,u.id user_id, u.userName,u.userPassword,u.idType,u.beFocusedNum,u.focusOtherNum,u.collectNum,u.postNum,u.nickName
+	from tb_post p,tb_block b,tb_postpage pa ,tb_user u 
+	where p.userId=#{0} and p.userId=u.id and  p.managerStatus=0
+	      and  p.blockTypeId=b.id and b.pageId=pa.id 
+  	      and pa.pageStatus=1 and p.managerStatus=0 and b.blockStatus=1  limit 0,10
+  </select>
+  	<!-- 获取我的帖子数量 -->
+  <select id="getMyPostByIdCount" resultType="java.lang.Integer">
+	select  count(*)
+	from tb_post p,tb_block b,tb_postpage pa ,tb_user u 
+	where  p.blockTypeId=b.id and b.pageId=pa.id 
+  	       and pa.pageStatus=1 and p.managerStatus=0 and b.blockStatus=1 
+	       and p.userId=#{0} and p.userId=u.id 
+  </select>
+  	<!-- 获取我的帖子集合 分页-->
+  <select id="getMyPostByIdLimit" resultMap="BaseResultMap">
+	select  p.id as id ,p.content,p.imgPath,p.title,p.userId,p.blockTypeId,p.time,p.managerStatus,p.postIsFocus,b.id block_id,b.blockName,b.blockRemark,b.blockStatus,b.pageId ,b.countNum,pa.id page_id,pa.pageName,pa.pageStatus,pa.pageManagerId,pa.pageRemark ,u.id user_id, u.userName,u.userPassword,u.idType,u.beFocusedNum,u.focusOtherNum,u.collectNum,u.postNum,u.nickName
+	from tb_post p,tb_block b,tb_postpage pa ,tb_user u 
+	where  p.blockTypeId=b.id and b.pageId=pa.id 
+  	       and pa.pageStatus=1 and p.managerStatus=0 and b.blockStatus=1 
+	       and p.userId=#{userId} and p.userId=u.id order by p.time desc limit #{start},#{perPageCount}
+  </select>
+  
  <update id="canclePraise"><!-- 根据po_id减少其一个赞 -->
 	 update tb_post t set t.postIsFocus=t.postIsFocus-1 where id=#{0}
 </update>
